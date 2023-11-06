@@ -1,0 +1,36 @@
+extends: uphold-react
+
+globals:
+  __DEV__: true
+  localStorage: true
+  sessionStorage: true
+  window: true
+
+env:
+  browser: true
+
+rules:
+  id-length:
+    - error
+    - exceptions:
+        - t
+        - x
+        - y
+  import/no-cycle:
+    - error
+  new-cap:
+    - error
+  react/jsx-uses-react:
+    - off
+  react/react-in-jsx-scope:
+    - off
+  valid-jsdoc:
+    - off
+  newline-after-var: 0
+  one-var: 0
+
+root: true
+
+settings:
+  import/ignore:
+    - node_modules
