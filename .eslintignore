@@ -1,0 +1,8 @@
+coverage
+node_modules
+dist
+public
+src/client/assets/locale/**
+src/client/lib/typekit/index.js
+src/config.js
+!.storybook

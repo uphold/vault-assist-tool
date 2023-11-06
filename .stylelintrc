@@ -1,0 +1,38 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "at-rule-no-vendor-prefix": true,
+    "color-named": "never",
+    "comment-word-blacklist": [
+      "/TODO/"
+    ],
+    "custom-property-pattern": "^([a-z]+[-]{0,1})+$",
+    "declaration-no-important": true,
+    "declaration-property-unit-blacklist": {
+      "font-size": ["px"]
+    },
+    "declaration-property-value-blacklist": {
+      "position": ["fixed"]
+    },
+    "font-family-name-quotes": "always-unless-keyword",
+    "font-weight-notation": "numeric",
+    "function-url-quotes": "always",
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-unknown": [true, { ignoreProperties: ["composes"] }],
+    "property-no-vendor-prefix": true,
+    "order/properties-order": [["composes"], { unspecified: "bottomAlphabetical" }],
+    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+    "selector-max-compound-selectors": 3,
+    "selector-max-specificity": "0,2,0",
+    "string-quotes": "double",
+    "selector-max-attribute": 0,
+    "selector-max-id": 0,
+    "selector-no-qualifying-type": true,
+    "selector-max-universal": 1,
+    "selector-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true
+  }
+}
