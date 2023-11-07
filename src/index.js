@@ -1,5 +1,5 @@
 import 'tippy.js/dist/tippy.css';
-// import './lib/i18n';
+import './lib/i18n/i18n';
 import '@typehaus/metropolis';
 import 'fast-text-encoding';
 
