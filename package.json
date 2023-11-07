@@ -105,7 +105,7 @@
     "react-test-renderer": "18.2.0",
     "react-toastify": "7.0.4",
     "resolve": "1.12.0",
-    "semver": "6.3.0",
+    "semver": "6.3.1",
     "smoothscroll-polyfill": "0.4.4",
     "storybook": "7.2.0",
     "style-loader": "3.3.1",
