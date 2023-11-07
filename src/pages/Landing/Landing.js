@@ -9,6 +9,7 @@ import { SectionStickyFooter } from '../../components/SectionStickyFooter';
 import { Semibold } from '../../components/Typography/Semibold';
 import { Small } from '../../components/Typography/Small';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -18,6 +19,7 @@ export const AlertBox = styled(Mixed.div)`
 `;
 
 export const Landing = ({ onNavigation }) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const onVaultAccess = () => {
     onNavigation();
@@ -27,24 +29,22 @@ export const Landing = ({ onNavigation }) => {
   return (
     <Fragment>
       <AlertBox>
-        <Alert variant="warning">Always check the legitimacy of Vault assist website before using your keys.</Alert>
+        <Alert variant="warning">{t('landing.warning.check')}</Alert>
       </AlertBox>
       <ScrollableSection>
         <Content>
           <Center>
             <Header>
               <H3>
-                <Semibold>Vault</Semibold> Assist
+                <Semibold>{t('landing.title1')}</Semibold> {t('landing.title2')}
               </H3>
             </Header>
-            <Small textAlign="center">
-              {`A small paragraph about the assist tool. What's the main purpose of the Vault assist tool and for what it should be used for.`}
-            </Small>
+            <Small textAlign="center">{t('landing.description')}</Small>
           </Center>
         </Content>
         <SectionStickyFooter>
           <Button onPress={onVaultAccess} size="regular">
-            Access your Vault
+            {t('actions.accessVault')}
           </Button>
         </SectionStickyFooter>
       </ScrollableSection>

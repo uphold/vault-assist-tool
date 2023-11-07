@@ -10,9 +10,11 @@ import { ScrollableSection } from '../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../components/SectionStickyFooter';
 import { Small } from '../../components/Typography/Small';
 import { TextField } from '../../forms/fields/TextField';
+import { addressSchema } from '../../forms/schemas';
 import { useErrors } from '../../hooks/useErrors';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from '../../hooks/useTranslation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
 
@@ -26,6 +28,7 @@ export const Instructions = styled(Mixed.div)`
 `;
 
 export const Access = () => {
+  const { t } = useTranslation();
   const history = useHistory();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -34,14 +37,11 @@ export const Access = () => {
   };
 
   const form = useForm({
-    resolver: yupResolver(true),
+    mode: 'onChange',
+    resolver: yupResolver(addressSchema),
   });
 
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = form;
+  const { control, handleSubmit } = form;
 
   const onSubmit = handleSubmit((data) => {
     const { address } = data;
@@ -57,15 +57,18 @@ export const Access = () => {
 
   const dismissBottomsheet = () => setIsVisible(false);
 
-  useErrors(form, errors?.[0]);
+  useErrors(form);
 
   return (
     <Fragment>
-      <Navigation leftAction={<NavigationAction name="back" onClick={onClickBack} />} title="Vault Assist" />
+      <Navigation
+        leftAction={<NavigationAction name="back" onClick={onClickBack} />}
+        title={t('access.navigation.title')}
+      />
       <ScrollableSection>
         <Content paddingTop="0">
           <Instructions>
-            <Small>Enter the Vault address to check your balance and move funds.</Small>
+            <Small>{t('access.description')}</Small>
           </Instructions>
           <TextField
             action={{
@@ -74,32 +77,27 @@ export const Access = () => {
             }}
             control={control}
             data-test="address"
-            label="XRP Vault Address"
+            label={t('access.fields.address.label.xrp')}
             name="address"
-            placeholder="Enter your address"
+            placeholder={t('access.fields.address.placeholder')}
           >
-            <Error type="required">Error: Required error</Error>
+            <Error type="required">{t('access.fields.address.errors.required')}</Error>
 
-            <Error>Error: Invalid error</Error>
+            <Error>{t('access.fields.address.errors.invalid')}</Error>
           </TextField>
         </Content>
         <SectionStickyFooter>
-          <Button onPress={onSubmit}>Submit</Button>
+          <Button onPress={onSubmit}>{t('actions.submit')}</Button>
         </SectionStickyFooter>
       </ScrollableSection>
       <BottomSheet isVisible={isVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
-          title="XRP Vault address"
+          title={t('access.fields.address.details.header')}
         />
         <ScrollableSection padding="sp02 sp05">
-          <Small marginBottom="sp06">
-            Each cryptocurrency held in your Vault corresponds to an underlying wallet address. You can locate this
-            address within the Uphold app when accessing the Vault page for the specific asset. Alternatively, you can
-            also find this address in the email sent to you when you initially created the Vault for that particular
-            cryptocurrency.
-          </Small>
-          <Button onPress={dismissBottomsheet}>Ok, got it</Button>
+          <Small marginBottom="sp06">{t('access.fields.address.details.description')}</Small>
+          <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>
       </BottomSheet>
     </Fragment>
