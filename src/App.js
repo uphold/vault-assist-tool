@@ -2,6 +2,7 @@ import { Access, Landing } from './pages';
 import { IconDefs } from './components/IconDefs';
 import { Route } from './components/Route';
 import { Router, Switch } from 'react-router-dom';
+import { ToasterContainer } from './components/Toaster';
 import { Wrapper } from './layouts/Wrapper';
 import { createBrowserHistory } from 'history';
 import { useEffect, useState } from 'react';
@@ -29,6 +30,8 @@ export const App = () => {
           <Route component={Landing} onNavigation={() => setIsGuarded(false)} path="/" />
         </Switch>
       </Router>
+      <ToasterContainer />
+      <div id="dynamicFormPortal" />
     </Wrapper>
   );
 };

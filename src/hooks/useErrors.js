@@ -14,6 +14,7 @@ export const useErrors = (
 ) => {
   const errorsRef = useRef();
   const previousRef = useRef();
+  const previousError = useRef();
   const values = useWatch({ control });
 
   useEffect(() => {
@@ -23,6 +24,18 @@ export const useErrors = (
 
     if (!previous || !errorsRef.current) {
       return;
+    }
+
+    // Toast errors
+    if (formErrors) {
+      Object.entries(formErrors).forEach(([, error]) => {
+        const previousErr = previousError.current;
+
+        if (error.message !== previousErr) {
+          Toaster.showError(error.message);
+          previousError.current = error.message;
+        }
+      });
     }
 
     Object.entries(errorsRef.current).forEach(([field, error]) => {

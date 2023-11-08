@@ -26,7 +26,6 @@ export const ToasterContainer = styled(BaseToastContainer).attrs({
     border-radius: 8px;
     min-height: initial;
     padding: 0;
-    box-shadow: 0 4px 8px ${styles.Utils.getColorWithOpacity(styles.colors.n045, 0.2)};
   }
 
   .Toastify__toast-body {
@@ -34,7 +33,7 @@ export const ToasterContainer = styled(BaseToastContainer).attrs({
   }
 
   .Toastify__close-button {
-    padding: 16px 16px 16px 0;
+    display: none;
     color: ${styles.colors.n045};
     opacity: 1;
   }

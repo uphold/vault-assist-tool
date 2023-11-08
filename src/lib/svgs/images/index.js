@@ -9,6 +9,7 @@ import success from './success.svg';
 import successOutline from './successOutline.svg';
 import uphold from './uphold.svg';
 import upholdDark from './upholdDark.svg';
+import vault from './vault.svg';
 import warning from './warning.svg';
 import warningCircular from './warningCircular.svg';
 
@@ -28,6 +29,7 @@ export default {
     dark: upholdDark,
     light: uphold,
   },
+  vault,
   warning,
   warningCircular,
 };
