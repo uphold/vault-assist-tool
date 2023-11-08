@@ -3,7 +3,6 @@ import i18next from 'i18next';
 
 export const languageCodes = Object.freeze({
   EN: 'en',
-  ES: 'es',
 });
 
 const defaultOptions = {
