@@ -8,6 +8,7 @@ import { ScrollableSection } from '../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../components/SectionStickyFooter';
 import { Semibold } from '../../components/Typography/Semibold';
 import { Small } from '../../components/Typography/Small';
+import { Svg } from '../../components/Svg';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
@@ -35,6 +36,7 @@ export const Landing = ({ onNavigation }) => {
         <Content>
           <Center>
             <Header>
+              <Svg height={193} name="vault" width={360} />
               <H3>
                 <Semibold>{t('landing.title1')}</Semibold> {t('landing.title2')}
               </H3>

@@ -1,7 +1,7 @@
 import { BottomSheet } from '../../components/BottomSheet';
 import { Button } from '../../components/Button';
 import { Content, Navigation } from '../../layouts';
-import { Error } from '../../forms/components/Error';
+import { DynamicSelectField } from '../../forms/fields/DynamicSelectField';
 import { Fragment, useState } from 'react';
 import { Icon } from '../../components/Icon';
 import { Mixed } from '../../components/Mixed';
@@ -30,13 +30,20 @@ export const Instructions = styled(Mixed.div)`
 export const Access = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isAddressInfoSheetVisible, setIsAddressInfoSheetVisible] = useState(false);
+  const networkOptions = [
+    { isDisabled: false, label: 'XRP', value: 'xrp' },
+    { isDisabled: true, label: 'BTC (Soon)', value: 'btc' },
+  ];
 
   const onClickBack = () => {
     history.goBack();
   };
 
   const form = useForm({
+    defaultValues: {
+      network: networkOptions[0],
+    },
     mode: 'onChange',
     resolver: yupResolver(addressSchema),
   });
@@ -55,7 +62,9 @@ export const Access = () => {
     // });
   });
 
-  const dismissBottomsheet = () => setIsVisible(false);
+  const dismissBottomsheet = () => {
+    setIsAddressInfoSheetVisible(false);
+  };
 
   useErrors(form);
 
@@ -70,27 +79,32 @@ export const Access = () => {
           <Instructions>
             <Small>{t('access.description')}</Small>
           </Instructions>
+          <DynamicSelectField
+            control={control}
+            data-test="network"
+            hideConfirm
+            label={t('access.fields.network.label')}
+            name="network"
+            options={networkOptions}
+            placeholder={t('access.fields.network.placeholder')}
+          />
           <TextField
             action={{
-              icon: <Icon marginRight="10px" name="infoCircle" size={24} />,
-              onClick: () => setIsVisible(true),
+              icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
+              onClick: () => setIsAddressInfoSheetVisible(true),
             }}
             control={control}
             data-test="address"
             label={t('access.fields.address.label.xrp')}
             name="address"
             placeholder={t('access.fields.address.placeholder')}
-          >
-            <Error type="required">{t('access.fields.address.errors.required')}</Error>
-
-            <Error>{t('access.fields.address.errors.invalid')}</Error>
-          </TextField>
+          />
         </Content>
         <SectionStickyFooter>
           <Button onPress={onSubmit}>{t('actions.submit')}</Button>
         </SectionStickyFooter>
       </ScrollableSection>
-      <BottomSheet isVisible={isVisible} onRequestClose={dismissBottomsheet}>
+      <BottomSheet isVisible={isAddressInfoSheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
           title={t('access.fields.address.details.header')}

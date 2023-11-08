@@ -2,7 +2,7 @@ import { Mixed } from '../../components/Mixed';
 import PropTypes from 'prop-types';
 
 export const Row = ({ hasAlert, hasErrors, hasMessage, ...props }) => (
-  <Mixed.div paddingBottom={hasAlert || hasErrors || hasMessage ? 0 : 32} paddingTop={8} {...props} />
+  <Mixed.div paddingBottom={hasAlert || hasErrors || hasMessage ? 0 : 18} paddingTop={8} {...props} />
 );
 
 Row.defaultProps = {

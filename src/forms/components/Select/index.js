@@ -4,6 +4,7 @@ import { Placeholder } from './Placeholder';
 import { forwardRef } from 'react';
 import { getColor } from '../../../lib/theme/helpers';
 import { getFormStatus, getFormVariant } from '../../../lib/form';
+import { theme } from '../../../lib/theme';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -18,13 +19,15 @@ const DropdownWrapper = styled.div`
 `;
 
 const Wrapper = styled.button`
-  ${({ theme, ...props }) => getColor(theme, 'select', getFormVariant(props), getFormStatus(props))};
+  ${({ ...props }) => getColor(theme, 'select', getFormVariant(props), getFormStatus(props))};
   align-items: center;
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
   flex: 1;
   min-height: 44px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   padding-left: 14px;
   text-align: left;
 

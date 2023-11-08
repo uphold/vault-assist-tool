@@ -11,8 +11,10 @@ const ToastTypes = Object.freeze({
 });
 
 export const Toast = ({ message, type }) => (
-  <Mixed.div alignItems="flex-start" backgroundColor="n01" display="flex" padding="sp03">
-    <Svg marginRight="sp03" name={ToastTypes[type]} />
+  <Mixed.div alignItems="flex-start" backgroundColor="nd40" display="flex" padding="sp03">
+    <Mixed.div marginRight="sp03">
+      <Svg name={ToastTypes[type]} />
+    </Mixed.div>
 
     <Small color="n05" data-test={`${type}Toast`} letterSpacing={0.2}>
       {message}
