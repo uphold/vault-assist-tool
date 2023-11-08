@@ -11,7 +11,7 @@ import { SectionStickyFooter } from '../../components/SectionStickyFooter';
 import { Small } from '../../components/Typography/Small';
 import { TextField } from '../../forms/fields/TextField';
 import { addressSchema } from '../../forms/schemas';
-import { useErrors } from '../../hooks/useErrors';
+import { toastErrors } from '../../utils/toastErrors';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -60,13 +60,11 @@ export const Access = () => {
     //     address,
     //   },
     // });
-  });
+  }, toastErrors);
 
   const dismissBottomsheet = () => {
     setIsAddressInfoSheetVisible(false);
   };
-
-  useErrors(form);
 
   return (
     <Fragment>
