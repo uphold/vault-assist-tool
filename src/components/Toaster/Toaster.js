@@ -28,6 +28,10 @@ export const ToasterContainer = styled(BaseToastContainer).attrs({
     padding: 0;
   }
 
+  .Toastify__toast {
+    background: none;
+  }
+
   .Toastify__toast-body {
     padding: 0;
   }
