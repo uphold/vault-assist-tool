@@ -78,7 +78,12 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
               <ListBox
                 isDisabled={(value) => optionsMap[value]?.isDisabled}
                 items={items}
-                onSelect={(item) => setSelectedItem(item)}
+                onSelect={(item) => {
+                  setSelectedItem(item);
+                  if (hideConfirm) {
+                    onConfirm();
+                  }
+                }}
                 ref={ref}
                 selectedItem={selectedItem}
                 subtitle={(value) => optionsMap[value]?.subtitle}

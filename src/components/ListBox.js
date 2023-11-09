@@ -32,7 +32,10 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
       layoutWidth="100%"
       marginTop={index > 0 && 'sp03'}
       onClick={!isDisabled(item) ? () => onSelect(item) : () => {}}
-      padding={item === selectedItem ? 14 : 15}
+      paddingBottom={item === selectedItem ? 14 : 15}
+      paddingLeft={item === selectedItem ? 18 : 17}
+      paddingRight={item === selectedItem ? 18 : 17}
+      paddingTop={item === selectedItem ? 19 : 18}
       ref={ref}
       transition={{
         box: { duration: 0.3, ease: 'easeIn' },
