@@ -51,9 +51,9 @@ export const Access = () => {
   const { control, handleSubmit } = form;
 
   const onSubmit = handleSubmit((data) => {
-    const { address } = data;
+    const { cryptoAddress } = data;
 
-    console.log(address);
+    console.log(cryptoAddress);
 
     // onConfirm({
     //   details: {
@@ -92,9 +92,9 @@ export const Access = () => {
               onClick: () => setIsAddressInfoSheetVisible(true),
             }}
             control={control}
-            data-test="address"
+            data-test="cryptoAddress"
             label={t('access.fields.address.label.xrp')}
-            name="address"
+            name="cryptoAddress"
             placeholder={t('access.fields.address.placeholder')}
           />
         </Content>
