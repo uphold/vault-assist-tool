@@ -42,7 +42,13 @@ export const App = () => {
         <Switch>
           {!isGuarded ? (
             <Fragment>
-              <Route component={Access} key="access" onConfirmAccount={onConfirmAccount} path="/access" />
+              <Route
+                component={Access}
+                key="access"
+                onConfirmAccount={onConfirmAccount}
+                onGoBack={() => setIsGuarded(true)}
+                path="/access"
+              />
               <Route
                 accountData={accountData}
                 component={XRP}

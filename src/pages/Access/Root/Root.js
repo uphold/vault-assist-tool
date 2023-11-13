@@ -19,7 +19,7 @@ import { useTranslation } from '../../../hooks/useTranslation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 
-export const Root = ({ onConfirmAccess }) => {
+export const Root = ({ onConfirmAccess, onGoBack }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +38,7 @@ export const Root = ({ onConfirmAccess }) => {
   ];
 
   const onClickBack = () => {
+    onGoBack();
     history.goBack();
   };
 
@@ -132,4 +133,5 @@ export const Root = ({ onConfirmAccess }) => {
 
 Root.propTypes = {
   onConfirmAccess: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func.isRequired,
 };
