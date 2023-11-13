@@ -1,5 +1,4 @@
 import { Mixed } from './Mixed';
-import { styles } from '../lib/styles';
 import PropTypes from 'prop-types';
 
 export const SectionStickyFooter = ({ children, marginTop, ...props }) => {

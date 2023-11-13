@@ -30,7 +30,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   };
 
   const { balance, reserve } = accountData;
-  const { baseReserve = 0, ownerReserve = 0, totalReserve = 0 } = reserve;
+  const { ownerReserve = 0, totalReserve = 0 } = reserve;
 
   const remainingBalance = Number(balance) - Number(totalReserve);
   const requiredReserve = Number(totalReserve) - Number(ownerReserve);
