@@ -1,5 +1,7 @@
 export const fontsByWeight = {
   Metropolis: {
+    100: 'Metropolis-Thin',
+    200: 'Metropolis-Extra-Light',
     300: 'Metropolis-Light',
     500: 'Metropolis-Regular',
     700: 'Metropolis-Bold',

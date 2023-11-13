@@ -24,7 +24,7 @@ export const Landing = ({ onNavigation }) => {
   const history = useHistory();
   const onVaultAccess = () => {
     onNavigation();
-    history.push('/access');
+    history.push({ ...history.location, pathname: '/access' });
   };
 
   return (

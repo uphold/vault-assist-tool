@@ -1,6 +1,6 @@
 /* eslint-disable no-process-env, no-sync */
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import { DefinePlugin } from 'webpack';
+import { DefinePlugin, ProvidePlugin } from 'webpack';
 // eslint-disable-next-line import/default
 import CopyPlugin from 'copy-webpack-plugin';
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
@@ -38,6 +38,10 @@ const plugins = [
   new DefinePlugin({
     __DEV__: isDevelopment,
     process: { env: {} },
+  }),
+  new ProvidePlugin({
+    Buffer: ['buffer', 'Buffer'],
+    process: 'process/browser',
   }),
 ];
 
@@ -139,6 +143,13 @@ const webpackConfig = {
       'react-native-web': path.resolve('node_modules/react-native-web'),
       src: path.resolve('src'),
       'styled-components': path.resolve('node_modules/styled-components'),
+    },
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      stream: require.resolve('stream-browserify'),
+      url: require.resolve('url'),
     },
   },
 };
