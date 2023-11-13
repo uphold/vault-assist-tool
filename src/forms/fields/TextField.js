@@ -84,7 +84,7 @@ const BaseTextField = forwardRef(
           {action && <Mixed.button onClick={action.onClick}>{action.icon}</Mixed.button>}
         </Input>
 
-        {invalid ? (
+        {invalid && children ? (
           <ErrorSwitch errors={error}>{children}</ErrorSwitch>
         ) : (
           message && <Message textAlign={messagePosition}>{message}</Message>

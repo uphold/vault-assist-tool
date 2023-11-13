@@ -11,15 +11,6 @@ export const SectionStickyFooter = ({ children, marginTop, ...props }) => {
 
   return (
     <Mixed.div layoutBottom={0} layoutLeft={0} layoutPosition="sticky" layoutRight={0} marginTop={marginTop} zIndex={1}>
-      <Mixed.div
-        background={`linear-gradient(
-        180deg,
-        ${styles.Utils.getColorWithOpacity(styles.colors.nd30, 0)} 0%,
-        ${styles.colors.nd30} 100%
-      )`}
-        layoutHeight={32}
-      />
-
       <Mixed.div {...defaultProps}>{children}</Mixed.div>
     </Mixed.div>
   );

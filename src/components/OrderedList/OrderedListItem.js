@@ -3,8 +3,14 @@ import { Small } from '../Typography/Small';
 import { XSmall } from '../Typography/XSmall';
 import PropTypes from 'prop-types';
 
+//  display: flex;
+// flex-direction: row;
+// flex-wrap: nowrap;
+// justify-content: normal;
+// align-items: normal;
+// align-content: normal;
 export const OrderedListItem = ({ children, number, ...props }) => (
-  <Mixed.div alignItems="center" display="flex" {...props}>
+  <Mixed.div display="flex" {...props}>
     <Mixed.div
       alignItems="center"
       border="2px solid n03"
@@ -21,7 +27,7 @@ export const OrderedListItem = ({ children, number, ...props }) => (
       </XSmall>
     </Mixed.div>
 
-    <Small color="n07" letterSpacing={0.2} marginLeft="sp03">
+    <Small fontWeight="200" marginLeft="12px" paddingTop="1px">
       {children}
     </Small>
   </Mixed.div>
