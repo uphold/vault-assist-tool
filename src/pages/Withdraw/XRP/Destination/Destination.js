@@ -32,7 +32,9 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   const { balance, reserve } = accountData;
   const { baseReserve = 0, ownerReserve = 0, totalReserve = 0 } = reserve;
 
-  const destinationAmount = Number(balance) - Number(totalReserve) + Number(baseReserve);
+  const remainingBalance = Number(balance) - Number(totalReserve);
+  const requiredReserve = Number(totalReserve) - Number(ownerReserve);
+  const destinationAmount = remainingBalance + requiredReserve;
 
   const form = useForm({
     mode: 'onChange',

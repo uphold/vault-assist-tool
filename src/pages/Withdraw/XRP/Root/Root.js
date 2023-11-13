@@ -23,7 +23,7 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
   };
 
   const { balance, reserve } = accountData;
-  const { baseReserve = 0, ownerReserve = 0, totalReserve = 0 } = reserve;
+  const { ownerReserve = 0, totalReserve = 0 } = reserve;
 
   const remainingBalance = Number(balance) - Number(totalReserve);
 
@@ -44,13 +44,17 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
             <OrderedListItem number={1}>
               <Semibold>{t('withdraw.xrp.conditions.funds.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.funds.text', {
-                remainingBalance: <Semibold>{formatNumber(remainingBalance)}</Semibold>,
+                remainingBalance: <Semibold>({formatNumber(remainingBalance)} XRP)</Semibold>,
+                totalReserve: <Semibold>({formatNumber(totalReserve)} XRP)</Semibold>,
               })}
             </OrderedListItem>
             <OrderedListItem number={2}>
-              <Semibold>{t('withdraw.xrp.conditions.account.deletion.label')}</Semibold>{' '}
-              {t('withdraw.xrp.conditions.account.deletion.text', {
-                baseReserve: formatNumber(baseReserve),
+              <Semibold>{t('withdraw.xrp.conditions.vault.deactivation.label')}</Semibold>{' '}
+              {t('withdraw.xrp.conditions.vault.deactivation.text')}
+            </OrderedListItem>
+            <OrderedListItem number={3}>
+              <Semibold>{t('withdraw.xrp.conditions.network.costs.label')}</Semibold>{' '}
+              {t('withdraw.xrp.conditions.network.costs.text', {
                 ownerReserve: formatNumber(ownerReserve),
               })}
             </OrderedListItem>
