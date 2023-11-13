@@ -5,7 +5,7 @@ import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const Access = ({ onConfirmAccount }) => {
+export const Access = ({ onConfirmAccount, onGoBack }) => {
   const history = useHistory();
   const { path } = useRouteMatch();
   const [accountData, setAccountData] = useState();
@@ -33,11 +33,12 @@ export const Access = ({ onConfirmAccount }) => {
           path={`${path}/details`}
         />
       ) : null}
-      <Route component={Root} key="access" onConfirmAccess={onConfirmAccess} path={path} />
+      <Route component={Root} key="access" onConfirmAccess={onConfirmAccess} onGoBack={onGoBack} path={path} />
     </Switch>
   );
 };
 
 Access.propTypes = {
   onConfirmAccount: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func.isRequired,
 };
