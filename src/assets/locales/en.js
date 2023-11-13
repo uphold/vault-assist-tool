@@ -49,7 +49,7 @@ export const en = {
     "withdraw.xrp.destination.fields.address.errors.required": "The address is required",
     "withdraw.xrp.destination.fields.address.label": "Destination XRP address",
     "withdraw.xrp.destination.fields.address.placeholder": "e.g. rPjTZfLP3Qxwww2xvXSALJdwrrw...",
-    "withdraw.xrp.destination.fields.destination.tag.errors.invalid": "The destination tag is invalid",
+    "withdraw.xrp.destination.fields.destination.tag.errors.invalid": "The tag you entered is incorrect, please use only positive integers",
     "withdraw.xrp.destination.fields.destination.tag.label": "Destination Tag",
     "withdraw.xrp.destination.fields.destination.tag.placeholder": "e.g. 0123456789",
     "withdraw.xrp.destination.label.network.costs": "Network costs",
