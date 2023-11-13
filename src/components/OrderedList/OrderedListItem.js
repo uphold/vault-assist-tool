@@ -3,12 +3,6 @@ import { Small } from '../Typography/Small';
 import { XSmall } from '../Typography/XSmall';
 import PropTypes from 'prop-types';
 
-//  display: flex;
-// flex-direction: row;
-// flex-wrap: nowrap;
-// justify-content: normal;
-// align-items: normal;
-// align-content: normal;
 export const OrderedListItem = ({ children, number, ...props }) => (
   <Mixed.div display="flex" {...props}>
     <Mixed.div
