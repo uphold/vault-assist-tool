@@ -1,4 +1,4 @@
-import { Blockchain, getBalance, getReserveBalances } from '../../../lib/vault';
+import { Blockchain, getBalance, getAccountInfo } from '../../../lib/vault';
 import { BottomSheet } from '../../../components/BottomSheet';
 import { Button } from '../../../components/Button';
 import { Content, Navigation } from '../../../layouts';
@@ -56,10 +56,10 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
   const onConfirm = async (address) => {
     try {
       const balance = await getBalance(selectedNetwork, address);
-      const reserve = await getReserveBalances(selectedNetwork, address);
+      const { reserve, signerList } = await getAccountInfo(selectedNetwork, address);
 
       setIsLoading(false);
-      onConfirmAccess({ address, balance, network: selectedNetwork, reserve });
+      onConfirmAccess({ address, balance, network: selectedNetwork, reserve, signerList });
     } catch (error) {
       setIsLoading(false);
       if (error?.message) {

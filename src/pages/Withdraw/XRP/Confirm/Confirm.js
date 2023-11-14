@@ -9,6 +9,7 @@ import { ScrollableSection } from '../../../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../../../components/SectionStickyFooter';
 import { Small } from '../../../../components/Typography/Small';
 import { TextField } from '../../../../forms/fields/TextField';
+import { signingKeysSchema } from '../../../../forms/schemas/signingKeysSchema';
 import { toastErrors } from '../../../../utils/toastErrors';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -18,6 +19,7 @@ import PropTypes from 'prop-types';
 
 export const Confirm = ({ onConfirmWithdraw }) => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const [isVaultKeySheetVisible, setIsVaultKeySheetVisible] = useState(false);
@@ -29,15 +31,25 @@ export const Confirm = ({ onConfirmWithdraw }) => {
 
   const form = useForm({
     mode: 'onChange',
-    resolver: yupResolver(false),
+    resolver: yupResolver(signingKeysSchema),
   });
 
-  const { control, handleSubmit } = form;
+  const { control, handleSubmit, setError } = form;
 
   const onSubmit = handleSubmit((data) => {
     const { vaultKey, backupKey } = data;
 
-    onConfirmWithdraw({ backupKey, vaultKey });
+    try {
+      onConfirmWithdraw({ backupKey, vaultKey });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      if (error?.message) {
+        toastErrors([error]);
+        setError('vaultKey', error.message);
+        setError('backupKey', error.message);
+      }
+    }
   }, toastErrors);
 
   const dismissBottomsheet = () => {
@@ -80,7 +92,9 @@ export const Confirm = ({ onConfirmWithdraw }) => {
           />
         </Content>
         <SectionStickyFooter>
-          <Button onPress={onSubmit}>{t('actions.confirm.withdraw')}</Button>
+          <Button isLoading={isLoading} onPress={onSubmit}>
+            {t('actions.confirm.withdraw')}
+          </Button>
         </SectionStickyFooter>
       </ScrollableSection>
       <BottomSheet isVisible={isVaultKeySheetVisible} onRequestClose={dismissBottomsheet}>

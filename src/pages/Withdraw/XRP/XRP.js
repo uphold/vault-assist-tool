@@ -1,22 +1,32 @@
+import { Blockchain, validateVaultKeys } from '../../../lib/vault';
 import { Confirm } from './Confirm';
 import { Destination } from './Destination';
 import { Root } from './Root';
 import { Route } from '../../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from '../../../hooks/useTranslation';
 import CustomPropTypes from '../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
 export const XRP = ({ accountData, onFailure, onSuccess }) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const { path } = useRouteMatch();
   const [destinationData, setDestinationData] = useState({});
+
+  const { signerList } = accountData;
 
   const onContinueWithdraw = () => {
     history.push({ ...history.location, pathname: `${path}/destination` });
   };
 
-  const onConfirmWithdraw = () => {
+  const onConfirmWithdraw = ({ vaultKey, backupKey }) => {
+    // Validate keys before we send transaction
+    if (!validateVaultKeys(Blockchain.XRPL, vaultKey, backupKey, signerList)) {
+      throw new Error(t('withdraw.xrp.confirm.fields.keys.error.invalid'));
+    }
+
     // TODO: Transaction submission
     onSuccess(destinationData);
     onFailure();
