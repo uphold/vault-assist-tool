@@ -1,5 +1,7 @@
 import { CryptoUtils } from 'vault-wallet-toolkit/lib/utils/CryptoUtils';
 import {
+  Network,
+  NetworkUtil,
   TransactionService,
   ValidationUtils,
   Blockchain as VaultBlockchain,
@@ -8,6 +10,9 @@ import {
 import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
 
 export const Blockchain = VaultBlockchain;
+
+// Set testnet if we are on dev
+NetworkUtil.setNetwork(__DEV__ ? Network.DEVELOPMENT : Network.PRODUCTION);
 
 export const validateAddress = (blockchain, address) => {
   return ValidationUtils.validateAddress(blockchain, address);
