@@ -11,6 +11,7 @@ import { ScrollableSection } from '../../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../../components/SectionStickyFooter';
 import { Small } from '../../../components/Typography/Small';
 import { TextField } from '../../../forms/fields/TextField';
+import { UnorderedList } from '../../../components/UnorderedList';
 import { addressSchema } from '../../../forms/schemas';
 import { toastErrors } from '../../../utils/toastErrors';
 import { useForm } from 'react-hook-form';
@@ -123,7 +124,11 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
           title={t('access.fields.address.details.header')}
         />
         <ScrollableSection padding="sp02 sp05">
-          <Small marginBottom="sp06">{t('access.fields.address.details.description')}</Small>
+          <Small marginBottom="sp03">{t('access.fields.address.details.description')}</Small>
+          <UnorderedList customIcon={false} marginBottom="sp06" marginLeft="sp02">
+            <Small>{t('access.fields.address.details.bullet1')}</Small>
+            <Small>{t('access.fields.address.details.bullet2')}</Small>
+          </UnorderedList>
           <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>
       </BottomSheet>
