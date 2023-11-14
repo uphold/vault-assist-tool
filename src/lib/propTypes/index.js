@@ -8,6 +8,7 @@ const Account = PropTypes.shape({
   reserve: PropTypes.shape({
     baseReserve: PropTypes.number,
     ownerReserve: PropTypes.number,
+    signerList: PropTypes.arrayOf(PropTypes.string),
     totalReserve: PropTypes.number,
   }),
 });

@@ -1,4 +1,5 @@
 import { CryptoUtils } from 'vault-wallet-toolkit/lib/utils/CryptoUtils';
+import { I18n } from './i18n/provider';
 import {
   Network,
   NetworkUtil,
@@ -7,6 +8,7 @@ import {
   Blockchain as VaultBlockchain,
   WalletService,
 } from 'vault-wallet-toolkit';
+import { Wallet } from 'vault-wallet-toolkit/lib/core/Wallet';
 import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
 
 export const Blockchain = VaultBlockchain;
@@ -18,8 +20,32 @@ export const validateAddress = (blockchain, address) => {
   return ValidationUtils.validateAddress(blockchain, address);
 };
 
+export const validateMnemonic = (mnemonic) => {
+  return ValidationUtils.validateMnemonic(mnemonic);
+};
+
 export const createTransaction = async (blockchain, transactionData) => {
   return await TransactionService.createTransaction(blockchain, transactionData);
+};
+
+export const validateVaultKeys = (blockchain, vaultKey, backupKey, signerList) => {
+  if (vaultKey === backupKey) {
+    return false;
+  }
+
+  const vaultWallet = new Wallet(blockchain, vaultKey);
+
+  if (!signerList.includes(vaultWallet.address)) {
+    return false;
+  }
+
+  const backupWallet = new Wallet(blockchain, backupKey);
+
+  if (!signerList.includes(backupWallet.address)) {
+    return false;
+  }
+
+  return true;
 };
 
 export const getBalance = async (blockchain, address) => {
@@ -30,11 +56,31 @@ export const getBalance = async (blockchain, address) => {
       return await xrplProvider.getXrpBalance(address);
 
     default:
-      throw new Error('Unsupported blockchain');
+      throw new Error(I18n.t('messages.error.unsupported.blockchain'));
   }
 };
 
-export const getReserveBalances = async (blockchain, address) => {
+export const findSigners = (signerLists) => {
+  try {
+    const [{ SignerEntries: signerEntries, SignerQuorum: signerQuorum }] = signerLists;
+
+    if (signerQuorum > 2) {
+      throw new Error(I18n.t('messages.error.account.not.vault'));
+    }
+
+    return signerEntries.map((signerEntry) => {
+      const {
+        SignerEntry: { Account: account },
+      } = signerEntry;
+
+      return account;
+    });
+  } catch {
+    throw new Error(I18n.t('messages.error.account.not.vault'));
+  }
+};
+
+export const getAccountInfo = async (blockchain, address) => {
   const { instance: xrplProvider } = await getXrplProvider();
 
   if (blockchain === Blockchain.XRPL) {
@@ -47,19 +93,22 @@ export const getReserveBalances = async (blockchain, address) => {
       },
     } = await xrplProvider.request({ command: 'server_info' });
 
-    // get account owner count
+    // get account owner count and signer info
     const {
       result: {
-        account_data: { OwnerCount: ownerCount },
+        account_data: { OwnerCount: ownerCount, signer_lists: signerLists },
       },
-    } = await xrplProvider.request({ account: address, command: 'account_info' });
+    } = await xrplProvider.request({ account: address, command: 'account_info', signer_lists: true });
 
     // calculate account's total reserve balance
     const totalReserve = baseReserve + ownerCount * ownerReserve;
 
-    return { baseReserve, ownerReserve, totalReserve };
+    // get list of signers for reference
+    const signerList = findSigners(signerLists);
+
+    return { reserve: { baseReserve, ownerReserve, totalReserve }, signerList };
   }
-  throw new Error('Unsupported blockchain');
+  throw new Error(I18n.t('messages.error.unsupported.blockchain'));
 };
 
 export const isValidKey = (fingerprint, key) => {
