@@ -55,10 +55,6 @@ export const Padding = Object.freeze({
 export const getBackground = ({ tokens, type }) => get(tokens.action, type.split('-'));
 
 export const getBorderColor = ({ tokens, type }) => {
-  if (type === ButtonType.AppleWallet) {
-    return tokens.border.apple.wallet;
-  }
-
   if (type === ButtonType.Secondary) {
     return {
       default: tokens.border.primary,

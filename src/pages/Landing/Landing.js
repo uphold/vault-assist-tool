@@ -9,7 +9,6 @@ import { SectionStickyFooter } from '../../components/SectionStickyFooter';
 import { Semibold } from '../../components/Typography/Semibold';
 import { Small } from '../../components/Typography/Small';
 import { Svg } from '../../components/Svg';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -19,13 +18,8 @@ export const AlertBox = styled(Mixed.div)`
   padding: 16px;
 `;
 
-export const Landing = ({ onNavigation }) => {
+export const Landing = ({ onConfirm }) => {
   const { t } = useTranslation();
-  const history = useHistory();
-  const onVaultAccess = () => {
-    onNavigation();
-    history.push({ ...history.location, pathname: '/access' });
-  };
 
   return (
     <Fragment>
@@ -45,7 +39,7 @@ export const Landing = ({ onNavigation }) => {
           </Center>
         </Content>
         <SectionStickyFooter>
-          <Button onPress={onVaultAccess} size="regular">
+          <Button onPress={onConfirm} size="regular">
             {t('actions.accessVault')}
           </Button>
         </SectionStickyFooter>
@@ -55,5 +49,5 @@ export const Landing = ({ onNavigation }) => {
 };
 
 Landing.propTypes = {
-  onNavigation: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };

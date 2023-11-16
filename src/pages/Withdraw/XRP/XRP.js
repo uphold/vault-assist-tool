@@ -1,35 +1,40 @@
-import { Blockchain, validateVaultKeys } from '../../../lib/vault';
+import { Blockchain, createTransaction, multiSignTransaction, sendTransaction } from '../../../lib/vault';
 import { Confirm } from './Confirm';
 import { Destination } from './Destination';
 import { Root } from './Root';
 import { Route } from '../../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useState } from 'react';
-import { useTranslation } from '../../../hooks/useTranslation';
 import CustomPropTypes from '../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
 export const XRP = ({ accountData, onFailure, onSuccess }) => {
-  const { t } = useTranslation();
   const history = useHistory();
   const { path } = useRouteMatch();
   const [destinationData, setDestinationData] = useState({});
 
-  const { signerList } = accountData;
-
+  const blockchain = Blockchain.XRPL;
   const onContinueWithdraw = () => {
     history.push({ ...history.location, pathname: `${path}/destination` });
   };
 
-  const onConfirmWithdraw = ({ vaultKey, backupKey }) => {
-    // Validate keys before we send transaction
-    if (!validateVaultKeys(Blockchain.XRPL, vaultKey, backupKey, signerList)) {
-      throw new Error(t('withdraw.xrp.confirm.fields.keys.error.invalid'));
-    }
+  const onConfirmWithdraw = async ({ backupKey, vaultKey }) => {
+    const transaction = await createTransaction(blockchain, {
+      ...destinationData,
+      from: accountData.address,
+      transactionType: 'AccountDelete',
+    });
 
-    // TODO: Transaction submission
-    onSuccess(destinationData);
-    onFailure();
+    const signedTransaction = multiSignTransaction(blockchain, transaction, [vaultKey, backupKey]);
+
+    try {
+      const transactionData = await sendTransaction(blockchain, signedTransaction);
+
+      onSuccess(transactionData);
+    } catch (error) {
+      console.error(error);
+      onFailure();
+    }
   };
 
   const onConfirmDestination = (destinationData) => {
@@ -55,7 +60,14 @@ export const XRP = ({ accountData, onFailure, onSuccess }) => {
         onConfirmDestination={onConfirmDestination}
         path={`${path}/destination`}
       />
-      <Route component={Confirm} exact key="confirm" onConfirmWithdraw={onConfirmWithdraw} path={`${path}/confirm`} />
+      <Route
+        accountData={accountData}
+        component={Confirm}
+        exact
+        key="confirm"
+        onConfirmWithdraw={onConfirmWithdraw}
+        path={`${path}/confirm`}
+      />
     </Switch>
   );
 };
