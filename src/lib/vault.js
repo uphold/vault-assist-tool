@@ -64,7 +64,7 @@ export const findSigners = (signerLists) => {
   try {
     const [{ SignerEntries: signerEntries, SignerQuorum: signerQuorum }] = signerLists;
 
-    if (signerQuorum > 2) {
+    if (signerQuorum !== 2) {
       throw new Error(I18n.t('messages.error.account.not.vault'));
     }
 
