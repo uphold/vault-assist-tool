@@ -2,10 +2,13 @@ import { Details } from './Details';
 import { Root } from './Root';
 import { Route } from '../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { getBalance, getReserves, getSigners } from '../../lib/vault';
 import { useEffect, useState } from 'react';
+import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
 
 export const Access = ({ onConfirmAccount, onGoBack }) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const { path } = useRouteMatch();
   const [accountData, setAccountData] = useState();
@@ -16,8 +19,16 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
     }
   }, [accountData]);
 
-  const onConfirmAccess = (accountData) => {
-    setAccountData(accountData);
+  const onConfirmAccess = async ({ address, network }) => {
+    const balance = await getBalance(network, address);
+    const signers = await getSigners(network, address);
+    const reserve = await getReserves(network, address);
+
+    if (!signers) {
+      throw new Error(t('messages.error.account.not.vault'));
+    }
+
+    setAccountData({ address, balance, network, reserve, signers });
     history.push({ ...history.location, pathname: `${path}/details` });
   };
 
@@ -29,11 +40,11 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
           component={Details}
           exact
           key="details"
-          onConfirmAccount={onConfirmAccount}
+          onConfirm={() => onConfirmAccount(accountData)}
           path={`${path}/details`}
         />
       ) : null}
-      <Route component={Root} key="access" onConfirmAccess={onConfirmAccess} onGoBack={onGoBack} path={path} />
+      <Route component={Root} key="access" onConfirm={onConfirmAccess} onGoBack={onGoBack} path={path} />
     </Switch>
   );
 };

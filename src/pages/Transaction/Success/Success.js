@@ -1,0 +1,111 @@
+import { Animation } from '../../../components/Animation';
+import { Button } from '../../../components/Button';
+import { Content, Header, Navigation } from '../../../layouts';
+import { Fragment, useState } from 'react';
+import { H3 } from '../../../components/Typography/H3';
+import { HorizontalSeparator } from '../../../components/HorizontalSeparator';
+import { Mixed } from '../../../components/Mixed';
+import { NavigationAction } from '../../../components/Navigation';
+import { ScrollableSection } from '../../../components/ScrollableSection';
+import { SectionStickyFooter } from '../../../components/SectionStickyFooter';
+import { TableBox } from '../../../components/TableView/TableBox';
+import { TableViewBody } from '../../../components/TableView/TableViewBody';
+import { TableViewNote } from '../../../components/TableView/TableViewNote';
+import { TableViewTitle } from '../../../components/TableView/TableViewTitle';
+import { colors } from '../../../lib/styles';
+import { formatNumber } from '../../../utils/formatNumber';
+import { getCurrency, getTransactionLink } from '../../../lib/vault';
+import { useTranslation } from '../../../hooks/useTranslation';
+import CustomPropTypes from '../../../lib/propTypes';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+export const EmptyNav = styled(Mixed.div)`
+  grid-area: navigation;
+`;
+
+export const Center = styled(Mixed.div)`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  justify-items: center;
+  grid-area: content;
+`;
+
+export const Success = ({ transactionData, onFinish }) => {
+  const { t } = useTranslation();
+  const [animating, setAnimating] = useState(true);
+
+  const { to, destinationTag, amount, network, hash } = transactionData;
+
+  return animating ? (
+    <Center>
+      <Animation
+        animation="successOperation"
+        animationOptions={{ loop: false }}
+        color={colors.green20}
+        layoutMaxWidth="100px"
+        onComplete={() => {
+          setAnimating(false);
+        }}
+      />
+    </Center>
+  ) : (
+    <Fragment>
+      <Navigation
+        leftAction={<NavigationAction name="close" onClick={onFinish} />}
+        title={t('transaction.navigation.title')}
+      />
+      <ScrollableSection>
+        <Content paddingTop="12px">
+          <Header alignItems="center">
+            <H3 marginBottom="sp03" textAlign="center">
+              {t('transaction.success.header', { currency: getCurrency(network) })}
+            </H3>
+          </Header>
+          <TableBox padding="sp01 sp03">
+            <TableViewTitle>{t('transaction.success.details.label.destination.address')}</TableViewTitle>
+
+            <TableViewBody>
+              <TableViewNote>{to}</TableViewNote>
+            </TableViewBody>
+            <HorizontalSeparator margin="sp02 0" />
+            {destinationTag ? (
+              <Fragment>
+                <TableViewTitle>{t('transaction.success.details.label.destination.tag')}</TableViewTitle>
+
+                <TableViewBody>
+                  <TableViewNote>{destinationTag}</TableViewNote>
+                </TableViewBody>
+                <HorizontalSeparator margin="sp02 0" />
+              </Fragment>
+            ) : null}
+            <TableViewTitle>{t('transaction.success.details.label.amount.transferred')}</TableViewTitle>
+
+            <TableViewBody>
+              <TableViewNote>
+                {formatNumber(amount)} {getCurrency(network)}
+              </TableViewNote>
+            </TableViewBody>
+          </TableBox>
+        </Content>
+        <SectionStickyFooter>
+          <Button marginBottom="sp02" onPress={() => window.open(getTransactionLink(network, hash), '_blank')}>
+            {t('actions.view.transaction')}
+          </Button>
+          <Button buttonType="secondary" marginBottom="sp01" onPress={onFinish}>
+            {t('actions.end.session')}
+          </Button>
+        </SectionStickyFooter>
+      </ScrollableSection>
+    </Fragment>
+  );
+};
+
+Success.propTypes = {
+  onFinish: PropTypes.func.isRequired,
+  transactionData: CustomPropTypes.Transaction.isRequired,
+};

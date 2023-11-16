@@ -15,32 +15,43 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../../../hooks/useTranslation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import CustomPropTypes from '../../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
-export const Confirm = ({ onConfirmWithdraw }) => {
+export const Confirm = ({ onConfirmWithdraw, accountData }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const [isVaultKeySheetVisible, setIsVaultKeySheetVisible] = useState(false);
   const [isBackupKeySheetVisible, setIsBackupKeySheetVisible] = useState(false);
-
+  const { network, signers } = accountData;
   const onClickBack = () => {
     history.goBack();
   };
 
   const form = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(signingKeysSchema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    resolver: yupResolver(signingKeysSchema(network, signers)),
   });
 
   const { control, handleSubmit, setError } = form;
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     const { vaultKey, backupKey } = data;
 
+    if (vaultKey === backupKey) {
+      toastErrors([{ message: t('withdraw.xrp.confirm.fields.keys.error.invalid') }]);
+      setError('vaultKey');
+      setError('backupKey');
+
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      onConfirmWithdraw({ backupKey, vaultKey });
+      await onConfirmWithdraw({ backupKey, vaultKey });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -121,6 +132,17 @@ export const Confirm = ({ onConfirmWithdraw }) => {
   );
 };
 
+Confirm.defaultProps = {
+  accountData: {
+    reserve: {
+      baseReserve: 0,
+      ownerReserve: 0,
+      totalReserve: 0,
+    },
+  },
+};
+
 Confirm.propTypes = {
+  accountData: CustomPropTypes.Account.isRequired,
   onConfirmWithdraw: PropTypes.func.isRequired,
 };
