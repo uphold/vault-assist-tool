@@ -101,6 +101,7 @@ export const Button = ({
     <AnimatedMixed
       alignItems="center"
       borderRadius="$border-radius-pill"
+      borderStyle="solid"
       borderWidth={borderWidth}
       disabled={isLoading || isDisabled}
       display="flex"

@@ -1,4 +1,4 @@
-import { Blockchain, getBalance, getAccountInfo } from '../../../lib/vault';
+import { Blockchain, getCurrency } from '../../../lib/vault';
 import { BottomSheet } from '../../../components/BottomSheet';
 import { Button } from '../../../components/Button';
 import { Content, Navigation } from '../../../layouts';
@@ -20,7 +20,7 @@ import { useTranslation } from '../../../hooks/useTranslation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 
-export const Root = ({ onConfirmAccess, onGoBack }) => {
+export const Root = ({ onConfirm, onGoBack }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -53,13 +53,12 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
 
   const { control, handleSubmit, setError } = form;
 
-  const onConfirm = async (address) => {
-    try {
-      const balance = await getBalance(selectedNetwork, address);
-      const { reserve, signerList } = await getAccountInfo(selectedNetwork, address);
+  const onSubmit = handleSubmit(async (data) => {
+    const { address } = data;
 
-      setIsLoading(false);
-      onConfirmAccess({ address, balance, network: selectedNetwork, reserve, signerList });
+    setIsLoading(true);
+    try {
+      await onConfirm({ address, network: selectedNetwork });
     } catch (error) {
       setIsLoading(false);
       if (error?.message) {
@@ -67,13 +66,6 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
         setError('address', error.message);
       }
     }
-  };
-
-  const onSubmit = handleSubmit((data) => {
-    const { address } = data;
-
-    setIsLoading(true);
-    onConfirm(address);
   }, toastErrors);
 
   const dismissBottomsheet = () => {
@@ -107,7 +99,7 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
             }}
             control={control}
             data-test="address"
-            label={t('access.fields.address.label.xrp')}
+            label={t('access.fields.address.label', { currency: getCurrency(selectedNetwork) })}
             name="address"
             placeholder={t('access.fields.address.placeholder')}
           />
@@ -121,7 +113,7 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
       <BottomSheet isVisible={isAddressInfoSheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
-          title={t('access.fields.address.details.header')}
+          title={t('access.fields.address.details.header', { currency: getCurrency(selectedNetwork) })}
         />
         <ScrollableSection padding="sp02 sp05">
           <Small marginBottom="sp03">{t('access.fields.address.details.description')}</Small>
@@ -137,6 +129,6 @@ export const Root = ({ onConfirmAccess, onGoBack }) => {
 };
 
 Root.propTypes = {
-  onConfirmAccess: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
   onGoBack: PropTypes.func.isRequired,
 };

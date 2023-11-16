@@ -29,16 +29,15 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
     history.goBack();
   };
 
-  const { balance, reserve } = accountData;
+  const { balance, reserve, address: sourceAddress } = accountData;
   const { ownerReserve = 0, totalReserve = 0 } = reserve;
 
   const remainingBalance = Number(balance) - Number(totalReserve);
-  const requiredReserve = Number(totalReserve) - Number(ownerReserve);
-  const destinationAmount = remainingBalance + requiredReserve;
+  const destinationAmount = remainingBalance + totalReserve;
 
   const form = useForm({
     mode: 'onChange',
-    resolver: yupResolver(destinationSchema),
+    resolver: yupResolver(destinationSchema(sourceAddress)),
   });
 
   const { control, handleSubmit } = form;
@@ -46,7 +45,11 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   const onSubmit = handleSubmit((data) => {
     const { address, destinationTag } = data;
 
-    onConfirmDestination({ destinationTag, fee: ownerReserve, to: address });
+    onConfirmDestination({
+      destinationTag: destinationTag.length ? destinationTag : undefined,
+      fee: ownerReserve,
+      to: address,
+    });
   }, toastErrors);
 
   return (
@@ -84,7 +87,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
             <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewNote>{`${ownerReserve} XRP`}</TableViewNote>
+              <TableViewNote>{`${formatNumber(ownerReserve)} XRP`}</TableViewNote>
             </TableViewBody>
           </TableBox>
         </Content>

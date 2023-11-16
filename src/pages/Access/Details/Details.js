@@ -1,3 +1,4 @@
+import { Blockchain, getCurrency } from '../../../lib/vault';
 import { Button } from '../../../components/Button';
 import { Content, Header, Navigation } from '../../../layouts';
 import { Fragment } from 'react';
@@ -18,7 +19,7 @@ import { useTranslation } from '../../../hooks/useTranslation';
 import CustomPropTypes from '../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
-export const Details = ({ accountData, onConfirmAccount }) => {
+export const Details = ({ accountData, onConfirm }) => {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -26,7 +27,7 @@ export const Details = ({ accountData, onConfirmAccount }) => {
     history.goBack();
   };
 
-  const { address, balance, reserve } = accountData;
+  const { address, balance, reserve, network } = accountData;
   const { totalReserve = 0 } = reserve;
 
   const remainingBalance = Number(balance) - Number(totalReserve);
@@ -41,31 +42,35 @@ export const Details = ({ accountData, onConfirmAccount }) => {
         <Content paddingTop="0">
           <Header alignItems="center">
             <H3 marginBottom="sp02">
-              <Semibold>{t('access.details.title1')}</Semibold> {t('access.details.title2')}
+              <Semibold>{getCurrency(network)}</Semibold> {t('access.details.title2')}
             </H3>
           </Header>
           <TableBox>
-            <TableViewTitle>{t('access.details.address.label')}</TableViewTitle>
+            <TableViewTitle>{t('access.details.address.label', { currency: getCurrency(network) })}</TableViewTitle>
 
             <TableViewBody>
               <TableViewNote lineHeight="28px">{address}</TableViewNote>
             </TableViewBody>
             <HorizontalSeparator />
-            <TableViewTitle>{t('access.details.balance.label')}</TableViewTitle>
+            <TableViewTitle>{t('access.details.balance.label', { currency: getCurrency(network) })}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewText>{`${formatNumber(remainingBalance)} XRP`}</TableViewText>
+              <TableViewText>{`${formatNumber(remainingBalance)} ${getCurrency(network)}`}</TableViewText>
             </TableViewBody>
-            <HorizontalSeparator />
-            <TableViewTitle>{t('access.details.reserve.label')}</TableViewTitle>
+            {network === Blockchain.XRPL ? (
+              <Fragment>
+                <HorizontalSeparator />
+                <TableViewTitle>{t('access.details.reserve.label', { currency: getCurrency(network) })}</TableViewTitle>
 
-            <TableViewBody>
-              <TableViewText>{`${formatNumber(totalReserve)} XRP`}</TableViewText>
-            </TableViewBody>
+                <TableViewBody>
+                  <TableViewText>{`${formatNumber(totalReserve)} ${getCurrency(network)}`}</TableViewText>
+                </TableViewBody>
+              </Fragment>
+            ) : null}
           </TableBox>
         </Content>
         <SectionStickyFooter>
-          <Button onPress={() => onConfirmAccount(accountData)}>{t('actions.withdraw.xrp')}</Button>
+          <Button onPress={onConfirm}>{t('actions.withdraw', { currency: getCurrency(network) })}</Button>
         </SectionStickyFooter>
       </ScrollableSection>
     </Fragment>
@@ -82,5 +87,5 @@ Details.defaultProps = {
 
 Details.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onConfirmAccount: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };
