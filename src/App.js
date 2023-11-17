@@ -1,5 +1,5 @@
 import { Access, Landing } from './pages';
-import { Failure, Success } from './pages/Transaction';
+import { Failure, Success, Transaction } from './pages/Transaction';
 import { Fragment, useEffect, useState } from 'react';
 import { IconDefs } from './components/IconDefs';
 import { Route } from './components/Route';
@@ -8,24 +8,60 @@ import { ToasterContainer } from './components/Toaster';
 import { Wrapper } from './layouts/Wrapper';
 import { XRP } from './pages/Withdraw';
 import { createBrowserHistory } from 'history';
+import { sendTransaction } from './lib/vault';
 import smoothscroll from 'smoothscroll-polyfill';
 
 const history = createBrowserHistory();
 
 smoothscroll.polyfill();
 
+const TransactionStatus = Object.freeze({
+  failure: 'failure',
+  pending: 'pending',
+  success: 'success',
+  unknown: 'unknown',
+});
+
 export const App = () => {
   const [isGuarded, setIsGuarded] = useState(true);
   const [accountData, setAccountData] = useState();
+  const [preparedTransaction, setPreparedTransaction] = useState();
+  const [transactionStatus, setTransactionStatus] = useState(TransactionStatus.unknown);
   const [transactionData, setTransactionData] = useState();
 
   useEffect(() => {
     if (isGuarded) {
       history.replace('/');
+      setTransactionStatus(TransactionStatus.unknown);
     }
   }, [isGuarded]);
 
+  // Transaction guards
+  useEffect(() => {
+    if (!isGuarded) {
+      switch (transactionStatus) {
+        case TransactionStatus.success:
+          history.replace('/transaction/success');
+          break;
+        case TransactionStatus.failure:
+          history.replace('/transaction/failure');
+          break;
+        default:
+          break;
+      }
+    }
+  }, [isGuarded, transactionStatus]);
+
+  const cleanSession = () => {
+    setIsGuarded(true);
+    setAccountData();
+    setPreparedTransaction();
+    setTransactionData();
+    setTransactionStatus(TransactionStatus.unknown);
+  };
+
   const onAccessVault = () => {
+    cleanSession();
     setIsGuarded(false);
     history.push({ ...history.location, pathname: '/access' });
   };
@@ -35,19 +71,23 @@ export const App = () => {
     history.push({ ...history.location, pathname: `/withdraw/xrp` });
   };
 
-  const onSuccess = (transactionData) => {
-    setTransactionData(transactionData);
-    history.push({ ...history.location, pathname: `/transaction/success` });
+  const onConfirmTransaction = (preparedTransaction) => {
+    setPreparedTransaction(preparedTransaction);
+    setTransactionStatus(TransactionStatus.pending);
+    history.replace('/transaction');
   };
 
-  const onFailure = () => {
-    history.push({ ...history.location, pathname: `/transaction/failure` });
-  };
+  const submitTransaction = async (preparedTransaction) => {
+    try {
+      const { network, transaction } = preparedTransaction;
+      const transactionData = await sendTransaction(network, transaction);
 
-  const onFinish = () => {
-    setIsGuarded(true);
-    setAccountData();
-    setTransactionData();
+      setTransactionData(transactionData);
+      setTransactionStatus(TransactionStatus.success);
+    } catch (error) {
+      console.error(error);
+      setTransactionStatus(TransactionStatus.failure);
+    }
   };
 
   return (
@@ -68,18 +108,34 @@ export const App = () => {
                 accountData={accountData}
                 component={XRP}
                 key="xrp"
-                onFailure={onFailure}
-                onSuccess={onSuccess}
+                onConfirmTransaction={onConfirmTransaction}
                 path="/withdraw/xrp"
+                pendingTransaction={transactionStatus !== TransactionStatus.unknown}
+                setIsGuarded={setIsGuarded}
               />
-              <Route
-                component={Success}
-                key="success"
-                onFinish={onFinish}
-                path="/transaction/success"
-                transactionData={transactionData}
-              />
-              <Route component={Failure} key="failure" onFinish={onFinish} path="/transaction/failure" />
+              {!transactionData ? (
+                <Route
+                  component={Transaction}
+                  isGuarded={isGuarded}
+                  key="transaction"
+                  path="/transaction"
+                  submitTransaction={async () => {
+                    if (!isGuarded) {
+                      await submitTransaction(preparedTransaction);
+                    }
+                  }}
+                />
+              ) : null}
+              {transactionData ? (
+                <Route
+                  component={Success}
+                  key="success"
+                  onFinish={cleanSession}
+                  path="/transaction/success"
+                  transactionData={transactionData}
+                />
+              ) : null}
+              <Route component={Failure} key="failure" onFinish={cleanSession} path="/transaction/failure" />
             </Fragment>
           ) : null}
           <Route component={Landing} onConfirm={onAccessVault} path="/" />

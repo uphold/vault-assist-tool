@@ -8,9 +8,7 @@ export const Svg = forwardRef(({ color, customComponent, height, name, size, tes
   const { name: themeName } = useTheme();
   const { icons, images } = svgs;
 
-  const { assets, countries, illustrations } = images;
-
-  const svg = customComponent || images[name] || icons[name] || assets[name] || countries[name] || illustrations[name];
+  const svg = customComponent || images[name] || icons[name];
 
   const Component = svg?.[themeName] || svg;
 
