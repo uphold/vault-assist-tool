@@ -1,17 +1,23 @@
-import { Blockchain, createTransaction, multiSignTransaction, sendTransaction } from '../../../lib/vault';
+import { Blockchain, createTransaction, multiSignTransaction } from '../../../lib/vault';
 import { Confirm } from './Confirm';
 import { Destination } from './Destination';
 import { Root } from './Root';
 import { Route } from '../../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomPropTypes from '../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
-export const XRP = ({ accountData, onFailure, onSuccess }) => {
+export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, setIsGuarded }) => {
   const history = useHistory();
   const { path } = useRouteMatch();
   const [destinationData, setDestinationData] = useState({});
+
+  useEffect(() => {
+    if (pendingTransaction) {
+      setIsGuarded(true);
+    }
+  }, [pendingTransaction]);
 
   const blockchain = Blockchain.XRPL;
   const onContinueWithdraw = () => {
@@ -27,14 +33,7 @@ export const XRP = ({ accountData, onFailure, onSuccess }) => {
 
     const signedTransaction = multiSignTransaction(blockchain, transaction, [vaultKey, backupKey]);
 
-    try {
-      const transactionData = await sendTransaction(blockchain, signedTransaction);
-
-      onSuccess(transactionData);
-    } catch (error) {
-      console.error(error);
-      onFailure();
-    }
+    onConfirmTransaction({ network: blockchain, transaction: signedTransaction });
   };
 
   const onConfirmDestination = (destinationData) => {
@@ -42,7 +41,7 @@ export const XRP = ({ accountData, onFailure, onSuccess }) => {
     history.push({ ...history.location, pathname: `${path}/confirm` });
   };
 
-  return (
+  return !pendingTransaction ? (
     <Switch>
       <Route
         accountData={accountData}
@@ -69,11 +68,16 @@ export const XRP = ({ accountData, onFailure, onSuccess }) => {
         path={`${path}/confirm`}
       />
     </Switch>
-  );
+  ) : null;
+};
+
+XRP.defaultProps = {
+  pendingTransaction: false,
 };
 
 XRP.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onFailure: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired,
+  onConfirmTransaction: PropTypes.func.isRequired,
+  pendingTransaction: PropTypes.bool,
+  setIsGuarded: PropTypes.func.isRequired,
 };

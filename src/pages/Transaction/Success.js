@@ -1,28 +1,24 @@
-import { Animation } from '../../../components/Animation';
-import { Button } from '../../../components/Button';
-import { Content, Header, Navigation } from '../../../layouts';
+import { Animation } from '../../components/Animation';
+import { Button } from '../../components/Button';
+import { Content, Header, Navigation } from '../../layouts';
 import { Fragment, useState } from 'react';
-import { H3 } from '../../../components/Typography/H3';
-import { HorizontalSeparator } from '../../../components/HorizontalSeparator';
-import { Mixed } from '../../../components/Mixed';
-import { NavigationAction } from '../../../components/Navigation';
-import { ScrollableSection } from '../../../components/ScrollableSection';
-import { SectionStickyFooter } from '../../../components/SectionStickyFooter';
-import { TableBox } from '../../../components/TableView/TableBox';
-import { TableViewBody } from '../../../components/TableView/TableViewBody';
-import { TableViewNote } from '../../../components/TableView/TableViewNote';
-import { TableViewTitle } from '../../../components/TableView/TableViewTitle';
-import { colors } from '../../../lib/styles';
-import { formatNumber } from '../../../utils/formatNumber';
-import { getCurrency, getTransactionLink } from '../../../lib/vault';
-import { useTranslation } from '../../../hooks/useTranslation';
-import CustomPropTypes from '../../../lib/propTypes';
+import { H3 } from '../../components/Typography/H3';
+import { HorizontalSeparator } from '../../components/HorizontalSeparator';
+import { Mixed } from '../../components/Mixed';
+import { NavigationAction } from '../../components/Navigation';
+import { ScrollableSection } from '../../components/ScrollableSection';
+import { SectionStickyFooter } from '../../components/SectionStickyFooter';
+import { TableBox } from '../../components/TableView/TableBox';
+import { TableViewBody } from '../../components/TableView/TableViewBody';
+import { TableViewNote } from '../../components/TableView/TableViewNote';
+import { TableViewTitle } from '../../components/TableView/TableViewTitle';
+import { colors } from '../../lib/styles';
+import { formatNumber } from '../../utils/formatNumber';
+import { getCurrency, getTransactionLink } from '../../lib/vault';
+import { useTranslation } from '../../hooks/useTranslation';
+import CustomPropTypes from '../../lib/propTypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-export const EmptyNav = styled(Mixed.div)`
-  grid-area: navigation;
-`;
 
 export const Center = styled(Mixed.div)`
   display: flex;
