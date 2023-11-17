@@ -2,7 +2,7 @@ import { Details } from './Details';
 import { Root } from './Root';
 import { Route } from '../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { getBalance, getReserves, getSigners } from '../../lib/vault';
+import { getBalance, getCurrency, getReserves, getSigners } from '../../lib/vault';
 import { useEffect, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
@@ -25,7 +25,7 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
     const reserve = await getReserves(network, address);
 
     if (!signers) {
-      throw new Error(t('messages.error.account.not.vault'));
+      throw new Error(t('access.fields.address.errors.invalid', { currency: getCurrency(network) }));
     }
 
     setAccountData({ address, balance, network, reserve, signers });
