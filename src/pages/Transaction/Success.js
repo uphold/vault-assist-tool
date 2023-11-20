@@ -1,10 +1,9 @@
 import { Animation } from '../../components/Animation';
 import { Button } from '../../components/Button';
-import { Content, Header, Navigation } from '../../layouts';
+import { CenterView, Content, Header, Navigation } from '../../layouts';
 import { Fragment, useState } from 'react';
 import { H3 } from '../../components/Typography/H3';
 import { HorizontalSeparator } from '../../components/HorizontalSeparator';
-import { Mixed } from '../../components/Mixed';
 import { NavigationAction } from '../../components/Navigation';
 import { ScrollableSection } from '../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../components/SectionStickyFooter';
@@ -18,18 +17,6 @@ import { getCurrency, getTransactionLink } from '../../lib/vault';
 import { useTranslation } from '../../hooks/useTranslation';
 import CustomPropTypes from '../../lib/propTypes';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-export const Center = styled(Mixed.div)`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  justify-items: center;
-  grid-area: content;
-`;
 
 export const Success = ({ transactionData, onFinish }) => {
   const { t } = useTranslation();
@@ -38,7 +25,7 @@ export const Success = ({ transactionData, onFinish }) => {
   const { to, destinationTag, amount, network, hash } = transactionData;
 
   return animating ? (
-    <Center>
+    <CenterView>
       <Animation
         animation="successOperation"
         animationOptions={{ loop: false }}
@@ -48,7 +35,7 @@ export const Success = ({ transactionData, onFinish }) => {
           setAnimating(false);
         }}
       />
-    </Center>
+    </CenterView>
   ) : (
     <Fragment>
       <Navigation
