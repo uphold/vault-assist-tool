@@ -1,4 +1,4 @@
-/* eslint-disable  id-length, sort-keys-fix/sort-keys-fix */
+/* eslint-disable id-length, sort-keys */
 export const balloonLoading = {
   v: '5.4.1',
   fr: 29.9700012207031,
@@ -21,7 +21,7 @@ export const balloonLoading = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -59,7 +59,7 @@ export const balloonLoading = {
                     [6.134, -2.835],
                     [1.48, -4.278],
                     [-4.472, -10.168],
-                    [-9.008, 0.1]
+                    [-9.008, 0.1],
                   ],
                   o: [
                     [-3.867, -12.058],
@@ -85,7 +85,7 @@ export const balloonLoading = {
                     [-3.588, 1.658],
                     [-2.567, 7.422],
                     [5.875, 13.359],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [27.997, -15.122],
@@ -111,15 +111,15 @@ export const balloonLoading = {
                     [-20.353, -24.337],
                     [-27.997, -15.12],
                     [-25.36, 12.896],
-                    [-0.002, 35.375]
+                    [-0.002, 35.375],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -130,7 +130,7 @@ export const balloonLoading = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -141,15 +141,15 @@ export const balloonLoading = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'gr',
@@ -165,7 +165,7 @@ export const balloonLoading = {
               ml2: { a: 0, k: 10, ix: 8 },
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -176,15 +176,15 @@ export const balloonLoading = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 2',
           np: 1,
           cix: 2,
           ix: 2,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -197,7 +197,7 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p333_0'],
                 t: 0,
                 s: [100],
-                e: [28.571]
+                e: [28.571],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -205,7 +205,7 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 20,
                 s: [28.571],
-                e: [19]
+                e: [19],
               },
               {
                 i: { x: [0.667], y: [1] },
@@ -213,13 +213,13 @@ export const balloonLoading = {
                 n: ['0p667_1_0p167_0p167'],
                 t: 21,
                 s: [19],
-                e: [0]
+                e: [0],
               },
               { i: { x: [0.667], y: [1] }, o: { x: [0.167], y: [0] }, n: ['0p667_1_0p167_0'], t: 27, s: [0], e: [0] },
               { i: { x: [0.667], y: [1] }, o: { x: [0.167], y: [0] }, n: ['0p667_1_0p167_0'], t: 30, s: [0], e: [0] },
-              { t: 60.0000024438501 }
+              { t: 60.0000024438501 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -230,25 +230,25 @@ export const balloonLoading = {
                 n: ['0p667_1_0p333_0'],
                 t: 0,
                 s: [100],
-                e: [100]
+                e: [100],
               },
               { i: { x: [0.667], y: [1] }, o: { x: [0.333], y: [0] }, n: ['0p667_1_0p333_0'], t: 30, s: [100], e: [0] },
-              { t: 60.0000024438501 }
+              { t: 60.0000024438501 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 3,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 0,
       op: 69.0000028104276,
       st: 0,
-      bm: 0
+      bm: 0,
     },
     {
       ddd: 0,
@@ -261,7 +261,7 @@ export const balloonLoading = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -279,27 +279,27 @@ export const balloonLoading = {
                     [0, 0],
                     [3, 0],
                     [0, 0],
-                    [3.021, 0.898]
+                    [3.021, 0.898],
                   ],
                   o: [
                     [-3.002, 0.887],
                     [-0.001, 0],
                     [-3.02, 0],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [9.258, -0.668],
                     [0.227, 0.685],
                     [-0.169, 0.685],
-                    [-9.258, -0.685]
+                    [-9.258, -0.685],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -312,7 +312,7 @@ export const balloonLoading = {
               ml2: { a: 0, k: 10, ix: 8 },
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -323,15 +323,15 @@ export const balloonLoading = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -344,7 +344,7 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 27,
                 s: [0],
-                e: [0]
+                e: [0],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -352,11 +352,11 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 62,
                 s: [0],
-                e: [100]
+                e: [100],
               },
-              { t: 66.0000026882351 }
+              { t: 66.0000026882351 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -367,7 +367,7 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 27,
                 s: [0],
-                e: [100]
+                e: [100],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -375,25 +375,25 @@ export const balloonLoading = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 31,
                 s: [100],
-                e: [100]
+                e: [100],
               },
-              { t: 62.0000025253118 }
+              { t: 62.0000025253118 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 0,
       op: 69.0000028104276,
       st: 0,
-      bm: 0
-    }
+      bm: 0,
+    },
   ],
-  markers: []
+  markers: [],
 };

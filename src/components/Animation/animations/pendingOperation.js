@@ -1,4 +1,4 @@
-/* eslint-disable  id-length, sort-keys-fix/sort-keys-fix */
+/* eslint-disable id-length, sort-keys */
 export const pendingOperation = {
   v: '5.4.1',
   fr: 29.9700012207031,
@@ -21,7 +21,7 @@ export const pendingOperation = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -41,7 +41,7 @@ export const pendingOperation = {
                     [-2.825, -2.603],
                     [-4.272, 3.674],
                     [19.77, 11.744],
-                    [0.104, 0.05]
+                    [0.104, 0.05],
                   ],
                   o: [
                     [0, 0],
@@ -49,7 +49,7 @@ export const pendingOperation = {
                     [6.497, 5.987],
                     [8.293, -7.133],
                     [-0.099, -0.059],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [-21.572, -10.445],
@@ -57,15 +57,15 @@ export const pendingOperation = {
                     [-5.796, 21.281],
                     [11.123, 21.613],
                     [1.803, -27.119],
-                    [1.493, -27.269]
+                    [1.493, -27.269],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -76,7 +76,7 @@ export const pendingOperation = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -87,15 +87,15 @@ export const pendingOperation = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -108,11 +108,11 @@ export const pendingOperation = {
                 n: ['0p606_1_0p225_0p002'],
                 t: 139,
                 s: [100],
-                e: [20]
+                e: [20],
               },
-              { t: 150.000006109625 }
+              { t: 150.000006109625 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -123,7 +123,7 @@ export const pendingOperation = {
                 n: ['0p833_1_0p237_-0p086'],
                 t: 139,
                 s: [100],
-                e: [100]
+                e: [100],
               },
               {
                 i: { x: [0.494], y: [1] },
@@ -131,7 +131,7 @@ export const pendingOperation = {
                 n: ['0p494_1_0p167_0'],
                 t: 146,
                 s: [100],
-                e: [41]
+                e: [41],
               },
               {
                 i: { x: [0.833], y: [1] },
@@ -139,24 +139,24 @@ export const pendingOperation = {
                 n: ['0p833_1_0p167_0'],
                 t: 150,
                 s: [41],
-                e: [34]
+                e: [34],
               },
-              { t: 152.000006191087 }
+              { t: 152.000006191087 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 129.000005254278,
       op: 200.000008146167,
       st: 3.00000012219251,
-      bm: 0
+      bm: 0,
     },
     {
       ddd: 0,
@@ -169,7 +169,7 @@ export const pendingOperation = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -195,24 +195,24 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [-1.783, -6.517],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [16.464, -20.73],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
+                        c: false,
+                      },
                     ],
                     e: [
                       {
@@ -221,25 +221,25 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [-1.783, -6.517],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [15.131, -20.397],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
-                    ]
+                        c: false,
+                      },
+                    ],
                   },
                   {
                     i: { x: 0.833, y: 0.833 },
@@ -253,24 +253,24 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [-1.783, -6.517],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [15.131, -20.397],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
+                        c: false,
+                      },
                     ],
                     e: [
                       {
@@ -279,25 +279,25 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [1.507, -4.949],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [26.631, -20.063],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
-                    ]
+                        c: false,
+                      },
+                    ],
                   },
                   {
                     i: { x: 0.833, y: 0.833 },
@@ -311,24 +311,24 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [1.507, -4.949],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [26.631, -20.063],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
+                        c: false,
+                      },
                     ],
                     e: [
                       {
@@ -337,33 +337,33 @@ export const pendingOperation = {
                           [0, 0],
                           [5.405, -1.057],
                           [1.148, -1.337],
-                          [-11.078, -15.914]
+                          [-11.078, -15.914],
                         ],
                         o: [
                           [0, 0],
                           [0.341, -3.199],
                           [-5.857, 1.145],
                           [-12.08, 14.064],
-                          [0, 0]
+                          [0, 0],
                         ],
                         v: [
                           [22.638, 5.988],
                           [22.464, -20.73],
                           [2.536, -28.738],
                           [-8.987, -21.156],
-                          [-11.56, 29.795]
+                          [-11.56, 29.795],
                         ],
-                        c: false
-                      }
-                    ]
+                        c: false,
+                      },
+                    ],
                   },
-                  { t: 174.000007087165 }
+                  { t: 174.000007087165 },
                 ],
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -374,7 +374,7 @@ export const pendingOperation = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -385,15 +385,15 @@ export const pendingOperation = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -406,7 +406,7 @@ export const pendingOperation = {
                 n: ['0p528_1_0p333_0'],
                 t: 132,
                 s: [100],
-                e: [0]
+                e: [0],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -414,11 +414,11 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 142,
                 s: [0],
-                e: [0]
+                e: [0],
               },
-              { t: 168.00000684278 }
+              { t: 168.00000684278 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -429,7 +429,7 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 132,
                 s: [100],
-                e: [51]
+                e: [51],
               },
               {
                 i: { x: [0.404], y: [1] },
@@ -437,7 +437,7 @@ export const pendingOperation = {
                 n: ['0p404_1_0p167_0p167'],
                 t: 139,
                 s: [51],
-                e: [19]
+                e: [19],
               },
               {
                 i: { x: [0.487], y: [1] },
@@ -445,7 +445,7 @@ export const pendingOperation = {
                 n: ['0p487_1_0p167_0p167'],
                 t: 142,
                 s: [19],
-                e: [21]
+                e: [21],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -453,7 +453,7 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 144,
                 s: [21],
-                e: [21]
+                e: [21],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -461,7 +461,7 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 166,
                 s: [21],
-                e: [21.4]
+                e: [21.4],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -469,7 +469,7 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 168,
                 s: [21.4],
-                e: [20.25]
+                e: [20.25],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -477,7 +477,7 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 171,
                 s: [20.25],
-                e: [19.3]
+                e: [19.3],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -485,24 +485,24 @@ export const pendingOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 172,
                 s: [19.3],
-                e: [20.2]
+                e: [20.2],
               },
-              { t: 174.000007087165 }
+              { t: 174.000007087165 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 126.000005132085,
       op: 200.000008146167,
       st: 0,
-      bm: 0
+      bm: 0,
     },
     {
       ddd: 0,
@@ -515,7 +515,7 @@ export const pendingOperation = {
         r: { a: 0, k: -176, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -539,7 +539,7 @@ export const pendingOperation = {
                     [-10.942, 7.375],
                     [0, 0],
                     [13.139, 18.874],
-                    [13.221, -0.038]
+                    [13.221, -0.038],
                   ],
                   o: [
                     [-8.167, 0.029],
@@ -551,7 +551,7 @@ export const pendingOperation = {
                     [0, 0],
                     [18.875, -13.14],
                     [-8.119, -11.662],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [-0.196, -42.524],
@@ -563,15 +563,15 @@ export const pendingOperation = {
                     [23.277, 33.7],
                     [23.806, 33.339],
                     [34.198, -24.666],
-                    [-0.167, -42.524]
+                    [-0.167, -42.524],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -582,7 +582,7 @@ export const pendingOperation = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -593,15 +593,15 @@ export const pendingOperation = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -614,11 +614,11 @@ export const pendingOperation = {
                 n: ['0p501_1_0p523_0'],
                 t: 127,
                 s: [100],
-                e: [0]
+                e: [0],
               },
-              { t: 144.00000586524 }
+              { t: 144.00000586524 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -629,25 +629,25 @@ export const pendingOperation = {
                 n: ['0p833_1_0p333_0'],
                 t: 127,
                 s: [100],
-                e: [100]
+                e: [100],
               },
-              { t: 144.00000586524 }
+              { t: 144.00000586524 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 126.000005132085,
       op: 200.000008146167,
       st: 0,
-      bm: 0
-    }
+      bm: 0,
+    },
   ],
-  markers: []
+  markers: [],
 };

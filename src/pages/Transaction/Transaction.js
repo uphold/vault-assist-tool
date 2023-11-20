@@ -1,20 +1,8 @@
 import { Animation } from '../../components/Animation';
-import { Mixed } from '../../components/Mixed';
+import { CenterView } from '../../layouts';
 import { colors } from '../../lib/styles';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-export const Center = styled(Mixed.div)`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  justify-items: center;
-  grid-area: content;
-`;
 
 export const Transaction = ({ submitTransaction }) => {
   useEffect(() => {
@@ -26,14 +14,14 @@ export const Transaction = ({ submitTransaction }) => {
   }, []);
 
   return (
-    <Center>
+    <CenterView>
       <Animation
         animation="balloonLoading"
         animationOptions={{ loop: true }}
         color={colors.green20}
         layoutMaxWidth="100px"
       />
-    </Center>
+    </CenterView>
   );
 };
 
