@@ -1,4 +1,4 @@
-/* eslint-disable  id-length, sort-keys-fix/sort-keys-fix */
+/* eslint-disable id-length, sort-keys */
 export const successOperation = {
   v: '5.4.1',
   fr: 29.9700012207031,
@@ -21,7 +21,7 @@ export const successOperation = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [92.765, 92.765, 100], ix: 6 }
+        s: { a: 0, k: [92.765, 92.765, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -45,7 +45,7 @@ export const successOperation = {
                     [12.788, -6.231],
                     [0, 0],
                     [-11.194, -22.12],
-                    [-14.119, -1.943]
+                    [-14.119, -1.943],
                   ],
                   o: [
                     [8.722, 1.194],
@@ -57,7 +57,7 @@ export const successOperation = {
                     [0, 0],
                     [-22.12, 11.195],
                     [6.917, 13.667],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [-6.042, 44.964],
@@ -69,15 +69,15 @@ export const successOperation = {
                     [-19.664, -39.927],
                     [-20.283, -39.62],
                     [-40.078, 20.741],
-                    [-6.073, 44.96]
+                    [-6.073, 44.96],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -88,7 +88,7 @@ export const successOperation = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -99,15 +99,15 @@ export const successOperation = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -115,9 +115,9 @@ export const successOperation = {
             a: 1,
             k: [
               { i: { x: [0.609], y: [1] }, o: { x: [0.46], y: [0] }, n: ['0p609_1_0p46_0'], t: 127, s: [100], e: [0] },
-              { t: 144.00000586524 }
+              { t: 144.00000586524 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: { a: 0, k: 100, ix: 2 },
           o: { a: 0, k: 0, ix: 3 },
@@ -125,13 +125,13 @@ export const successOperation = {
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 126.000005132085,
       op: 169.000006883511,
       st: 0,
-      bm: 0
+      bm: 0,
     },
     {
       ddd: 0,
@@ -145,7 +145,7 @@ export const successOperation = {
         r: { a: 0, k: 0, ix: 10 },
         p: { a: 0, k: [48, 48, 0], ix: 2 },
         a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
+        s: { a: 0, k: [100, 100, 100], ix: 6 },
       },
       ao: 0,
       shapes: [
@@ -165,7 +165,7 @@ export const successOperation = {
                     [0, 0],
                     [-0.947, 1.299],
                     [7.311, 4.072],
-                    [0.111, 0.053]
+                    [0.111, 0.053],
                   ],
                   o: [
                     [3.979, 3.998],
@@ -173,7 +173,7 @@ export const successOperation = {
                     [1.188, -1.084],
                     [5.547, -7.609],
                     [-0.108, -0.06],
-                    [0, 0]
+                    [0, 0],
                   ],
                   v: [
                     [-27.252, 12.494],
@@ -181,15 +181,15 @@ export const successOperation = {
                     [18.52, -2.294],
                     [21.705, -5.895],
                     [16.767, -26.387],
-                    [16.434, -26.548]
+                    [16.434, -26.548],
                   ],
-                  c: false
+                  c: false,
                 },
-                ix: 2
+                ix: 2,
               },
               nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false
+              hd: false,
             },
             {
               ty: 'st',
@@ -200,7 +200,7 @@ export const successOperation = {
               lj: 2,
               nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false
+              hd: false,
             },
             {
               ty: 'tr',
@@ -211,15 +211,15 @@ export const successOperation = {
               o: { a: 0, k: 100, ix: 7 },
               sk: { a: 0, k: 0, ix: 4 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform'
-            }
+              nm: 'Transform',
+            },
           ],
           nm: 'Group 1',
           np: 2,
           cix: 2,
           ix: 1,
           mn: 'ADBE Vector Group',
-          hd: false
+          hd: false,
         },
         {
           ty: 'tm',
@@ -232,7 +232,7 @@ export const successOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 140,
                 s: [100],
-                e: [0]
+                e: [0],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -240,11 +240,11 @@ export const successOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 147,
                 s: [0],
-                e: [8]
+                e: [8],
               },
-              { t: 150.000006109625 }
+              { t: 150.000006109625 },
             ],
-            ix: 1
+            ix: 1,
           },
           e: {
             a: 1,
@@ -255,7 +255,7 @@ export const successOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 140,
                 s: [100],
-                e: [62]
+                e: [62],
               },
               {
                 i: { x: [0.833], y: [0.833] },
@@ -263,25 +263,25 @@ export const successOperation = {
                 n: ['0p833_0p833_0p167_0p167'],
                 t: 147,
                 s: [62],
-                e: [68]
+                e: [68],
               },
-              { t: 150.000006109625 }
+              { t: 150.000006109625 },
             ],
-            ix: 2
+            ix: 2,
           },
           o: { a: 0, k: 0, ix: 3 },
           m: 1,
           ix: 2,
           nm: 'Trim Paths 1',
           mn: 'ADBE Vector Filter - Trim',
-          hd: false
-        }
+          hd: false,
+        },
       ],
       ip: 126.000005132085,
       op: 169.000006883511,
       st: 0,
-      bm: 0
-    }
+      bm: 0,
+    },
   ],
-  markers: []
+  markers: [],
 };
