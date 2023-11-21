@@ -7,7 +7,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "predeploy": "NODE_CONFIG_DIR=./config bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=development} --progress'",
+    "predeploy": "NODE_CONFIG_DIR=./config bash -c 'webpack --config webpack.app.babel.js --progress'",
     "deploy": "gh-pages -d public",
     "build": "NODE_CONFIG_DIR=./config bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=development} --progress'",
     "cleanup": "echo 'not implemented'",
