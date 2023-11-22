@@ -10,7 +10,7 @@ export const Center = styled(Mixed.div)`
   align-items: center;
   @media (min-height: 600px) {
     @media (min-width: 884px) {
-      padding: 32px 32px;
+      padding: 32px 24px;
     }
   }
 `;
