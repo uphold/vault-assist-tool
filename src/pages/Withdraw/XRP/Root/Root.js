@@ -44,7 +44,7 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
             <OrderedListItem number={1}>
               <Semibold>{t('withdraw.xrp.conditions.funds.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.funds.text', {
-                remainingBalance: <Semibold>({formatNumber(remainingBalance)} XRP)</Semibold>,
+                remainingBalance: <Semibold>({formatNumber(remainingBalance, 2)} XRP)</Semibold>,
                 totalReserve: <Semibold>({formatNumber(totalReserve)} XRP)</Semibold>,
               })}
             </OrderedListItem>
@@ -55,7 +55,7 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
             <OrderedListItem number={3}>
               <Semibold>{t('withdraw.xrp.conditions.network.costs.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.network.costs.text', {
-                ownerReserve: formatNumber(ownerReserve),
+                ownerReserve: formatNumber(ownerReserve, 0, 0),
               })}
             </OrderedListItem>
           </OrderedList>
