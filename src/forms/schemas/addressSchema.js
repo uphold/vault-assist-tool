@@ -7,7 +7,7 @@ export const addressSchema = (selectedNetwork) =>
   yup.object().shape({
     address: yup
       .string()
-      .required(I18n.t('access.fields.address.errors.required'))
+      .required(I18n.t('access.fields.address.errors.required', { currency: getCurrency(selectedNetwork) }))
       .test(
         'validation',
         I18n.t('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }),

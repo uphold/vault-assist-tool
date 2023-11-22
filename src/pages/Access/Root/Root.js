@@ -30,7 +30,7 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
   const networkNames = Object.freeze({
     [Blockchain.XRPL]: 'XRP',
-    [Blockchain.BTC]: 'BTC (Soon)',
+    [Blockchain.BTC]: 'BTC (coming soon)',
   });
 
   const networkOptions = [

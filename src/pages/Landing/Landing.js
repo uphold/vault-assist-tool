@@ -1,6 +1,6 @@
 import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
-import { Center, Content, Header } from '../../layouts';
+import { Center, CenterView, Content, Header } from '../../layouts';
 import { Fragment } from 'react';
 import { H3 } from '../../components/Typography/H3';
 import { Mixed } from '../../components/Mixed';
@@ -27,17 +27,22 @@ export const Landing = ({ onConfirm }) => {
         <Alert variant="warning">{t('landing.warning.check')}</Alert>
       </AlertBox>
       <ScrollableSection>
-        <Content>
-          <Center>
-            <Header>
-              <Svg height={193} name="vault" width={360} />
-              <H3>
-                <Semibold>{t('landing.title1')}</Semibold> {t('landing.title2')}
-              </H3>
-            </Header>
-            <Small textAlign="center">{t('landing.description')}</Small>
-          </Center>
-        </Content>
+        <CenterView>
+          <Content>
+            <Center>
+              <Header>
+                <Svg height={193} name="vault" width={360} />
+                <H3>
+                  <Semibold>{t('landing.title1')}</Semibold> {t('landing.title2')}
+                </H3>
+              </Header>
+              <Small marginBottom="sp03" textAlign="center">
+                {t('landing.description')}
+              </Small>
+              <Small textAlign="center">{t('landing.description2')}</Small>
+            </Center>
+          </Content>
+        </CenterView>
         <SectionStickyFooter>
           <Button onPress={onConfirm} size="regular">
             {t('actions.accessVault')}

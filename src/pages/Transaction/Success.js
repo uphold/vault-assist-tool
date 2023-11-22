@@ -50,22 +50,6 @@ export const Success = ({ transactionData, onFinish }) => {
             </H3>
           </Header>
           <TableBox padding="sp01 sp03">
-            <TableViewTitle>{t('transaction.success.details.label.destination.address')}</TableViewTitle>
-
-            <TableViewBody>
-              <TableViewNote>{to}</TableViewNote>
-            </TableViewBody>
-            <HorizontalSeparator margin="sp02 0" />
-            {destinationTag ? (
-              <Fragment>
-                <TableViewTitle>{t('transaction.success.details.label.destination.tag')}</TableViewTitle>
-
-                <TableViewBody>
-                  <TableViewNote>{destinationTag}</TableViewNote>
-                </TableViewBody>
-                <HorizontalSeparator margin="sp02 0" />
-              </Fragment>
-            ) : null}
             <TableViewTitle>{t('transaction.success.details.label.amount.transferred')}</TableViewTitle>
 
             <TableViewBody>
@@ -73,6 +57,22 @@ export const Success = ({ transactionData, onFinish }) => {
                 {formatNumber(amount)} {getCurrency(network)}
               </TableViewNote>
             </TableViewBody>
+            <HorizontalSeparator margin="sp02 0" />
+            <TableViewTitle>{t('transaction.success.details.label.destination.address')}</TableViewTitle>
+
+            <TableViewBody>
+              <TableViewNote>{to}</TableViewNote>
+            </TableViewBody>
+            {destinationTag ? (
+              <Fragment>
+                <HorizontalSeparator margin="sp02 0" />
+                <TableViewTitle>{t('transaction.success.details.label.destination.tag')}</TableViewTitle>
+
+                <TableViewBody>
+                  <TableViewNote>{destinationTag}</TableViewNote>
+                </TableViewBody>
+              </Fragment>
+            ) : null}
           </TableBox>
         </Content>
         <SectionStickyFooter>
