@@ -1,0 +1,15 @@
+env:
+  browser: true
+  cypress/globals: true
+  node: true
+
+extends:
+  - plugin:cypress/recommended
+  - uphold-react
+
+rules:
+  id-match: ['error', '^_$|^[_a-zA-Z][_a-zA-Z0-9]*$|^[A-Z][_A-Z0-9]+[_A-Z0-9]$||^[$a-zA-Z][$a-zA-Z0-9]*$|^[A-Z][$A-Z0-9]+[$A-Z0-9]$']
+  spaced-comment: ["error", "never"]
+
+plugins:
+  - cypress

@@ -18,3 +18,7 @@ coverage/
 
 # Build
 public
+
+# Cypress
+test/cypress/screenshots
+test/cypress/videos

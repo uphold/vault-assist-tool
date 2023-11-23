@@ -42,7 +42,9 @@ export const getTransactionLink = (blockchain, hash) => {
   }
 };
 
-export const isKeySigner = (blockchain, key, signers) => signers.includes(new Wallet(blockchain, key).address);
+export const getAddress = (blockchain, key) => new Wallet(blockchain, key).address;
+
+export const isKeySigner = (blockchain, key, signers) => signers.includes(getAddress(blockchain, key));
 
 export const sendTransaction = async (blockchain, transaction) => {
   switch (blockchain) {
