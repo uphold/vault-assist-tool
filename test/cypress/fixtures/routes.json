@@ -1,0 +1,11 @@
+{
+  "access": "/access",
+  "accessDetails": "/access/details",
+  "landing": "/",
+  "transaction": "/transaction",
+  "transactionFailure": "/transaction/failure",
+  "transactionSuccess": "/transaction/success",
+  "withdrawXrp": "/withdraw/xrp",
+  "withdrawXrpConfirm": "/withdraw/xrp/confirm",
+  "withdrawXrpDestination": "/withdraw/xrp/destination"
+}

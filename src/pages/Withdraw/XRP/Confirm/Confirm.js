@@ -96,7 +96,7 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
               onClick: () => setIsBackupKeySheetVisible(true),
             }}
             control={control}
-            data-test="vaultKey"
+            data-test="backupKey"
             label={t('withdraw.xrp.confirm.fields.backup.key.label')}
             name="backupKey"
             placeholder={t('withdraw.xrp.confirm.fields.vault.key.placeholder')}
