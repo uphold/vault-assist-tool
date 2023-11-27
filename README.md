@@ -13,9 +13,9 @@ This tool is available on the web at [https://uphold.github.io/vault-assist-tool
 ### How to use
 
 1. Select the Vault you wish to access (XRP, BTC...)
-2. Enter your address
-3. Enter Vault and Backup Key
-4. Specify the destination address
+2. Enter your Vault address. This was emailed to you when you created the Vault. It is also available within the Uphold app.
+3. Enter your Vault and Backup Key
+4. Specify the destination address you wish to move funds.
 5. Confirm and view transaction on chain
 
 ---
