@@ -1,3 +1,3 @@
 import { FloatingBox } from './Box/FloatingBox';
 
-export const BottomSheet = (props) => <FloatingBox {...props} variant="bottom" />;
+export const BottomSheet = props => <FloatingBox {...props} variant="bottom" />;

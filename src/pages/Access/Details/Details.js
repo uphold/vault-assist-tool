@@ -38,6 +38,7 @@ export const Details = ({ accountData, onConfirm }) => {
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
         title={t('access.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingTop="0">
           <Header alignItems="center">
@@ -45,21 +46,26 @@ export const Details = ({ accountData, onConfirm }) => {
               <Semibold>{getCurrency(network)}</Semibold> {t('access.details.title2')}
             </H3>
           </Header>
+
           <TableBox>
             <TableViewTitle>{t('access.details.address.label', { currency: getCurrency(network) })}</TableViewTitle>
 
             <TableViewBody>
               <TableViewNote lineHeight="28px">{address}</TableViewNote>
             </TableViewBody>
+
             <HorizontalSeparator />
+
             <TableViewTitle>{t('access.details.balance.label', { currency: getCurrency(network) })}</TableViewTitle>
 
             <TableViewBody>
               <TableViewText>{`${formatNumber(remainingBalance)} ${getCurrency(network)}`}</TableViewText>
             </TableViewBody>
+
             {network === Blockchain.XRPL ? (
               <Fragment>
                 <HorizontalSeparator />
+
                 <TableViewTitle>{t('access.details.reserve.label', { currency: getCurrency(network) })}</TableViewTitle>
 
                 <TableViewBody>
@@ -69,6 +75,7 @@ export const Details = ({ accountData, onConfirm }) => {
             ) : null}
           </TableBox>
         </Content>
+
         <SectionStickyFooter>
           <Button onPress={onConfirm}>{t('actions.withdraw', { currency: getCurrency(network) })}</Button>
         </SectionStickyFooter>
@@ -80,12 +87,12 @@ export const Details = ({ accountData, onConfirm }) => {
 Details.defaultProps = {
   accountData: {
     reserve: {
-      totalReserve: 0,
-    },
-  },
+      totalReserve: 0
+    }
+  }
 };
 
 Details.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onConfirm: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired
 };

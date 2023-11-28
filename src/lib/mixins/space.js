@@ -5,63 +5,63 @@ import { transformSpace } from './transformers';
 export const marginDefinition = {
   margin: {
     properties: ['margin'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginBottom: {
     properties: ['marginBottom'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginHorizontal: {
     properties: ['marginLeft', 'marginRight'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginLeft: {
     properties: ['marginLeft'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginRight: {
     properties: ['marginRight'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginTop: {
     properties: ['marginTop'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   marginVertical: {
     properties: ['marginBottom', 'marginTop'],
-    transform: transformSpace(),
-  },
+    transform: transformSpace()
+  }
 };
 
 export const paddingDefinition = {
   padding: {
     properties: ['padding'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingBottom: {
     properties: ['paddingBottom'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingHorizontal: {
     properties: ['paddingLeft', 'paddingRight'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingLeft: {
     properties: ['paddingLeft'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingRight: {
     properties: ['paddingRight'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingTop: {
     properties: ['paddingTop'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   paddingVertical: {
     properties: ['paddingBottom', 'paddingTop'],
-    transform: transformSpace(),
-  },
+    transform: transformSpace()
+  }
 };
 
 export const margin = createMixin(marginDefinition);

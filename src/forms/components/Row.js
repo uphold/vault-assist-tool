@@ -8,10 +8,10 @@ export const Row = ({ hasAlert, hasMessage, ...props }) => (
 Row.defaultProps = {
   hasAlert: false,
   hasMessage: false,
-  layoutPosition: 'relative',
+  layoutPosition: 'relative'
 };
 
 Row.propTypes = {
   hasAlert: PropTypes.bool,
-  hasMessage: PropTypes.bool,
+  hasMessage: PropTypes.bool
 };

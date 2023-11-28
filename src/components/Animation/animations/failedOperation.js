@@ -1,28 +1,24 @@
-/* eslint-disable id-length, sort-keys */
+/* eslint-disable id-length, sort-keys, sort-keys-fix/sort-keys-fix, prettier/prettier */
 export const failedOperation = {
-  v: '5.4.1',
-  fr: 29.9700012207031,
-  ip: 127.000005172816,
-  op: 180.00000733155,
-  w: 96,
-  h: 96,
-  nm: 'Link_Fail_Main',
-  ddd: 0,
   assets: [],
+  ddd: 0,
+  fr: 29.9700012207031,
+  h: 96,
+  ip: 127.000005172816,
   layers: [
     {
       ddd: 0,
+      ao: 0,
       ind: 1,
-      ty: 4,
-      nm: 'NO_Support_CircleMINI',
-      sr: 1,
+      ip: 148.000006028164,
       ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: -176, ix: 10 },
+        o: { a: 0, ix: 11, k: 100 },
         p: { a: 0, k: [47.8, 64, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
+        r: { a: 0, k: -176, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
         s: {
           a: 1,
+          ix: 6,
           k: [
             {
               i: { x: [0.833, 0.833, 0.833], y: [0.927, 0.927, -7.333] },
@@ -42,20 +38,22 @@ export const failedOperation = {
             },
             { t: 156.00000635401 },
           ],
-          ix: 6,
-        },
+        }
       },
-      ao: 0,
+      nm: 'NO_Support_CircleMINI',
+      op: 180.00000733155,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -95,81 +93,81 @@ export const failedOperation = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.403921987496, 0.23529399797, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [48, 48.859], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
+          c: { a: 0, ix: 4, k: [1, 0.403921568627, 0.235294117647, 1] },
+          o: { a: 0, ix: 5, k: 100 },
           ty: 'fl',
-          c: { a: 0, k: [1, 0.403921568627, 0.235294117647, 1], ix: 4 },
-          o: { a: 0, k: 100, ix: 5 },
-          r: 1,
           nm: 'Fill 1',
-          mn: 'ADBE Vector Graphic - Fill',
           hd: false,
-        },
+          r: 1,
+          mn: 'ADBE Vector Graphic - Fill'
+        }
       ],
-      ip: 148.000006028164,
-      op: 180.00000733155,
-      st: 2.00000008146167,
-      bm: 0,
+      sr: 1,
+      st: 2.00000008146167
     },
     {
       ddd: 0,
-      ind: 2,
-      ty: 4,
-      nm: 'NO_Support_Circle',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: -176, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 2,
+      ip: 126.000005132085,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: -176, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'NO_Support_Circle',
+      op: 180.00000733155,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -209,46 +207,46 @@ export const failedOperation = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.403921987496, 0.23529399797, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [48, 48.859], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.501], y: [1] },
@@ -260,10 +258,10 @@ export const failedOperation = {
               },
               { t: 144.00000586524 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [1] },
@@ -275,45 +273,45 @@ export const failedOperation = {
               },
               { t: 144.00000586524 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 126.000005132085,
-      op: 180.00000733155,
-      st: 0,
-      bm: 0,
+      sr: 1,
+      st: 0
     },
     {
       ddd: 0,
-      ind: 3,
-      ty: 4,
-      nm: 'Link_Fail_Symbol Outlines 2',
-      sr: 1.1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [47.667, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 3,
+      ip: 126.000005132085,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [47.667, 48, 0], ix: 2 },
+        r: { a: 0, k: 0, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'Link_Fail_Symbol Outlines 2',
+      op: 200.00000733155,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -344,46 +342,46 @@ export const failedOperation = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.403921987496, 0.23529399797, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [67.056, 34.382], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.506], y: [-9.274] },
@@ -419,10 +417,10 @@ export const failedOperation = {
               },
               { t: 149.999955262166 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [0.863] },
@@ -458,21 +456,23 @@ export const failedOperation = {
               },
               { t: 152.200005402964 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 126.000005132085,
-      op: 200.00000733155,
-      st: -12.6000005132085,
-      bm: 0,
-    },
+      sr: 1.1,
+      st: -12.6000005132085
+    }
   ],
   markers: [],
+  nm: 'Link_Fail_Main',
+  op: 180.00000733155,
+  v: '5.4.1',
+  w: 96
 };

@@ -44,5 +44,5 @@ export const UnorderedList = ({ children, customIcon, ...props }) => {
 
 UnorderedList.propTypes = {
   children: PropTypes.node.isRequired,
-  customIcon: PropTypes.node.isRequired,
+  customIcon: PropTypes.node.isRequired
 };

@@ -28,10 +28,10 @@ export const NavigationSubtitle = ({ children, html, ...props }) => {
 
 NavigationSubtitle.defaultProps = {
   children: null,
-  html: undefined,
+  html: undefined
 };
 
 NavigationSubtitle.propTypes = {
   children: PropTypes.node,
-  html: PropTypes.node,
+  html: PropTypes.node
 };

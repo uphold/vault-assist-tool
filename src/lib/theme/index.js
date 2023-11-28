@@ -7,10 +7,10 @@ export const ThemeContext = ProivderThemeContext;
 export const ThemePreference = Object.freeze({
   Dark: 'dark',
   Light: 'dark',
-  System: 'system',
+  System: 'system'
 });
 
-export const getTheme = (themeName) =>
+export const getTheme = themeName =>
   new ThemeBuilder(baseTheme(themeName))
     .setTheme(themeName)
     .setElement('checkbox', {
@@ -18,11 +18,11 @@ export const getTheme = (themeName) =>
       fontFamily: 'Metropolis',
       fontSize: '14px',
       letterSpacing: '0.4px',
-      lineHeight: '20px',
+      lineHeight: '20px'
     })
     .setElement('checkbox', { status: 'disable' }, { color: 'n04' })
     .setElement('error', {
-      color: 'e06',
+      color: 'e06'
     })
     .setElement('input', {
       backgroundColor: 'transparent',
@@ -34,7 +34,7 @@ export const getTheme = (themeName) =>
       fontFamily: 'Metropolis',
       fontSize: '16px',
       letterSpacing: '0.2px',
-      lineHeight: '30px',
+      lineHeight: '30px'
     })
     .setElement('input', { status: 'disable' }, { backgroundColor: 'n02', color: 'n04' })
     .setElement('input', { status: 'focus' }, { borderColor: 'n06' })

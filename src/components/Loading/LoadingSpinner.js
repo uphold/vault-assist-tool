@@ -26,9 +26,9 @@ export const LoadingSpinner = ({ size, ...props }) => (
 );
 
 LoadingSpinner.defaultProps = {
-  size: 32,
+  size: 32
 };
 
 LoadingSpinner.propTypes = {
-  size: PropTypes.number,
+  size: PropTypes.number
 };

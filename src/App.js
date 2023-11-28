@@ -19,7 +19,7 @@ const TransactionStatus = Object.freeze({
   failure: 'failure',
   pending: 'pending',
   success: 'success',
-  unknown: 'unknown',
+  unknown: 'unknown'
 });
 
 export const App = () => {
@@ -66,18 +66,18 @@ export const App = () => {
     history.push({ ...history.location, pathname: '/access' });
   };
 
-  const onConfirmAccount = (accountData) => {
+  const onConfirmAccount = accountData => {
     setAccountData(accountData);
     history.push({ ...history.location, pathname: `/withdraw/xrp` });
   };
 
-  const onConfirmTransaction = (preparedTransaction) => {
+  const onConfirmTransaction = preparedTransaction => {
     setPreparedTransaction(preparedTransaction);
     setTransactionStatus(TransactionStatus.pending);
     history.replace('/transaction');
   };
 
-  const submitTransaction = async (preparedTransaction) => {
+  const submitTransaction = async preparedTransaction => {
     try {
       const { network, transaction } = preparedTransaction;
       const transactionData = await sendTransaction(network, transaction);
@@ -94,6 +94,7 @@ export const App = () => {
     <Wrapper>
       <Router history={history}>
         <IconDefs />
+
         <Switch>
           {!isGuarded ? (
             <Fragment>
@@ -104,6 +105,7 @@ export const App = () => {
                 onGoBack={() => setIsGuarded(true)}
                 path="/access"
               />
+
               <Route
                 accountData={accountData}
                 component={XRP}
@@ -113,6 +115,7 @@ export const App = () => {
                 pendingTransaction={transactionStatus !== TransactionStatus.unknown}
                 setIsGuarded={setIsGuarded}
               />
+
               {!transactionData ? (
                 <Route
                   component={Transaction}
@@ -126,6 +129,7 @@ export const App = () => {
                   }}
                 />
               ) : null}
+
               {transactionData ? (
                 <Route
                   component={Success}
@@ -135,13 +139,17 @@ export const App = () => {
                   transactionData={transactionData}
                 />
               ) : null}
+
               <Route component={Failure} key="failure" onFinish={cleanSession} path="/transaction/failure" />
             </Fragment>
           ) : null}
+
           <Route component={Landing} onConfirm={onAccessVault} path="/" />
         </Switch>
       </Router>
+
       <ToasterContainer />
+
       <div id="dynamicFormPortal" />
     </Wrapper>
   );

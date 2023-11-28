@@ -4,107 +4,107 @@ import { transformBorder, transformColor, transformNumber, transformRadius } fro
 export const borderDefinition = {
   border: {
     properties: ['border'],
-    transform: transformBorder(),
+    transform: transformBorder()
   },
   borderBottom: {
     properties: ['border-bottom'],
-    transform: transformBorder(),
+    transform: transformBorder()
   },
   borderBottomColor: {
     properties: ['border-bottom-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   borderBottomLeftRadius: {
     properties: ['border-bottom-left-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderBottomRadius: {
     properties: ['border-bottom-left-radius', 'border-bottom-right-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderBottomRightRadius: {
     properties: ['border-bottom-right-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderBottomStyle: {
-    properties: ['border-bottom-style'],
+    properties: ['border-bottom-style']
   },
   borderBottomWidth: {
     properties: ['border-bottom-width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   borderColor: {
     properties: ['border-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   borderLeft: {
     properties: ['border-left'],
-    transform: transformBorder(),
+    transform: transformBorder()
   },
   borderLeftColor: {
     properties: ['border-left-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   borderLeftStyle: {
-    properties: ['border-left-style'],
+    properties: ['border-left-style']
   },
   borderLeftWidth: {
     properties: ['border-left-width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   borderRadius: {
     properties: ['border-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderRight: {
     properties: ['border-right'],
-    transform: transformBorder(),
+    transform: transformBorder()
   },
   borderRightColor: {
     properties: ['border-right-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   borderRightStyle: {
-    properties: ['border-right-style'],
+    properties: ['border-right-style']
   },
   borderRightWidth: {
     properties: ['border-right-width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   borderStyle: {
-    properties: ['border-style'],
+    properties: ['border-style']
   },
   borderTop: {
     properties: ['border-top'],
-    transform: transformBorder(),
+    transform: transformBorder()
   },
   borderTopColor: {
     properties: ['border-top-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   borderTopLeftRadius: {
     properties: ['border-top-left-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderTopRadius: {
     properties: ['border-top-left-radius', 'border-top-right-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderTopRightRadius: {
     properties: ['border-top-right-radius'],
-    transform: transformRadius(),
+    transform: transformRadius()
   },
   borderTopStyle: {
-    properties: ['border-top-style'],
+    properties: ['border-top-style']
   },
   borderTopWidth: {
     properties: ['border-top-width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   borderWidth: {
     properties: ['border-width'],
-    transform: transformNumber(),
-  },
+    transform: transformNumber()
+  }
 };
 
 export const border = createMixin(borderDefinition);

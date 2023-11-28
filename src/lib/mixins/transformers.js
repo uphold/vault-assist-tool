@@ -108,7 +108,7 @@ export const transformRadius =
     if (typeof raw === 'string' && raw.indexOf(' ') >= 0) {
       return raw
         .split(' ')
-        .map((rawBit) => getRadius(rawBit, defaultUnit, theme))
+        .map(rawBit => getRadius(rawBit, defaultUnit, theme))
         .join(' ');
     }
 
@@ -125,14 +125,14 @@ export const transformSpace =
     if (typeof raw === 'string' && raw.indexOf(' ') >= 0) {
       return raw
         .split(' ')
-        .map((rawBit) => getSpacing(rawBit, defaultUnit, theme))
+        .map(rawBit => getSpacing(rawBit, defaultUnit, theme))
         .join(' ');
     }
 
     return getSpacing(raw, defaultUnit, theme);
   };
 
-export const transformString = () => (raw) => /['\n]/.test(raw) ? raw : `'${raw}'`;
+export const transformString = () => raw => /['\n]/.test(raw) ? raw : `'${raw}'`;
 
 const transformers = {
   transformBorder,
@@ -140,7 +140,7 @@ const transformers = {
   transformNumber,
   transformRadius,
   transformSpace,
-  transformString,
+  transformString
 };
 
 export default transformers;

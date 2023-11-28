@@ -42,7 +42,7 @@ export const InputAmount = forwardRef(
       return value;
     }, [value, options]);
 
-    const onValueChange = (event) => {
+    const onValueChange = event => {
       let value = (event.target.value || '').replace(/,$/, '.');
 
       value = value === '.' ? '0.' : value;
@@ -90,7 +90,7 @@ InputAmount.defaultProps = {
   onChange: () => {},
   options: {},
   size: 'large',
-  value: '',
+  value: ''
 };
 
 InputAmount.displayName = 'forwardRef(InputAmount)';
@@ -103,5 +103,5 @@ InputAmount.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.object,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
-  value: PropTypes.string,
+  value: PropTypes.string
 };

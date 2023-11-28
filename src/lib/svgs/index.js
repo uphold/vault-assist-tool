@@ -3,5 +3,5 @@ import images from './images';
 
 export const svgs = {
   icons,
-  images,
+  images
 };

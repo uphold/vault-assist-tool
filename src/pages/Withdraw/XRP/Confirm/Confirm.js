@@ -33,12 +33,12 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
   const form = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    resolver: yupResolver(signingKeysSchema(network, signers)),
+    resolver: yupResolver(signingKeysSchema(network, signers))
   });
 
   const { control, handleSubmit, setError } = form;
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async data => {
     const { vaultKey, backupKey } = data;
 
     if (vaultKey === backupKey) {
@@ -74,15 +74,17 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
         title={t('withdraw.xrp.confirm.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingTop="0">
           <Instructions>
             <Small>{t('withdraw.xrp.confirm.description')}</Small>
           </Instructions>
+
           <TextField
             action={{
               icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
-              onClick: () => setIsVaultKeySheetVisible(true),
+              onClick: () => setIsVaultKeySheetVisible(true)
             }}
             control={control}
             data-test="vaultKey"
@@ -90,10 +92,11 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
             name="vaultKey"
             placeholder={t('withdraw.xrp.confirm.fields.vault.key.placeholder')}
           />
+
           <TextField
             action={{
               icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
-              onClick: () => setIsBackupKeySheetVisible(true),
+              onClick: () => setIsBackupKeySheetVisible(true)
             }}
             control={control}
             data-test="backupKey"
@@ -102,29 +105,36 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
             placeholder={t('withdraw.xrp.confirm.fields.vault.key.placeholder')}
           />
         </Content>
+
         <SectionStickyFooter>
           <Button isLoading={isLoading} onPress={onSubmit}>
             {t('actions.confirm.withdraw')}
           </Button>
         </SectionStickyFooter>
       </ScrollableSection>
+
       <BottomSheet isVisible={isVaultKeySheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
           title={t('withdraw.xrp.confirm.fields.vault.key.details.header')}
         />
+
         <ScrollableSection padding="sp02 sp05">
           <Small marginBottom="sp06">{t('withdraw.xrp.confirm.fields.vault.key.details.description')}</Small>
+
           <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>
       </BottomSheet>
+
       <BottomSheet isVisible={isBackupKeySheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
           title={t('withdraw.xrp.confirm.fields.backup.key.details.header')}
         />
+
         <ScrollableSection padding="sp02 sp05">
           <Small marginBottom="sp06">{t('withdraw.xrp.confirm.fields.backup.key.details.description')}</Small>
+
           <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>
       </BottomSheet>
@@ -137,12 +147,12 @@ Confirm.defaultProps = {
     reserve: {
       baseReserve: 0,
       ownerReserve: 0,
-      totalReserve: 0,
-    },
-  },
+      totalReserve: 0
+    }
+  }
 };
 
 Confirm.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onConfirmWithdraw: PropTypes.func.isRequired,
+  onConfirmWithdraw: PropTypes.func.isRequired
 };

@@ -26,23 +26,28 @@ export const Landing = ({ onConfirm }) => {
       <AlertBox>
         <Alert variant="warning">{t('landing.warning.check')}</Alert>
       </AlertBox>
+
       <ScrollableSection>
         <CenterView>
           <Content>
             <Center>
               <Header>
                 <Svg height={193} name="vault" width={360} />
+
                 <H3>
                   <Semibold>{t('landing.title1')}</Semibold> {t('landing.title2')}
                 </H3>
               </Header>
+
               <Small marginBottom="sp03" textAlign="center">
                 {t('landing.description')}
               </Small>
+
               <Small textAlign="center">{t('landing.description2')}</Small>
             </Center>
           </Content>
         </CenterView>
+
         <SectionStickyFooter>
           <Button onPress={onConfirm} size="regular">
             {t('actions.accessVault')}
@@ -54,5 +59,5 @@ export const Landing = ({ onConfirm }) => {
 };
 
 Landing.propTypes = {
-  onConfirm: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired
 };

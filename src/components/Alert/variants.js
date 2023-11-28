@@ -3,5 +3,5 @@ export const variants = Object.freeze({
   INFO: 'info',
   PENDING: 'pending',
   SUCCESS: 'success',
-  WARNING: 'warning',
+  WARNING: 'warning'
 });

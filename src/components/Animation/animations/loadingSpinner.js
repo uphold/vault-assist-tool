@@ -1,14 +1,5 @@
-/* eslint-disable sort-keys */
-/* eslint-disable id-length */
+/* eslint-disable id-length, sort-keys, sort-keys-fix/sort-keys-fix, prettier/prettier */
 export const loadingSpinner = {
-  v: '5.4.1',
-  fr: 29.9700012207031,
-  ip: 0,
-  op: 62.0000025253118,
-  w: 93,
-  h: 93,
-  nm: 'worm',
-  ddd: 0,
   assets: [
     {
       id: 'comp_0',
@@ -16,9 +7,7 @@ export const loadingSpinner = {
         {
           ddd: 0,
           ind: 1,
-          ty: 4,
           nm: 'AnimF_V8',
-          sr: 1,
           ks: {
             o: {
               a: 1,
@@ -56,7 +45,11 @@ export const loadingSpinner = {
             a: { a: 0, k: [0, 0, 0], ix: 1 },
             s: { a: 0, k: [140, 140, 100], ix: 6 },
           },
+          ty: 4,
           ao: 0,
+          sr: 1,
+          ip: 0,
+          op: 64.0000026067734,
           shapes: [
             {
               ty: 'gr',
@@ -228,17 +221,13 @@ export const loadingSpinner = {
               hd: false,
             },
           ],
-          ip: 0,
-          op: 64.0000026067734,
-          st: -4.00000016292334,
           bm: 0,
+          st: -4.00000016292334
         },
         {
           ddd: 0,
           ind: 2,
-          ty: 4,
           nm: 'AnimF_V7',
-          sr: 1,
           ks: {
             o: {
               a: 1,
@@ -260,7 +249,11 @@ export const loadingSpinner = {
             a: { a: 0, k: [0, 0, 0], ix: 1 },
             s: { a: 0, k: [140, 140, 100], ix: 6 },
           },
+          ty: 4,
           ao: 0,
+          sr: 1,
+          ip: 0,
+          op: 64.0000026067734,
           shapes: [
             {
               ty: 'gr',
@@ -400,17 +393,13 @@ export const loadingSpinner = {
               hd: false,
             },
           ],
-          ip: 0,
-          op: 64.0000026067734,
-          st: -4.00000016292334,
           bm: 0,
+          st: -4.00000016292334
         },
         {
           ddd: 0,
           ind: 3,
-          ty: 4,
           nm: 'AnimF_V6',
-          sr: 1,
           ks: {
             o: {
               a: 1,
@@ -432,7 +421,11 @@ export const loadingSpinner = {
             a: { a: 0, k: [0, 0, 0], ix: 1 },
             s: { a: 0, k: [140, 140, 100], ix: 6 },
           },
+          ty: 4,
           ao: 0,
+          sr: 1,
+          ip: 0,
+          op: 64.0000026067734,
           shapes: [
             {
               ty: 'gr',
@@ -572,17 +565,13 @@ export const loadingSpinner = {
               hd: false,
             },
           ],
-          ip: 0,
-          op: 64.0000026067734,
-          st: -4.00000016292334,
           bm: 0,
+          st: -4.00000016292334
         },
         {
           ddd: 0,
           ind: 4,
-          ty: 4,
           nm: 'AnimF_V5',
-          sr: 1,
           ks: {
             o: { a: 0, k: 40, ix: 11 },
             r: { a: 0, k: 0, ix: 10 },
@@ -590,7 +579,11 @@ export const loadingSpinner = {
             a: { a: 0, k: [0, 0, 0], ix: 1 },
             s: { a: 0, k: [140, 140, 100], ix: 6 },
           },
+          ty: 4,
           ao: 0,
+          sr: 1,
+          ip: 0,
+          op: 64.0000026067734,
           shapes: [
             {
               ty: 'gr',
@@ -770,24 +763,24 @@ export const loadingSpinner = {
               hd: false,
             },
           ],
-          ip: 0,
-          op: 64.0000026067734,
-          st: -4.00000016292334,
           bm: 0,
-        },
-      ],
-    },
+          st: -4.00000016292334
+        }
+      ]
+    }
   ],
+  ddd: 0,
+  fr: 29.9700012207031,
+  h: 93,
+  ip: 0,
   layers: [
     {
       ddd: 0,
       ind: 1,
-      ty: 0,
-      nm: 'main_rool',
-      refId: 'comp_0',
-      sr: 1,
       ks: {
-        o: { a: 0, k: 100, ix: 11 },
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, ix: 2, k: [46.5, 46.5, 0] },
+        a: { a: 0, ix: 1, k: [46.5, 46.5, 0] },
         r: {
           a: 1,
           k: [
@@ -803,32 +796,38 @@ export const loadingSpinner = {
           ],
           ix: 10,
         },
-        p: { a: 0, k: [46.5, 46.5, 0], ix: 2 },
-        a: { a: 0, k: [46.5, 46.5, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
       },
       ao: 0,
-      w: 93,
+      nm: 'main_rool',
       h: 93,
+      refId: 'comp_0',
       ip: 0,
-      op: 62.0000025253118,
-      st: 0,
+      ty: 0,
       bm: 0,
-    },
+      op: 62.0000025253118,
+      sr: 1,
+      st: 0,
+      w: 93
+    }
   ],
   markers: [
-    { tm: 7.00000028511585, cm: '3', dr: 0 },
-    { tm: 13.0000005295009, cm: '2', dr: 0 },
-    { tm: 20.0000008146167, cm: '4', dr: 0 },
-    { tm: 26.0000010590017, cm: '5', dr: 0 },
-    { tm: 33.0000013441176, cm: '6', dr: 0 },
-    { tm: 40.0000016292334, cm: '7', dr: 0 },
-    { tm: 47.0000019143492, cm: '8', dr: 0 },
-    { tm: 50.0000020365418, cm: '9', dr: 0 },
-    { tm: 57.0000023216576, cm: '10', dr: 0 },
-    { tm: 71.0000028918893, cm: '11', dr: 0 },
-    { tm: 78.0000031770051, cm: '12', dr: 0 },
-    { tm: 85.000003462121, cm: '13', dr: 0 },
-    { tm: 92.0000037472368, cm: '14', dr: 0 },
+    { cm: '3', dr: 0, tm: 7.00000028511585 },
+    { cm: '2', dr: 0, tm: 13.0000005295009 },
+    { cm: '4', dr: 0, tm: 20.0000008146167 },
+    { cm: '5', dr: 0, tm: 26.0000010590017 },
+    { cm: '6', dr: 0, tm: 33.0000013441176 },
+    { cm: '7', dr: 0, tm: 40.0000016292334 },
+    { cm: '8', dr: 0, tm: 47.0000019143492 },
+    { cm: '9', dr: 0, tm: 50.0000020365418 },
+    { cm: '10', dr: 0, tm: 57.0000023216576 },
+    { cm: '11', dr: 0, tm: 71.0000028918893 },
+    { cm: '12', dr: 0, tm: 78.0000031770051 },
+    { cm: '13', dr: 0, tm: 85.000003462121 },
+    { cm: '14', dr: 0, tm: 92.0000037472368 }
   ],
+  nm: 'worm',
+  op: 62.0000025253118,
+  v: '5.4.1',
+  w: 93
 };

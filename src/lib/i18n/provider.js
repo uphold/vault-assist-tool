@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import i18next from 'i18next';
 
 export const languageCodes = Object.freeze({
-  EN: 'en',
+  EN: 'en'
 });
 
 const defaultOptions = {
@@ -10,11 +10,11 @@ const defaultOptions = {
   fallbackLng: languageCodes.EN,
   interpolation: {
     escapeValue: false,
-    skipOnVariables: false,
+    skipOnVariables: false
   },
   keySeparator: ' ',
   resource: {},
-  supportedLngs: Object.values(languageCodes),
+  supportedLngs: Object.values(languageCodes)
 };
 
 const interpolationMatch = /({{[^}]*}})/gm;
@@ -89,7 +89,7 @@ class I18nComponent {
   }
 
   setPlugins(plugins) {
-    plugins?.forEach((plugin) => {
+    plugins?.forEach(plugin => {
       if (plugin) {
         this.instance.use(plugin);
       }

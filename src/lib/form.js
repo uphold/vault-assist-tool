@@ -41,19 +41,19 @@ export const renderControllerField = (component, props, parentRef) => {
       ...field,
       ...fieldState,
       'data-test': props['data-test'] || props.dataTest || field.name,
-      ref,
+      ref
     };
 
     // For performance purposes, the override isn't needed if 1 of the functions isn't declared, since they will be automaticaly included on the spread above
     if (props?.onBlur && field?.onBlur) {
-      componentProps.onBlur = (event) => {
+      componentProps.onBlur = event => {
         field.onBlur(event);
         props.onBlur(event);
       };
     }
 
     if (props?.onChange && field?.onChange) {
-      componentProps.onChange = (event) => {
+      componentProps.onChange = event => {
         field.onChange(event);
         props.onChange(event);
       };
@@ -69,7 +69,7 @@ export const renderControllerField = (component, props, parentRef) => {
   Component.propTypes = {
     ...component.propTypes,
     field: PropTypes.object.isRequired,
-    fieldState: PropTypes.object.isRequired,
+    fieldState: PropTypes.object.isRequired
   };
 
   return Component;

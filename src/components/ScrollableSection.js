@@ -79,7 +79,7 @@ ScrollableSection.defaultProps = {
   isLoading: false,
   layoutPosition: 'relative',
   onEndReached: () => {},
-  overflowY: 'auto',
+  overflowY: 'auto'
 };
 
 ScrollableSection.displayName = 'forwardRef(ScrollableSection)';
@@ -89,5 +89,5 @@ ScrollableSection.propTypes = {
   children: PropTypes.node.isRequired,
   hasNextPage: PropTypes.bool,
   isLoading: PropTypes.bool,
-  onEndReached: PropTypes.func,
+  onEndReached: PropTypes.func
 };

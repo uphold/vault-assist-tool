@@ -5,13 +5,13 @@ const getCurrentNavigation = (navigationItems, pathname, ...extraItems) => {
   const allItems = navigationItems.concat(extraItems).reduce((result, { shownActive = [], ...item }) => {
     result.push(item);
 
-    shownActive.forEach((path) => result.push({ ...item, path }));
+    shownActive.forEach(path => result.push({ ...item, path }));
 
     return result;
   }, []);
 
   return allItems
-    .filter((item) => matchPath(pathname, item))
+    .filter(item => matchPath(pathname, item))
     .reduce((previous, current) => (previous?.path?.includes(current.path) ? previous : current), null);
 };
 

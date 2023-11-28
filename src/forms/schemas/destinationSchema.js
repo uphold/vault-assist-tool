@@ -3,7 +3,7 @@ import { I18n } from '../../lib/i18n/provider';
 import { isValidAddress } from '../validations/isValidAddress';
 import { yup } from '../index';
 
-export const destinationSchema = (sourceAddress) =>
+export const destinationSchema = sourceAddress =>
   yup.object().shape({
     address: yup
       .string()
@@ -11,13 +11,13 @@ export const destinationSchema = (sourceAddress) =>
       .test(
         'validation',
         I18n.t('withdraw.xrp.destination.fields.address.errors.invalid.xrp'),
-        (val) => isValidAddress(Blockchain.XRPL, val) && val !== sourceAddress
+        val => isValidAddress(Blockchain.XRPL, val) && val !== sourceAddress
       ),
     destinationTag: yup
       .string()
       .test(
         'validation',
         I18n.t('withdraw.xrp.destination.fields.destination.tag.errors.invalid'),
-        (val) => !val.includes('-') && !val.includes('.') && !isNaN(Number(val))
-      ),
+        val => !val.includes('-') && !val.includes('.') && !isNaN(Number(val))
+      )
   });

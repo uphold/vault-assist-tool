@@ -44,6 +44,7 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
           path={`${path}/details`}
         />
       ) : null}
+
       <Route component={Root} key="access" onConfirm={onConfirmAccess} onGoBack={onGoBack} path={path} />
     </Switch>
   );
@@ -51,5 +52,5 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
 
 Access.propTypes = {
   onConfirmAccount: PropTypes.func.isRequired,
-  onGoBack: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func.isRequired
 };

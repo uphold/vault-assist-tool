@@ -18,14 +18,14 @@ const BaseNumberField = forwardRef(
     const isfocused = useMemo(() => (isFocused ? isFocused.toString() : undefined), [isFocused]);
     const isvalid = useMemo(() => (!invalid ? 'true' : undefined), [invalid]);
 
-    const onBlur = (event) => {
+    const onBlur = event => {
       event.stopPropagation();
       setIsFocused(false);
 
       props.onBlur(event);
     };
 
-    const onFocus = (event) => {
+    const onFocus = event => {
       event.stopPropagation();
       setIsFocused(true);
 
@@ -51,7 +51,7 @@ const BaseNumberField = forwardRef(
             isvalid={isvalid}
             onBlur={onBlur}
             onFocus={onFocus}
-            ref={(input) => (ref.current = input?.element)}
+            ref={input => (ref.current = input?.element)}
           />
         </Input>
 
@@ -71,7 +71,7 @@ BaseNumberField.defaultProps = {
   message: undefined,
   onBlur: () => {},
   onFocus: () => {},
-  type: 'tel',
+  type: 'tel'
 };
 
 BaseNumberField.displayName = 'forwardRef(BaseNumberField)';
@@ -86,7 +86,7 @@ BaseNumberField.propTypes = {
   message: PropTypes.node,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
-  type: PropTypes.string,
+  type: PropTypes.string
 };
 
 export const NumberField = ({ control, defaultValue, name, shouldUnregister, ...props }) => (
@@ -102,12 +102,12 @@ export const NumberField = ({ control, defaultValue, name, shouldUnregister, ...
 NumberField.defaultProps = {
   control: {},
   defaultValue: '',
-  shouldUnregister: true,
+  shouldUnregister: true
 };
 
 NumberField.propTypes = {
   control: PropTypes.object,
   defaultValue: PropTypes.any,
   name: PropTypes.string.isRequired,
-  shouldUnregister: PropTypes.bool,
+  shouldUnregister: PropTypes.bool
 };

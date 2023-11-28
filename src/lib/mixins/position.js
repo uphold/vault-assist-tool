@@ -4,26 +4,26 @@ import { transformNumber } from './transformers';
 export const positionDefinition = {
   layoutBottom: {
     properties: ['bottom'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutLeft: {
     properties: ['left'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutPosition: {
-    properties: ['position'],
+    properties: ['position']
   },
   layoutRight: {
     properties: ['right'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutTop: {
     properties: ['top'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   zIndex: {
-    properties: ['zIndex'],
-  },
+    properties: ['zIndex']
+  }
 };
 
 export const position = createMixin(positionDefinition);

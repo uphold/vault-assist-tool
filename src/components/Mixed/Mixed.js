@@ -6,10 +6,10 @@ import styled from 'styled-components';
 const cache = new Map();
 
 const baseComponent = styled.span?.withConfig({
-  shouldForwardProp: (key, isDefaultProp) => !isValidMotionProp(key) && shouldForwardProp(key, isDefaultProp),
+  shouldForwardProp: (key, isDefaultProp) => !isValidMotionProp(key) && shouldForwardProp(key, isDefaultProp)
 })(mixins);
 
-const createMixed = (element) => {
+const createMixed = element => {
   const component = forwardRef((props, ref) => createElement(baseComponent, { as: element, ref, ...props }));
 
   component.displayName = `Mixed(${element?.displayName || element?.name || element})`;
@@ -47,6 +47,6 @@ export const Mixed = new Proxy(
       }
 
       return target(prop, { useCache: true });
-    },
+    }
   }
 );

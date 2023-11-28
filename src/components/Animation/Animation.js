@@ -13,9 +13,9 @@ const Wrapper = styled(Mixed.div)`
   }
 
   svg path {
-    stroke: currentColor;
-    fill: currentColor;
     color: currentColor;
+    fill: currentColor;
+    stroke: currentColor;
   }
 `;
 
@@ -23,7 +23,7 @@ export const Animation = ({ animation, animationOptions, isActive, onComplete, o
   const animationRef = useRef();
   const callbacks = useCurrent({
     onComplete,
-    onDestroy,
+    onDestroy
   });
   const ref = useRef();
 
@@ -37,8 +37,8 @@ export const Animation = ({ animation, animationOptions, isActive, onComplete, o
       ...animationOptions,
       rendererSettings: {
         viewBoxOnly: true,
-        ...(animationOptions?.rendererSettings || {}),
-      },
+        ...(animationOptions?.rendererSettings || {})
+      }
     });
 
     let completed = false;
@@ -88,8 +88,8 @@ Animation.defaultProps = {
   onDestroy: () => {},
   svgStyle: {
     layoutHeight: '100%',
-    layoutWidth: '100%',
-  },
+    layoutWidth: '100%'
+  }
 };
 
 Animation.propTypes = {
@@ -97,5 +97,5 @@ Animation.propTypes = {
   animationOptions: PropTypes.object,
   isActive: PropTypes.bool,
   onComplete: PropTypes.func,
-  onDestroy: PropTypes.func,
+  onDestroy: PropTypes.func
 };

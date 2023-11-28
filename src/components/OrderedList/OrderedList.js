@@ -15,5 +15,5 @@ export const OrderedList = ({ children, ...props }) => {
 };
 
 OrderedList.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };

@@ -41,14 +41,17 @@ export const Failure = ({ onFinish }) => {
           <Mixed.div paddingVertical="sp03">
             <Svg color={colors.red30} height={100} name="failed" width={100} />
           </Mixed.div>
+
           <Header alignItems="center">
             <H3 marginBottom="sp02">
               <Semibold>{t('transaction.failure.header')}</Semibold>
             </H3>
           </Header>
+
           <Paragraph textAlign="center">{t('transaction.failure.description')}</Paragraph>
         </Center>
       </CenterView>
+
       <SectionStickyFooter>
         <Button onPress={onFinish}>{t('actions.close')}</Button>
       </SectionStickyFooter>
@@ -57,5 +60,5 @@ export const Failure = ({ onFinish }) => {
 };
 
 Failure.propTypes = {
-  onFinish: PropTypes.func.isRequired,
+  onFinish: PropTypes.func.isRequired
 };

@@ -11,5 +11,5 @@ const checkSiteWarning = () => {
 
 export default {
   checkLanding,
-  checkSiteWarning,
+  checkSiteWarning
 };

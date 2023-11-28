@@ -67,12 +67,12 @@ NavigationBar.defaultProps = {
   children: null,
   leftAction: null,
   rightAction: null,
-  title: '',
+  title: ''
 };
 
 NavigationBar.propTypes = {
   children: PropTypes.node,
   leftAction: PropTypes.node,
   rightAction: PropTypes.node,
-  title: PropTypes.node,
+  title: PropTypes.node
 };

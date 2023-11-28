@@ -47,12 +47,12 @@ export const BoxModal = ({ backgroundColor, children, hasInitialAnimation, isVis
 BoxModal.defaultProps = {
   backgroundColor: '',
   hasInitialAnimation: false,
-  isVisible: false,
+  isVisible: false
 };
 
 BoxModal.propTypes = {
   backgroundColor: PropTypes.string,
   children: PropTypes.node.isRequired,
   hasInitialAnimation: PropTypes.bool,
-  isVisible: PropTypes.bool,
+  isVisible: PropTypes.bool
 };

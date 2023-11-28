@@ -18,7 +18,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 export const FORMATS = Object.freeze({
-  DATE: 'll',
+  DATE: 'll'
 });
 
 dayjs.extend(advancedFormat);

@@ -29,5 +29,5 @@ export default {
   success,
   ticker,
   up,
-  warning,
+  warning
 };

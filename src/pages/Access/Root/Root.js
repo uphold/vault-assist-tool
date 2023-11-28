@@ -30,12 +30,12 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
   const networkNames = Object.freeze({
     [Blockchain.XRPL]: 'XRP',
-    [Blockchain.BTC]: 'BTC (coming soon)',
+    [Blockchain.BTC]: 'BTC (coming soon)'
   });
 
   const networkOptions = [
     { isDisabled: false, label: networkNames[Blockchain.XRPL], value: `${Blockchain.XRPL}` },
-    { isDisabled: true, label: networkNames[Blockchain.BTC], value: `${Blockchain.BTC}` },
+    { isDisabled: true, label: networkNames[Blockchain.BTC], value: `${Blockchain.BTC}` }
   ];
 
   const onClickBack = () => {
@@ -45,15 +45,15 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
   const form = useForm({
     defaultValues: {
-      network: networkOptions[0],
+      network: networkOptions[0]
     },
     mode: 'onChange',
-    resolver: yupResolver(addressSchema(selectedNetwork)),
+    resolver: yupResolver(addressSchema(selectedNetwork))
   });
 
   const { control, handleSubmit, setError } = form;
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async data => {
     const { address } = data;
 
     setIsLoading(true);
@@ -78,11 +78,13 @@ export const Root = ({ onConfirm, onGoBack }) => {
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
         title={t('access.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingTop="0">
           <Instructions>
             <Small>{t('access.description')}</Small>
           </Instructions>
+
           <DynamicSelectField
             control={control}
             data-test="network"
@@ -92,10 +94,11 @@ export const Root = ({ onConfirm, onGoBack }) => {
             options={networkOptions}
             placeholder={t('access.fields.network.placeholder')}
           />
+
           <TextField
             action={{
               icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
-              onClick: () => setIsAddressInfoSheetVisible(true),
+              onClick: () => setIsAddressInfoSheetVisible(true)
             }}
             control={control}
             data-test="address"
@@ -104,23 +107,29 @@ export const Root = ({ onConfirm, onGoBack }) => {
             placeholder={t('access.fields.address.placeholder')}
           />
         </Content>
+
         <SectionStickyFooter>
           <Button isLoading={isLoading} onPress={onSubmit}>
             {t('actions.submit')}
           </Button>
         </SectionStickyFooter>
       </ScrollableSection>
+
       <BottomSheet isVisible={isAddressInfoSheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
           title={t('access.fields.address.details.header', { currency: getCurrency(selectedNetwork) })}
         />
+
         <ScrollableSection padding="sp02 sp05">
           <Small marginBottom="sp03">{t('access.fields.address.details.description')}</Small>
+
           <UnorderedList customIcon={false} marginBottom="sp06" marginLeft="sp02">
             <Small>{t('access.fields.address.details.bullet1')}</Small>
+
             <Small>{t('access.fields.address.details.bullet2')}</Small>
           </UnorderedList>
+
           <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>
       </BottomSheet>
@@ -130,5 +139,5 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
 Root.propTypes = {
   onConfirm: PropTypes.func.isRequired,
-  onGoBack: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func.isRequired
 };

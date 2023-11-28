@@ -8,11 +8,11 @@ const checkWithdrawDestination = () => {
   cy.location('pathname').should('be.equal', routes.withdrawXrpDestination);
 };
 
-const setAddress = (from) => {
+const setAddress = from => {
   cy.typeAndCheck(addressId, from);
 };
 
-const setDestinationTag = (tag) => {
+const setDestinationTag = tag => {
   cy.typeAndCheck(destinationTagId, tag);
 };
 
@@ -34,5 +34,5 @@ export default {
   checkRequired,
   checkWithdrawDestination,
   setAddress,
-  setDestinationTag,
+  setDestinationTag
 };

@@ -6,5 +6,5 @@ export const Semibold = styled.strong.withConfig({ shouldForwardProp })`
 `;
 
 Semibold.defaultProps = {
-  fontWeight: 600,
+  fontWeight: 600
 };

@@ -22,11 +22,11 @@ export const Portal = ({ children, node, id }) => {
 
 Portal.defaultProps = {
   id: undefined,
-  node: undefined,
+  node: undefined
 };
 
 Portal.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
-  node: PropTypes.object,
+  node: PropTypes.object
 };

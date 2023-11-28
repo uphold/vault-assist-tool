@@ -42,6 +42,7 @@ export const Success = ({ transactionData, onFinish }) => {
         leftAction={<NavigationAction name="close" onClick={onFinish} />}
         title={t('transaction.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingTop="12px">
           <Header alignItems="center">
@@ -49,6 +50,7 @@ export const Success = ({ transactionData, onFinish }) => {
               {t('transaction.success.header', { currency: getCurrency(network) })}
             </H3>
           </Header>
+
           <TableBox padding="sp01 sp03">
             <TableViewTitle>{t('transaction.success.details.label.amount.transferred')}</TableViewTitle>
 
@@ -57,15 +59,19 @@ export const Success = ({ transactionData, onFinish }) => {
                 {formatNumber(amount)} {getCurrency(network)}
               </TableViewNote>
             </TableViewBody>
+
             <HorizontalSeparator margin="sp02 0" />
+
             <TableViewTitle>{t('transaction.success.details.label.destination.address')}</TableViewTitle>
 
             <TableViewBody>
               <TableViewNote>{to}</TableViewNote>
             </TableViewBody>
+
             {destinationTag ? (
               <Fragment>
                 <HorizontalSeparator margin="sp02 0" />
+
                 <TableViewTitle>{t('transaction.success.details.label.destination.tag')}</TableViewTitle>
 
                 <TableViewBody>
@@ -75,10 +81,12 @@ export const Success = ({ transactionData, onFinish }) => {
             ) : null}
           </TableBox>
         </Content>
+
         <SectionStickyFooter>
           <Button marginBottom="sp02" onPress={() => window.open(getTransactionLink(network, hash), '_blank')}>
             {t('actions.view.transaction')}
           </Button>
+
           <Button buttonType="secondary" marginBottom="sp01" onPress={onFinish}>
             {t('actions.end.session')}
           </Button>
@@ -90,5 +98,5 @@ export const Success = ({ transactionData, onFinish }) => {
 
 Success.propTypes = {
   onFinish: PropTypes.func.isRequired,
-  transactionData: CustomPropTypes.Transaction.isRequired,
+  transactionData: CustomPropTypes.Transaction.isRequired
 };

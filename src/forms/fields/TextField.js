@@ -45,14 +45,14 @@ const BaseTextField = forwardRef(
       return props.maxLength - (props?.value.length || 0);
     }, [defaultMessage, isCounterVisible, isFocused, props?.maxLength, props?.value]);
 
-    const onBlur = (event) => {
+    const onBlur = event => {
       event.stopPropagation();
       setIsFocused(false);
 
       props.onBlur(event);
     };
 
-    const onFocus = (event) => {
+    const onFocus = event => {
       event.stopPropagation();
       setIsFocused(true);
 
@@ -112,7 +112,7 @@ BaseTextField.defaultProps = {
   onFocus: () => {},
   options: {},
   type: 'text',
-  value: '',
+  value: ''
 };
 
 BaseTextField.displayName = 'forwardRef(BaseTextField)';
@@ -135,7 +135,7 @@ BaseTextField.propTypes = {
   onFocus: PropTypes.func,
   options: PropTypes.object,
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.string
 };
 
 export const TextField = ({ control, defaultValue, name, shouldUnregister, ...props }) => (
@@ -151,12 +151,12 @@ export const TextField = ({ control, defaultValue, name, shouldUnregister, ...pr
 TextField.defaultProps = {
   control: {},
   defaultValue: '',
-  shouldUnregister: true,
+  shouldUnregister: true
 };
 
 TextField.propTypes = {
   control: PropTypes.object,
   defaultValue: PropTypes.any,
   name: PropTypes.string.isRequired,
-  shouldUnregister: PropTypes.bool,
+  shouldUnregister: PropTypes.bool
 };

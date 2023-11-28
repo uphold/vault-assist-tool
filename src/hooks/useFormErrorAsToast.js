@@ -2,7 +2,7 @@ import { Children, useEffect } from 'react';
 import { Toaster } from '../components/Toaster';
 import isEmpty from 'lodash/isEmpty';
 
-export const useFormErrorAsToast = (props) => {
+export const useFormErrorAsToast = props => {
   const { children, error } = props;
 
   console.log(props);
@@ -14,8 +14,8 @@ export const useFormErrorAsToast = (props) => {
     const childrenArr = Children.toArray(children);
 
     const child =
-      childrenArr.find((child) => [error.code, error.type].includes(child.props.type)) ||
-      childrenArr.find((child) => typeof child.props.type === 'undefined');
+      childrenArr.find(child => [error.code, error.type].includes(child.props.type)) ||
+      childrenArr.find(child => typeof child.props.type === 'undefined');
 
     if (!child) {
       return;

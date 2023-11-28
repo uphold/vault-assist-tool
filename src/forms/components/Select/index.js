@@ -50,12 +50,12 @@ export const Select = forwardRef((props, ref) => {
 
 Select.defaultProps = {
   disabled: false,
-  value: {},
+  value: {}
 };
 
 Select.displayName = 'forwardRef(Select)';
 
 Select.propTypes = {
   disabled: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };

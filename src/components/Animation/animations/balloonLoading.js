@@ -1,39 +1,37 @@
-/* eslint-disable id-length, sort-keys */
+/* eslint-disable id-length, sort-keys, sort-keys-fix/sort-keys-fix, prettier/prettier */
 export const balloonLoading = {
-  v: '5.4.1',
-  fr: 29.9700012207031,
-  ip: 0,
-  op: 69.0000028104276,
-  w: 96,
-  h: 96,
-  nm: 'Logo_Main',
-  ddd: 0,
   assets: [],
+  ddd: 0,
+  fr: 29.9700012207031,
+  h: 96,
+  ip: 0,
   layers: [
     {
       ddd: 0,
-      ind: 1,
-      ty: 4,
-      nm: 'uphold logo strokes-01 Outlines',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 1,
+      ip: 0,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: 0, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'uphold logo strokes-01 Outlines',
+      op: 69.0000028104276,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -115,81 +113,81 @@ export const balloonLoading = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [0.286274509804, 0.8, 0.407843137255, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [47.952, 40.879], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'gr',
           it: [
             {
-              ty: 'st',
               c: { a: 0, k: [0.286274509804, 0.8, 0.407843137255, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 1,
               ml: 10,
-              ml2: { a: 0, k: 10, ix: 8 },
-              nm: 'Stroke 1',
+              ml2: { a: 0, ix: 8, k: 10 },
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [47.951, 89.6], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 2',
-          np: 1,
+          ty: 'gr',
           cix: 2,
           ix: 2,
-          mn: 'ADBE Vector Group',
+          np: 1,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.833], y: [0.833] },
@@ -219,10 +217,10 @@ export const balloonLoading = {
               { i: { x: [0.667], y: [1] }, o: { x: [0.167], y: [0] }, n: ['0p667_1_0p167_0'], t: 30, s: [0], e: [0] },
               { t: 60.0000024438501 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.667], y: [1] },
@@ -235,45 +233,45 @@ export const balloonLoading = {
               { i: { x: [0.667], y: [1] }, o: { x: [0.333], y: [0] }, n: ['0p667_1_0p333_0'], t: 30, s: [100], e: [0] },
               { t: 60.0000024438501 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 3,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 0,
-      op: 69.0000028104276,
-      st: 0,
-      bm: 0,
+      sr: 1,
+      st: 0
     },
     {
       ddd: 0,
-      ind: 2,
-      ty: 4,
-      nm: 'Uphold_Down Outlines',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 2,
+      ip: 0,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: 0, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'Uphold_Down Outlines',
+      op: 69.0000028104276,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -295,48 +293,48 @@ export const balloonLoading = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [0.286274509804, 0.8, 0.407843137255, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 1,
               ml: 10,
-              ml2: { a: 0, k: 10, ix: 8 },
-              nm: 'Stroke 1',
+              ml2: { a: 0, ix: 8, k: 10 },
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [47.951, 89.6], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.833], y: [0.833] },
@@ -356,10 +354,10 @@ export const balloonLoading = {
               },
               { t: 66.0000026882351 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [0.833] },
@@ -379,21 +377,23 @@ export const balloonLoading = {
               },
               { t: 62.0000025253118 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 0,
-      op: 69.0000028104276,
-      st: 0,
-      bm: 0,
-    },
+      sr: 1,
+      st: 0
+    }
   ],
   markers: [],
+  nm: 'Logo_Main',
+  op: 69.0000028104276,
+  v: '5.4.1',
+  w: 96
 };

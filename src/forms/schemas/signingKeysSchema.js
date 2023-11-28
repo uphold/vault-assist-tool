@@ -11,7 +11,7 @@ export const signingKeysSchema = (network, signers) =>
       .test(
         'validation',
         I18n.t('withdraw.xrp.confirm.fields.backup.key.errors.invalid'),
-        (val) => isValidMnemonic(val) && isKeySigner(network, val, signers)
+        val => isValidMnemonic(val) && isKeySigner(network, val, signers)
       ),
     vaultKey: yup
       .string()
@@ -19,6 +19,6 @@ export const signingKeysSchema = (network, signers) =>
       .test(
         'validation',
         I18n.t('withdraw.xrp.confirm.fields.vault.key.errors.invalid'),
-        (val) => isValidMnemonic(val) && isKeySigner(network, val, signers)
-      ),
+        val => isValidMnemonic(val) && isKeySigner(network, val, signers)
+      )
   });

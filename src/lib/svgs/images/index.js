@@ -21,15 +21,15 @@ export default {
   actionSuccess,
   error: {
     dark: errorDark,
-    light: error,
+    light: error
   },
   success,
   successOutline,
   uphold: {
     dark: upholdDark,
-    light: uphold,
+    light: uphold
   },
   vault,
   warning,
-  warningCircular,
+  warningCircular
 };

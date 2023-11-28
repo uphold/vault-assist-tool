@@ -20,7 +20,7 @@ export const ButtonContent = ({
   size,
   testID,
   trailingIcon,
-  type,
+  type
 }) => {
   const animatedColor = useDerivedValue(
     () => withTiming(isHovered.value && hoverColor ? hoverColor : color, AnimationConfig),
@@ -29,7 +29,7 @@ export const ButtonContent = ({
 
   const animatedStyle = useAnimatedStyle(
     () => ({
-      color: animatedColor.value,
+      color: animatedColor.value
     }),
     []
   );
@@ -89,7 +89,7 @@ ButtonContent.defaultProps = {
   size: undefined,
   testID: undefined,
   trailingIcon: undefined,
-  type: undefined,
+  type: undefined
 };
 
 ButtonContent.propTypes = {
@@ -103,5 +103,5 @@ ButtonContent.propTypes = {
   size: PropTypes.oneOf(Object.values(ButtonSize)),
   testID: PropTypes.string,
   trailingIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  type: PropTypes.oneOf(Object.values(ButtonType)),
+  type: PropTypes.oneOf(Object.values(ButtonType))
 };

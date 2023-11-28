@@ -33,6 +33,7 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
         title={t('withdraw.xrp.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingTop="12px">
           <Header alignItems="center">
@@ -40,26 +41,30 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
               <Semibold>{t('withdraw.xrp.conditions.title')}</Semibold>
             </H4>
           </Header>
+
           <OrderedList paddingHorizontal="sp03">
             <OrderedListItem number={1}>
               <Semibold>{t('withdraw.xrp.conditions.funds.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.funds.text', {
                 remainingBalance: <Semibold>({formatNumber(remainingBalance, 2)} XRP)</Semibold>,
-                totalReserve: <Semibold>({formatNumber(totalReserve)} XRP)</Semibold>,
+                totalReserve: <Semibold>({formatNumber(totalReserve)} XRP)</Semibold>
               })}
             </OrderedListItem>
+
             <OrderedListItem number={2}>
               <Semibold>{t('withdraw.xrp.conditions.vault.deactivation.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.vault.deactivation.text')}
             </OrderedListItem>
+
             <OrderedListItem number={3}>
               <Semibold>{t('withdraw.xrp.conditions.network.costs.label')}</Semibold>{' '}
               {t('withdraw.xrp.conditions.network.costs.text', {
-                ownerReserve: formatNumber(ownerReserve, 0, 0),
+                ownerReserve: formatNumber(ownerReserve, 0, 0)
               })}
             </OrderedListItem>
           </OrderedList>
         </Content>
+
         <SectionStickyFooter>
           <Button onPress={() => onContinueWithdraw(accountData)}>{t('actions.continue')}</Button>
         </SectionStickyFooter>
@@ -73,12 +78,12 @@ Root.defaultProps = {
     reserve: {
       baseReserve: 0,
       ownerReserve: 0,
-      totalReserve: 0,
-    },
-  },
+      totalReserve: 0
+    }
+  }
 };
 
 Root.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onContinueWithdraw: PropTypes.func.isRequired,
+  onContinueWithdraw: PropTypes.func.isRequired
 };

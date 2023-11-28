@@ -5,5 +5,5 @@ export default {
   rd04: 16,
   rd05: 30,
   rd06: 32,
-  rd07: 40,
+  rd07: 40
 };

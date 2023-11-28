@@ -85,25 +85,25 @@ export const ActionToast = ({ action, description, icon, id, secondaryAction, ti
 
 ActionToast.defaultProps = {
   icon: undefined,
-  secondaryAction: undefined,
+  secondaryAction: undefined
 };
 
 ActionToast.propTypes = {
   action: PropTypes.shape({
     action: PropTypes.func,
     label: PropTypes.string,
-    shouldDismissToast: PropTypes.bool,
+    shouldDismissToast: PropTypes.bool
   }).isRequired,
   description: PropTypes.string.isRequired,
   icon: PropTypes.shape({
     color: PropTypes.string,
-    name: PropTypes.string,
+    name: PropTypes.string
   }),
   id: PropTypes.string.isRequired,
   secondaryAction: PropTypes.shape({
     action: PropTypes.func,
     label: PropTypes.string,
-    shouldDismissToast: PropTypes.bool,
+    shouldDismissToast: PropTypes.bool
   }),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };

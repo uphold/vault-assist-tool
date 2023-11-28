@@ -1,38 +1,28 @@
 {
-  "extends": "stylelint-config-standard",
+  "customSyntax": "postcss-styled-syntax",
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-styled-components", "stylelint-config-prettier"],
   "plugins": [
     "stylelint-order"
   ],
   "rules": {
-    "at-rule-no-vendor-prefix": true,
-    "color-named": "never",
-    "comment-word-blacklist": [
-      "/TODO/"
+    "block-no-empty": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "declaration-colon-newline-after": null,
+    "function-url-quotes": null,
+    "function-name-case": null,
+    "keyframes-name-pattern": null,
+    "length-zero-no-unit": null,
+    "property-no-unknown": [
+      true,
+      { ignoreProperties: ["shadow-color", "shadow-offset", "shadow-opacity", "shadow-radius", "-styled-mixin"] }
     ],
-    "custom-property-pattern": "^([a-z]+[-]{0,1})+$",
-    "declaration-no-important": true,
-    "declaration-property-unit-blacklist": {
-      "font-size": ["px"]
-    },
-    "declaration-property-value-blacklist": {
-      "position": ["fixed"]
-    },
-    "font-family-name-quotes": "always-unless-keyword",
-    "font-weight-notation": "numeric",
-    "function-url-quotes": "always",
-    "media-feature-name-no-vendor-prefix": true,
-    "property-no-unknown": [true, { ignoreProperties: ["composes"] }],
-    "property-no-vendor-prefix": true,
-    "order/properties-order": [["composes"], { unspecified: "bottomAlphabetical" }],
-    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-    "selector-max-compound-selectors": 3,
-    "selector-max-specificity": "0,2,0",
-    "string-quotes": "double",
-    "selector-max-attribute": 0,
-    "selector-max-id": 0,
-    "selector-no-qualifying-type": true,
-    "selector-max-universal": 1,
-    "selector-no-vendor-prefix": true,
-    "value-no-vendor-prefix": true
+    "selector-class-pattern": null,
+    "selector-no-vendor-prefix": null,
+    "value-keyword-case": null,
+    "order/properties-alphabetical-order": true,
+    "scss/at-function-pattern": null,
+    "scss/dollar-variable-pattern": null,
+    "scss/operator-no-unspaced": null,
+    "scss/percent-placeholder-pattern": null
   }
 }

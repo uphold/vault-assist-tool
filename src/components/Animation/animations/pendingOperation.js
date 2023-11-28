@@ -1,39 +1,37 @@
-/* eslint-disable id-length, sort-keys */
+/* eslint-disable id-length, sort-keys, sort-keys-fix/sort-keys-fix, prettier/prettier */
 export const pendingOperation = {
-  v: '5.4.1',
-  fr: 29.9700012207031,
-  ip: 126.000005132085,
-  op: 200.000008146167,
-  w: 96,
-  h: 96,
-  nm: 'Processing_Main',
-  ddd: 0,
   assets: [],
+  ddd: 0,
+  fr: 29.9700012207031,
+  h: 96,
+  ip: 126.000005132085,
   layers: [
     {
       ddd: 0,
-      ind: 1,
-      ty: 4,
-      nm: 'Processing_Symbol ',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 1,
+      ip: 129.000005254278,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: 0, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'Processing_Symbol ',
+      op: 200.000008146167,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -61,46 +59,46 @@ export const pendingOperation = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.854902020623, 0.278430983599, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [64.54, 37.711], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.606], y: [1] },
@@ -112,10 +110,10 @@ export const pendingOperation = {
               },
               { t: 150.000006109625 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [1] },
@@ -143,45 +141,45 @@ export const pendingOperation = {
               },
               { t: 152.000006191087 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 129.000005254278,
-      op: 200.000008146167,
-      st: 3.00000012219251,
-      bm: 0,
+      sr: 1,
+      st: 3.00000012219251
     },
     {
       ddd: 0,
-      ind: 2,
-      ty: 4,
-      nm: 'Processing_Symbol 2',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 2,
+      ip: 126.000005132085,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: 0, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'Processing_Symbol 2',
+      op: 200.000008146167,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 1,
+                ix: 2,
                 k: [
                   {
                     i: { x: 0.833, y: 0.833 },
@@ -359,46 +357,46 @@ export const pendingOperation = {
                   },
                   { t: 174.000007087165 },
                 ],
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.854902020623, 0.278430983599, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [25.362, 42.012], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.528], y: [1] },
@@ -418,10 +416,10 @@ export const pendingOperation = {
               },
               { t: 168.00000684278 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [0.833] },
@@ -489,45 +487,45 @@ export const pendingOperation = {
               },
               { t: 174.000007087165 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 126.000005132085,
-      op: 200.000008146167,
-      st: 0,
-      bm: 0,
+      sr: 1,
+      st: 0
     },
     {
       ddd: 0,
-      ind: 3,
-      ty: 4,
-      nm: 'Processing_Circle',
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: -176, ix: 10 },
-        p: { a: 0, k: [48, 48, 0], ix: 2 },
-        a: { a: 0, k: [48, 48, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 },
-      },
       ao: 0,
+      ind: 3,
+      ip: 126.000005132085,
+      ks: {
+        o: { a: 0, ix: 11, k: 100 },
+        p: { a: 0, k: [48, 48, 0], ix: 2 },
+        r: { a: 0, k: -176, ix: 10 },
+        a: { a: 0, ix: 1, k: [48, 48, 0] },
+        s: { a: 0, ix: 6, k: [100, 100, 100] }
+      },
+      nm: 'Processing_Circle',
+      op: 200.000008146167,
+      bm: 0,
+      ty: 4,
       shapes: [
         {
-          ty: 'gr',
           it: [
             {
               ind: 0,
-              ty: 'sh',
               ix: 1,
+              ty: 'sh',
               ks: {
                 a: 0,
+                ix: 2,
                 k: {
                   i: [
                     [0, 0],
@@ -567,46 +565,46 @@ export const pendingOperation = {
                   ],
                   c: false,
                 },
-                ix: 2,
               },
-              nm: 'Path 1',
               mn: 'ADBE Vector Shape - Group',
-              hd: false,
+              nm: 'Path 1',
+              hd: false
             },
             {
-              ty: 'st',
               c: { a: 0, k: [1, 0.854902020623, 0.278430983599, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
+              ty: 'st',
+              o: { a: 0, ix: 4, k: 100 },
               lc: 2,
+              w: { a: 0, k: 6, ix: 5 },
               lj: 2,
-              nm: 'Stroke 1',
               mn: 'ADBE Vector Graphic - Stroke',
-              hd: false,
+              nm: 'Stroke 1',
+              hd: false
             },
             {
-              ty: 'tr',
               p: { a: 0, k: [48, 48.859], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
+              ty: 'tr',
+              a: { a: 0, ix: 1, k: [0, 0] },
               r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 4 },
+              s: { a: 0, k: [100, 100], ix: 3 },
+              o: { a: 0, ix: 7, k: 100 },
               sa: { a: 0, k: 0, ix: 5 },
-              nm: 'Transform',
-            },
+              sk: { a: 0, k: 0, ix: 4 },
+              nm: 'Transform'
+            }
           ],
           nm: 'Group 1',
-          np: 2,
+          ty: 'gr',
           cix: 2,
           ix: 1,
-          mn: 'ADBE Vector Group',
+          np: 2,
           hd: false,
+          mn: 'ADBE Vector Group'
         },
         {
-          ty: 'tm',
           s: {
             a: 1,
+            ix: 1,
             k: [
               {
                 i: { x: [0.501], y: [1] },
@@ -618,10 +616,10 @@ export const pendingOperation = {
               },
               { t: 144.00000586524 },
             ],
-            ix: 1,
           },
           e: {
             a: 1,
+            ix: 2,
             k: [
               {
                 i: { x: [0.833], y: [1] },
@@ -633,21 +631,23 @@ export const pendingOperation = {
               },
               { t: 144.00000586524 },
             ],
-            ix: 2,
           },
-          o: { a: 0, k: 0, ix: 3 },
+          ty: 'tm',
           m: 1,
           ix: 2,
-          nm: 'Trim Paths 1',
+          o: { a: 0, k: 0, ix: 3 },
           mn: 'ADBE Vector Filter - Trim',
           hd: false,
-        },
+          nm: 'Trim Paths 1'
+        }
       ],
-      ip: 126.000005132085,
-      op: 200.000008146167,
-      st: 0,
-      bm: 0,
-    },
+      sr: 1,
+      st: 0
+    }
   ],
   markers: [],
+  nm: 'Processing_Main',
+  op: 200.000008146167,
+  v: '5.4.1',
+  w: 96
 };

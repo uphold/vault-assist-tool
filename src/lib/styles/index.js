@@ -15,7 +15,7 @@ export const styles = {
   radii,
   reset,
   sizes,
-  spacings,
+  spacings
 };
 
 export { Utils, base, reset, colors, fonts, fontsByWeight, radii, sizes, spacings };

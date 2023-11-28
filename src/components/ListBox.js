@@ -7,14 +7,14 @@ import { styles } from '../lib/styles';
 import PropTypes from 'prop-types';
 
 const variants = {
-  box: (isSelected) => ({
+  box: isSelected => ({
     borderColor: isSelected ? styles.colors.p06 : styles.colors.n06,
-    color: isSelected ? styles.colors.n01 : styles.colors.n06,
+    color: isSelected ? styles.colors.n01 : styles.colors.n06
   }),
-  hover: (isSelected) =>
+  hover: isSelected =>
     !isSelected && {
-      boxShadow: '0 8px 16px var(--shadowColor)',
-    },
+      boxShadow: '0 8px 16px var(--shadowColor)'
+    }
 };
 
 export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, subtitle, title, ...props }, ref) =>
@@ -38,7 +38,7 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
       paddingTop={item === selectedItem ? 19 : 18}
       ref={ref}
       transition={{
-        box: { duration: 0.3, ease: 'easeIn' },
+        box: { duration: 0.3, ease: 'easeIn' }
       }}
       variants={variants}
       whileHover="hover"
@@ -67,7 +67,7 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
           color="n05"
           dangerouslySetInnerHTML={{ __html: subtitle(item) }}
           marginTop="sp01"
-          onClick={(event) => event.target.tagName.toLowerCase() === 'a' && event.stopPropagation()}
+          onClick={event => event.target.tagName.toLowerCase() === 'a' && event.stopPropagation()}
           textAlign="left"
         />
       )}
@@ -79,7 +79,7 @@ ListBox.defaultProps = {
   isDisabled: undefined,
   items: [],
   selectedItem: undefined,
-  subtitle: undefined,
+  subtitle: undefined
 };
 
 ListBox.displayName = 'forwardRef(ListBox)';
@@ -90,5 +90,5 @@ ListBox.propTypes = {
   onSelect: PropTypes.func.isRequired,
   selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   subtitle: PropTypes.func,
-  title: PropTypes.func.isRequired,
+  title: PropTypes.func.isRequired
 };

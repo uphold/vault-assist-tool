@@ -15,5 +15,5 @@ const containsDetails = (address, balance, reserve, currency) => {
 
 export default {
   checkAccessDetails,
-  containsDetails,
+  containsDetails
 };

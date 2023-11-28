@@ -46,7 +46,7 @@ export const Alert = ({ children, onClick, tooltip, variant, ...props }) => {
       trigger: 'mouseenter',
       triggerTarget: wrapperRef.current,
       zIndex: 1000,
-      ...props,
+      ...props
     });
 
     return () => {
@@ -72,6 +72,7 @@ export const Alert = ({ children, onClick, tooltip, variant, ...props }) => {
       {...props}
     >
       <AlertIcon ref={iconRef} variant={variant} />
+
       <Small data-test="alertMessage" flex={1} marginLeft="sp03" marginTop={2} textAlign="left">
         {children}
       </Small>
@@ -86,12 +87,12 @@ export const Alert = ({ children, onClick, tooltip, variant, ...props }) => {
 Alert.defaultProps = {
   onClick: undefined,
   tooltip: '',
-  variant: 'info',
+  variant: 'info'
 };
 
 Alert.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   tooltip: PropTypes.string,
-  variant: PropTypes.oneOf(Object.values(variants)),
+  variant: PropTypes.oneOf(Object.values(variants))
 };

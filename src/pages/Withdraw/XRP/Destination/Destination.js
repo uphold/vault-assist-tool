@@ -37,18 +37,18 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
 
   const form = useForm({
     mode: 'onChange',
-    resolver: yupResolver(destinationSchema(sourceAddress)),
+    resolver: yupResolver(destinationSchema(sourceAddress))
   });
 
   const { control, handleSubmit } = form;
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(data => {
     const { address, destinationTag } = data;
 
     onConfirmDestination({
       destinationTag: destinationTag.length ? destinationTag : undefined,
       fee: ownerReserve,
-      to: address,
+      to: address
     });
   }, toastErrors);
 
@@ -58,11 +58,13 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
         title={t('withdraw.xrp.navigation.title')}
       />
+
       <ScrollableSection>
         <Content paddingBottom="0" paddingTop="0">
           <Alert marginBottom="18px" variant="warning">
             {t('withdraw.xrp.destination.warning')}
           </Alert>
+
           <TextField
             control={control}
             data-test="address"
@@ -70,6 +72,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
             name="address"
             placeholder={t('withdraw.xrp.destination.fields.address.placeholder')}
           />
+
           <TextField
             control={control}
             data-test="destinationTag"
@@ -77,13 +80,16 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
             name="destinationTag"
             placeholder={t('withdraw.xrp.destination.fields.destination.tag.placeholder')}
           />
+
           <TableBox padding="sp01 sp03">
             <TableViewTitle>{t('withdraw.xrp.destination.label.withdraw.amount')}</TableViewTitle>
 
             <TableViewBody>
               <TableViewNote>{`${formatNumber(destinationAmount)} XRP`}</TableViewNote>
             </TableViewBody>
+
             <HorizontalSeparator margin="sp02 0" />
+
             <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
 
             <TableViewBody>
@@ -91,6 +97,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
             </TableViewBody>
           </TableBox>
         </Content>
+
         <SectionStickyFooter>
           <Button onPress={onSubmit}>{t('actions.submit')}</Button>
         </SectionStickyFooter>
@@ -104,12 +111,12 @@ Destination.defaultProps = {
     reserve: {
       baseReserve: 0,
       ownerReserve: 0,
-      totalReserve: 0,
-    },
-  },
+      totalReserve: 0
+    }
+  }
 };
 
 Destination.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
-  onConfirmDestination: PropTypes.func.isRequired,
+  onConfirmDestination: PropTypes.func.isRequired
 };

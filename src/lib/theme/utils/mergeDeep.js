@@ -4,9 +4,9 @@ export const mergeDeep = (obj1, obj2) => {
   const obj1Keys = Object.keys(obj1);
   const obj2Keys = Object.keys(obj2);
 
-  const repeatedKeys = obj1Keys.filter((key) => obj2Keys.includes(key));
+  const repeatedKeys = obj1Keys.filter(key => obj2Keys.includes(key));
 
-  repeatedKeys.forEach((key) => {
+  repeatedKeys.forEach(key => {
     const value1 = obj1[key];
     const value2 = obj2[key];
 

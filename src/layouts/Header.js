@@ -11,5 +11,5 @@ export const Header = styled(Mixed.div)`
 Header.defaultProps = {
   layoutMinHeight: '0',
   layoutMinWidth: '0',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };

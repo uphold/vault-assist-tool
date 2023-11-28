@@ -12,5 +12,5 @@ Box.defaultProps = {
   display: 'flex',
   flexDirection: 'column',
   layoutHeight: '100%',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };

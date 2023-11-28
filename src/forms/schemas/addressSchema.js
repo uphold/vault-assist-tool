@@ -3,7 +3,7 @@ import { getCurrency } from '../../lib/vault';
 import { isValidAddress } from '../validations/isValidAddress';
 import { yup } from '../index';
 
-export const addressSchema = (selectedNetwork) =>
+export const addressSchema = selectedNetwork =>
   yup.object().shape({
     address: yup
       .string()
@@ -11,6 +11,6 @@ export const addressSchema = (selectedNetwork) =>
       .test(
         'validation',
         I18n.t('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }),
-        (val) => isValidAddress(selectedNetwork, val)
-      ),
+        val => isValidAddress(selectedNetwork, val)
+      )
   });

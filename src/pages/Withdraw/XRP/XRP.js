@@ -28,7 +28,7 @@ export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, set
     const transaction = await createTransaction(blockchain, {
       ...destinationData,
       from: accountData.address,
-      transactionType: 'AccountDelete',
+      transactionType: 'AccountDelete'
     });
 
     const signedTransaction = multiSignTransaction(blockchain, transaction, [vaultKey, backupKey]);
@@ -36,7 +36,7 @@ export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, set
     onConfirmTransaction({ network: blockchain, transaction: signedTransaction });
   };
 
-  const onConfirmDestination = (destinationData) => {
+  const onConfirmDestination = destinationData => {
     setDestinationData(destinationData);
     history.push({ ...history.location, pathname: `${path}/confirm` });
   };
@@ -51,6 +51,7 @@ export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, set
         onContinueWithdraw={onContinueWithdraw}
         path={path}
       />
+
       <Route
         accountData={accountData}
         component={Destination}
@@ -59,6 +60,7 @@ export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, set
         onConfirmDestination={onConfirmDestination}
         path={`${path}/destination`}
       />
+
       <Route
         accountData={accountData}
         component={Confirm}
@@ -72,12 +74,12 @@ export const XRP = ({ accountData, onConfirmTransaction, pendingTransaction, set
 };
 
 XRP.defaultProps = {
-  pendingTransaction: false,
+  pendingTransaction: false
 };
 
 XRP.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
   onConfirmTransaction: PropTypes.func.isRequired,
   pendingTransaction: PropTypes.bool,
-  setIsGuarded: PropTypes.func.isRequired,
+  setIsGuarded: PropTypes.func.isRequired
 };

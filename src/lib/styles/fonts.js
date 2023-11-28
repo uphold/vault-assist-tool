@@ -4,22 +4,22 @@ export const fontsByWeight = {
     200: 'Metropolis-Extra-Light',
     300: 'Metropolis-Light',
     500: 'Metropolis-Regular',
-    700: 'Metropolis-Bold',
-  },
+    700: 'Metropolis-Bold'
+  }
 };
 
 export default {
   card: {
-    regular: 'OCRAStd',
+    regular: 'OCRAStd'
   },
   monospace: {
     bold: 'RobotoMono-Bold',
     regular: 'RobotoMono-Regular',
-    semibold: 'RobotoMono-Medium',
+    semibold: 'RobotoMono-Medium'
   },
   regular: {
     bold: 'Metropolis-Bold',
     regular: 'Metropolis-Light',
-    semibold: 'Metropolis-Regular',
-  },
+    semibold: 'Metropolis-Regular'
+  }
 };

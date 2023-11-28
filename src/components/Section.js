@@ -22,10 +22,10 @@ Section.defaultProps = {
   flexDirection: 'column',
   isLoading: false,
   layoutPosition: 'relative',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };
 
 Section.propTypes = {
   children: PropTypes.node,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool
 };

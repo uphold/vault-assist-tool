@@ -8,16 +8,16 @@ const blockchain = Blockchain.XRPL;
 // signer requirements for multisig vault
 const requirements = {
   signerEntries: 3,
-  signerQuorum: 2,
+  signerQuorum: 2
 };
 
 export const { signTransaction } = WalletService;
 
 const signer = (key, tx) => signTransaction(blockchain, key, tx, { multisig: true });
 
-export const multisigner = (tx, keys) => multisign(keys.map((key) => signer(key, tx)));
+export const multisigner = (tx, keys) => multisign(keys.map(key => signer(key, tx)));
 
-export const getBalance = async (address) => {
+export const getBalance = async address => {
   const { instance } = await getXrplProvider();
 
   return await instance.getXrpBalance(address);
@@ -29,7 +29,7 @@ const getServerInfo = async () => {
   return await instance.request({ command: 'server_info' });
 };
 
-const getAccountInfo = async (address) => {
+const getAccountInfo = async address => {
   const { instance } = await getXrplProvider();
 
   return await instance.request({ account: address, command: 'account_info', signer_lists: true });
@@ -40,34 +40,34 @@ export const getLedgerReserve = async () => {
   const {
     result: {
       info: {
-        validated_ledger: { reserve_base_xrp: baseReserve, reserve_inc_xrp: ownerReserve },
-      },
-    },
+        validated_ledger: { reserve_base_xrp: baseReserve, reserve_inc_xrp: ownerReserve }
+      }
+    }
   } = await getServerInfo();
 
   return { baseReserve, ownerReserve };
 };
 
-export const getAccountReserve = async (address) => {
+export const getAccountReserve = async address => {
   const { baseReserve, ownerReserve } = await getLedgerReserve();
 
   // number of account owners
   const {
     result: {
-      account_data: { OwnerCount: ownerCount },
-    },
+      account_data: { OwnerCount: ownerCount }
+    }
   } = await getAccountInfo(address);
 
   // total reserve xrp on this account
   return baseReserve + ownerCount * ownerReserve;
 };
 
-export const getAccountSigners = async (address) => {
+export const getAccountSigners = async address => {
   // get account signer list
   const {
     result: {
-      account_data: { signer_lists: signerLists },
-    },
+      account_data: { signer_lists: signerLists }
+    }
   } = await getAccountInfo(address);
 
   if (signerLists.length > 0) {
@@ -75,9 +75,9 @@ export const getAccountSigners = async (address) => {
 
     if (signerQuorum === requirements.signerQuorum && signerEntries.length === requirements.signerEntries) {
       // convert into array of addresses
-      return signerEntries.map((signerEntry) => {
+      return signerEntries.map(signerEntry => {
         const {
-          SignerEntry: { Account: account },
+          SignerEntry: { Account: account }
         } = signerEntry;
 
         return account;
@@ -92,7 +92,7 @@ export const buildTransaction = async ({
   fee,
   destinationTag,
   transactionType,
-  signerCounts = requirements.signerQuorum,
+  signerCounts = requirements.signerQuorum
 }) => {
   const { instance } = await getXrplProvider();
 
@@ -103,14 +103,14 @@ export const buildTransaction = async ({
         Destination: to,
         DestinationTag: destinationTag,
         Fee: xrpToDrops(fee),
-        TransactionType: transactionType,
+        TransactionType: transactionType
       },
       signerCounts
     )
   );
 };
 
-export const sendTransaction = async (transaction) => {
+export const sendTransaction = async transaction => {
   const { instance } = await getXrplProvider();
 
   const {
@@ -119,8 +119,8 @@ export const sendTransaction = async (transaction) => {
       Destination: to,
       DestinationTag: destinationTag,
       hash,
-      meta: { DeliveredAmount: amount },
-    },
+      meta: { DeliveredAmount: amount }
+    }
   } = await instance.submitAndWait(transaction);
 
   return { amount: dropsToXrp(amount), destinationTag, from, hash, network: blockchain, to };

@@ -3,48 +3,48 @@ import { transformSpace } from './transformers';
 
 export const flexDefinition = {
   alignContent: {
-    properties: ['alignContent'],
+    properties: ['alignContent']
   },
   alignItems: {
-    properties: ['alignItems'],
+    properties: ['alignItems']
   },
   alignSelf: {
-    properties: ['alignSelf'],
+    properties: ['alignSelf']
   },
   flex: {
-    properties: ['flex'],
+    properties: ['flex']
   },
   flexBasis: {
-    properties: ['flexBasis'],
+    properties: ['flexBasis']
   },
   flexDirection: {
-    properties: ['flexDirection'],
+    properties: ['flexDirection']
   },
   flexGrow: {
-    properties: ['flexGrow'],
+    properties: ['flexGrow']
   },
   flexShrink: {
-    properties: ['flexShrink'],
+    properties: ['flexShrink']
   },
   flexWrap: {
-    properties: ['flexWrap'],
+    properties: ['flexWrap']
   },
   gap: {
     properties: ['gap'],
-    transform: transformSpace(),
+    transform: transformSpace()
   },
   justifyContent: {
-    properties: ['justifyContent'],
+    properties: ['justifyContent']
   },
   justifyItems: {
-    properties: ['justifyItems'],
+    properties: ['justifyItems']
   },
   justifySelf: {
-    properties: ['justifySelf'],
+    properties: ['justifySelf']
   },
   order: {
-    properties: ['order'],
-  },
+    properties: ['order']
+  }
 };
 
 export const flex = createMixin(flexDefinition);

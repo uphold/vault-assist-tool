@@ -12,7 +12,7 @@ import {
   getHoverColor,
   getIconSize,
   getPadding,
-  propTypes,
+  propTypes
 } from './lib';
 import { ButtonContent } from './ButtonContent';
 import { Mixed } from '../Mixed';
@@ -46,7 +46,7 @@ export const Button = ({
 
   const borderWidth = isDisabled ? 2 : 1;
   const type = useMemo(
-    () => Object.values(ButtonType).find((type) => type === buttonType) ?? ButtonType.Primary,
+    () => Object.values(ButtonType).find(type => type === buttonType) ?? ButtonType.Primary,
     [buttonType]
   );
 
@@ -78,7 +78,7 @@ export const Button = ({
       borderColor: isFocused.value ? tokens.focus.default : withTiming(currentBorderColor, AnimationConfig),
       boxShadow: isFocused.value
         ? `0 0 0 1px ${tokens.focus.default}, inset 0 0 0 1px ${tokens.background.main}, inset 0 0 0 2px ${currentBorderColor}`
-        : 'none',
+        : 'none'
     };
   }, [background, borderColor, hasBorder, isDisabled, tokens]);
 

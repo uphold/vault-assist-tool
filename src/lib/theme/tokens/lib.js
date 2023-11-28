@@ -1,6 +1,6 @@
 import { get } from '../utils/get';
 
-export const isToken = (value) => typeof value === 'string' && value.startsWith('$');
+export const isToken = value => typeof value === 'string' && value.startsWith('$');
 
 export const getTokenValue = ({ tokens, value }, defaultUnit = 'px') => {
   // The value has a format like `$dimension-1`

@@ -14,13 +14,13 @@ const actionsWithdraw = I18n.t('actions.withdraw', { currency: defaultCrypto });
 const button = 'button-primary';
 const closeButton = 'close';
 
-const clickAction = (id) => {
+const clickAction = id => {
   return (index = 0) => {
     cy.findAllByTestId(id).eq(index).click();
   };
 };
 
-const clickActionByText = (text) => {
+const clickActionByText = text => {
   return (index = 0) => {
     cy.findAllByText(text).eq(index).click();
   };
@@ -52,15 +52,15 @@ Cypress.Commands.addAll({
   clickSubmit: clickActionByText(actionsSubmit),
   clickViewTransaction: clickActionByText(actionsViewTransaction),
   clickWithdraw: clickActionByText(actionsWithdraw),
-  visitPage,
+  visitPage
 });
 
 Cypress.Commands.add('checkSuccessAnimation', () => {
   cy.checkVisible('okAnimation');
 });
 
-Cypress.Commands.add('checkFieldValidated', (validationMessages) => {
-  validationMessages.forEach((message) => {
+Cypress.Commands.add('checkFieldValidated', validationMessages => {
+  validationMessages.forEach(message => {
     if (['lowercase', 'minLength', 'numberOrSpecialCharacter', 'uppercase'].includes(message)) {
       return cy.findByTestId(message).should('have.css', 'text-decoration-line', 'line-through');
     }

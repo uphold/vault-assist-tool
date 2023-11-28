@@ -18,14 +18,14 @@ const BaseTextAreaField = forwardRef(
     const isfocused = useMemo(() => (isFocused ? isFocused.toString() : undefined), [isFocused]);
     const isvalid = useMemo(() => (!invalid ? 'true' : undefined), [invalid]);
 
-    const onBlur = (event) => {
+    const onBlur = event => {
       event.stopPropagation();
       setIsFocused(false);
 
       props.onBlur(event);
     };
 
-    const onFocus = (event) => {
+    const onFocus = event => {
       event.stopPropagation();
       setIsFocused(true);
 
@@ -74,7 +74,7 @@ BaseTextAreaField.defaultProps = {
   onBlur: () => {},
   onFocus: () => {},
   placeholder: '',
-  type: 'textarea',
+  type: 'textarea'
 };
 
 BaseTextAreaField.displayName = 'forwardRef(BaseTextAreaField)';
@@ -91,7 +91,7 @@ BaseTextAreaField.propTypes = {
   message: PropTypes.node,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
-  type: PropTypes.string,
+  type: PropTypes.string
 };
 
 export const TextAreaField = ({ control, defaultValue, name, shouldUnregister, ...props }) => (
@@ -107,12 +107,12 @@ export const TextAreaField = ({ control, defaultValue, name, shouldUnregister, .
 TextAreaField.defaultProps = {
   control: {},
   defaultValue: '',
-  shouldUnregister: true,
+  shouldUnregister: true
 };
 
 TextAreaField.propTypes = {
   control: PropTypes.object,
   defaultValue: PropTypes.any,
   name: PropTypes.string.isRequired,
-  shouldUnregister: PropTypes.bool,
+  shouldUnregister: PropTypes.bool
 };

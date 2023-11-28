@@ -7,5 +7,5 @@ export const Error = styled(XSmall)`
 `;
 
 Error.defaultProps = {
-  padding: '4px 16px 12px',
+  padding: '4px 16px 12px'
 };
