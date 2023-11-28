@@ -4,7 +4,7 @@ import '@typehaus/metropolis';
 import 'fast-text-encoding';
 
 import { App } from './App';
-import { ThemeProvider } from './lib/theme/provider';
+import { ThemeProvider } from './lib/theme';
 import { base, reset } from './lib/styles';
 import { createGlobalStyle } from 'styled-components';
 import { createRoot } from 'react-dom/client';

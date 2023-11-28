@@ -1,24 +1,10 @@
-import { mergeDeep } from './utils/mergeDeep';
 import { styles } from '../styles';
-import { themes } from './themes';
 import ThemeBuilder from './ThemeBuilder';
-import allTokens from './tokens/tokens.json';
 
 export const ThemePreference = Object.freeze({
   Dark: 'dark',
-  Light: 'light',
+  Light: 'dark',
   System: 'system'
-});
-
-export const getTheme = name => ({
-  colors: themes[name],
-  name,
-  // Keep backwards compatibility
-  themeScheme: {
-    colors: themes[name],
-    name
-  },
-  tokens: mergeDeep(allTokens.global, allTokens[name])
 });
 
 const defaultTypography = {
@@ -27,7 +13,7 @@ const defaultTypography = {
   fontWeight: 'light'
 };
 
-export const theme = themeName =>
+export const getTheme = themeName =>
   new ThemeBuilder()
     .setTheme(themeName)
     .setElement('alert', {
@@ -259,4 +245,50 @@ export const theme = themeName =>
     .setElement('tradeInputAsset', { assetIconSize: 24, color: 'n06', dropdownIconSize: 24, placeholderColor: 'n04' })
     .setElement('xsmall', { ...defaultTypography, fontSize: '12px', letterSpacing: '0.4px', lineHeight: '16px' })
     .setElement('xxsmall', { ...defaultTypography, fontSize: '8px', letterSpacing: '2px', lineHeight: '10px' })
+    .setElement('checkbox', {
+      color: 'n06',
+      fontFamily: 'Metropolis',
+      fontSize: '14px',
+      letterSpacing: '0.4px',
+      lineHeight: '20px'
+    })
+    .setElement('checkbox', { status: 'disable' }, { color: 'n04' })
+    .setElement('error', {
+      color: 'e06'
+    })
+    .setElement('input', {
+      '-webkit-text-fill-color': 'n06 !important',
+      backgroundColor: 'transparent',
+      borderColor: 'n04',
+      borderRadius: '8px',
+      borderStyle: 'solid',
+      borderWidth: '2px',
+      color: 'n06',
+      fontFamily: 'Metropolis',
+      fontSize: '16px',
+      letterSpacing: '0.2px',
+      lineHeight: '30px'
+    })
+    .setElement('input', { status: 'disable' }, { backgroundColor: 'n02', color: 'n04' })
+    .setElement('input', { status: 'focus' }, { borderColor: 'n06' })
+    .setElement('input', { status: 'hover' }, { borderColor: 'n06' })
+    .setElement('input', { variant: 'error' }, { borderColor: 'e06' })
+    .setElement('input', { variant: 'secondary' }, { backgroundColor: 'n02', borderWidth: 0 })
+    .setElement('input', { status: 'hover', variant: 'secondary' }, { backgroundColor: 'n03', borderWidth: 0 })
+    .setElement(
+      'input',
+      { status: 'disable', variant: 'error' },
+      { backgroundColor: 'n02', borderColor: 'e06', color: 'n04' }
+    )
+    .setElement('label', { color: 'n06' })
+    .setElement('label', { status: 'disable' }, { color: 'n05' })
+    .setElement('label', { status: 'focus' }, { color: 'n06' })
+    .setElement('label', { variant: 'error' }, { color: 'e06' })
+    .setElement('placeholder', { color: 'n045' })
+    .setElement('placeholder', { variant: 'secondary' }, { color: 'n045' })
+    .setElement('select', { backgroundColor: 'transparent', color: 'n06' })
+    .setElement('select', { status: 'disable' }, { backgroundColor: 'n02', color: 'n04' })
     .getTheme();
+
+// Forced dark theme
+export const theme = getTheme('dark');
