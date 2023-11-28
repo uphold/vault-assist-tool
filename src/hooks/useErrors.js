@@ -56,7 +56,7 @@ export const useErrors = (
         return;
       }
 
-      if (!Object.keys(errorsRef.current).some((field) => field in previousRef.current) && showGenericError) {
+      if (!Object.keys(errorsRef.current).some(field => field in previousRef.current) && showGenericError) {
         Toaster.showError(I18n.t('messages.error.default'));
 
         return;

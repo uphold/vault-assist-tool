@@ -5,20 +5,20 @@ import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplPro
 
 const defaultBlockchain = Blockchain.XRPL;
 
-const createWallets = (numberOfWallets) => {
+const createWallets = numberOfWallets => {
   return [...Array(numberOfWallets)].map(() => {
     return WalletService.createWalletMinimal();
   });
 };
 
-const parseWallet = (wallet) => ({ address: getAddress(defaultBlockchain, wallet.mnemonic), key: wallet.mnemonic });
+const parseWallet = wallet => ({ address: getAddress(defaultBlockchain, wallet.mnemonic), key: wallet.mnemonic });
 
-const buildSignerListEntries = (signerList) =>
+const buildSignerListEntries = signerList =>
   signerList.map(({ address }) => ({
     SignerEntry: {
       Account: address,
-      SignerWeight: 1,
-    },
+      SignerWeight: 1
+    }
   }));
 
 const createVaultTestWallets = async () => {
@@ -29,14 +29,14 @@ const createVaultTestWallets = async () => {
   const vaultWallet = faucet.wallet;
   const vaultAddress = vaultWallet.address;
 
-  const signerWallets = createWallets(3).map((wallet) => parseWallet(wallet));
+  const signerWallets = createWallets(3).map(wallet => parseWallet(wallet));
   const signerListEntries = buildSignerListEntries(signerWallets);
 
   const transaction = {
     Account: vaultAddress,
     SignerEntries: signerListEntries,
     SignerQuorum: 2,
-    TransactionType: 'SignerListSet',
+    TransactionType: 'SignerListSet'
   };
 
   await instance.submitAndWait(transaction, { autofill: true, wallet: vaultWallet });
@@ -52,10 +52,10 @@ const createVaultTestWallets = async () => {
     signerWallets,
     vaultAddress,
     vaultBalance: await getBalance(vaultAddress),
-    vaultReserve: await getAccountReserve(vaultAddress),
+    vaultReserve: await getAccountReserve(vaultAddress)
   };
 };
 
 export default {
-  createVaultTestWallets,
+  createVaultTestWallets
 };

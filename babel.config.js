@@ -1,4 +1,4 @@
-module.exports = (api) => {
+module.exports = api => {
   const isDevelopment = api.env('development');
 
   api.cache(false);
@@ -7,7 +7,7 @@ module.exports = (api) => {
     ['babel-plugin-styled-components', { ssr: false }],
     '@babel/plugin-proposal-export-default-from',
     'react-native-web',
-    'react-native-reanimated/plugin',
+    'react-native-reanimated/plugin'
   ];
 
   if (isDevelopment) {
@@ -20,10 +20,10 @@ module.exports = (api) => {
       {
         corejs: 3,
         exclude: ['transform-typeof-symbol'],
-        useBuiltIns: 'entry',
-      },
+        useBuiltIns: 'entry'
+      }
     ],
-    ['@babel/preset-react', { runtime: 'automatic', useBuiltIns: true }],
+    ['@babel/preset-react', { runtime: 'automatic', useBuiltIns: true }]
   ];
 
   return { plugins, presets };

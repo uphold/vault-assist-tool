@@ -9,22 +9,22 @@ const checkAccess = () => {
   cy.location('pathname').should('be.equal', routes.access);
 };
 
-const setAddress = (from) => {
+const setAddress = from => {
   cy.typeAndCheck(addressId, from);
 };
 
-const selectNetwork = (value) => {
+const selectNetwork = value => {
   cy.findAndClick(networkId);
   cy.get(dynamicFormPortalId).within(() => {
     cy.findAllByText(value).eq(0).click();
   });
 };
 
-const checkInvalid = (currency) => {
+const checkInvalid = currency => {
   cy.checkVisibleAndContains('errorToast', I18n.t('access.fields.address.errors.invalid', { currency }));
 };
 
-const checkRequired = (currency) => {
+const checkRequired = currency => {
   cy.checkVisibleAndContains('errorToast', I18n.t('access.fields.address.errors.required', { currency }));
 };
 
@@ -33,5 +33,5 @@ export default {
   checkInvalid,
   checkRequired,
   selectNetwork,
-  setAddress,
+  setAddress
 };

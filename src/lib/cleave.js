@@ -1,6 +1,6 @@
 import Cleave from 'cleave.js';
 
-export const getNumeralFormatter = (options) =>
+export const getNumeralFormatter = options =>
   //  Reference: https://github.com/nosir/cleave.js/blob/master/src/shortcuts/NumeralFormatter.js
   new Cleave.NumeralFormatter(
     options.numeralDecimalMark,

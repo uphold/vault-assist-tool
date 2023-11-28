@@ -5,7 +5,7 @@ export const SectionStickyFooter = ({ children, marginTop, ...props }) => {
   const defaultProps = {
     backgroundColor: 'n01',
     padding: 'sp03 sp03',
-    ...props,
+    ...props
   };
 
   return (
@@ -16,10 +16,10 @@ export const SectionStickyFooter = ({ children, marginTop, ...props }) => {
 };
 
 SectionStickyFooter.defaultProps = {
-  marginTop: 'auto',
+  marginTop: 'auto'
 };
 
 SectionStickyFooter.propTypes = {
   children: PropTypes.node.isRequired,
-  marginTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  marginTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };

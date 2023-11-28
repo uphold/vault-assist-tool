@@ -5,5 +5,5 @@ const checkTransactionFailure = () => {
 };
 
 export default {
-  checkTransactionFailure,
+  checkTransactionFailure
 };

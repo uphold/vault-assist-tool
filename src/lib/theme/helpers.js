@@ -18,11 +18,11 @@ export const getElement = (theme, name, variant, status) => {
     ...getElementStyle(theme, name),
     ...getElementStyle(theme, name, variant),
     ...getElementStyle(theme, name, variant, status),
-    status: undefined,
+    status: undefined
   };
 };
 
-export const element = (name) => (callback) => (props) =>
+export const element = name => callback => props =>
   callback(getElement(props.theme, name, props.variant, props.status), props);
 
 /**
@@ -36,7 +36,7 @@ export const getBorder = (theme, name, variant, status) => {
     borderColor,
     borderRadius,
     borderStyle,
-    borderWidth,
+    borderWidth
   };
 
   if (styles.colors[borderColor]) {
@@ -58,7 +58,7 @@ export const getBorderMixins = (...args) => {
   return mixins;
 };
 
-export const border = (name) => (props) =>
+export const border = name => props =>
   omit(getBorder(props.theme, name, props.variant, props.status), ['borderColorCode']);
 
 /**
@@ -100,7 +100,7 @@ export const getColorMixins = (...args) => {
   return mixins;
 };
 
-export const color = (name) => (props) =>
+export const color = name => props =>
   omit(getColor(props.theme, name, props.variant, props.status), ['backgroundColorCode', 'colorCode']);
 
 /**
@@ -115,7 +115,7 @@ export const getPosition = (theme, name, variant, status) => {
     left,
     position,
     right,
-    top,
+    top
   };
 };
 
@@ -125,7 +125,7 @@ export const getPositionMixins = (...args) => {
     left: layoutLeft,
     position: layoutPosition,
     right: layoutRight,
-    top: layoutTop,
+    top: layoutTop
   } = getPosition(...args);
 
   return {
@@ -133,17 +133,17 @@ export const getPositionMixins = (...args) => {
     layoutLeft,
     layoutPosition,
     layoutRight,
-    layoutTop,
+    layoutTop
   };
 };
 
-export const position = (name) => (props) => getPosition(props.theme, name, props.variant, props.status);
+export const position = name => props => getPosition(props.theme, name, props.variant, props.status);
 
-const mapFontFamily = (fontFamily) => {
+const mapFontFamily = fontFamily => {
   return fontFamily === 'Metropolis' ? 'Metropolis' : fontFamily;
 };
 
-const mapFontWeight = (fontWeight) => {
+const mapFontWeight = fontWeight => {
   if (fontWeight === 'normal') {
     return 400;
   }
@@ -169,7 +169,7 @@ export const getTypography = (theme, name, variant, status) => {
     letterSpacing,
     lineHeight,
     textAlign,
-    textDecoration,
+    textDecoration
   } = getElement(theme, name, variant, status);
 
   const fontFamily = mapFontFamily(baseFontFamily);
@@ -182,7 +182,7 @@ export const getTypography = (theme, name, variant, status) => {
     letterSpacing,
     lineHeight,
     textAlign,
-    textDecoration,
+    textDecoration
   };
 };
 
@@ -190,4 +190,4 @@ export const getTypographyMixins = (...args) => {
   return getTypography(...args);
 };
 
-export const typography = (name) => (props) => getTypography(props.theme, name, props.variant, props.status);
+export const typography = name => props => getTypography(props.theme, name, props.variant, props.status);

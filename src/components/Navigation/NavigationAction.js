@@ -14,15 +14,15 @@ const colors = {
     backgroundDisabled: styles.Utils.getColorWithOpacity(styles.colors.p06, 0.48),
     backgroundHover: styles.Utils.getColorWithOpacity(styles.colors.p06, 0.32),
     color: styles.colors.p06,
-    colorDisabled: styles.Utils.getColorWithOpacity(styles.colors.p06, 0.08),
+    colorDisabled: styles.Utils.getColorWithOpacity(styles.colors.p06, 0.08)
   },
   neutral: {
     background: styles.colors.nd50,
     backgroundDisabled: styles.colors.nd40,
     backgroundHover: styles.colors.nd60,
     color: styles.colors.n04,
-    colorDisabled: styles.colors.n06,
-  },
+    colorDisabled: styles.colors.n06
+  }
 };
 
 export const NavigationAction = ({ color, iconProps, isDisabled, name, theme, ...props }) => {
@@ -48,7 +48,7 @@ export const NavigationAction = ({ color, iconProps, isDisabled, name, theme, ..
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       variants={{
         default: { backgroundColor: colors[theme]?.background, color: colors[theme]?.color },
-        disabled: { backgroundColor: colors[theme]?.backgroundDisabled, color: colors[theme]?.colorDisabled },
+        disabled: { backgroundColor: colors[theme]?.backgroundDisabled, color: colors[theme]?.colorDisabled }
       }}
       whileHover={!isDisabled && { backgroundColor: colors[theme]?.backgroundHover }}
       whileTap={!isDisabled && { scale: 0.92 }}
@@ -63,7 +63,7 @@ NavigationAction.defaultProps = {
   color: 'currentColor',
   iconProps: {},
   isDisabled: false,
-  theme: 'neutral',
+  theme: 'neutral'
 };
 
 NavigationAction.propTypes = {
@@ -71,5 +71,5 @@ NavigationAction.propTypes = {
   iconProps: PropTypes.object,
   isDisabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  theme: PropTypes.string,
+  theme: PropTypes.string
 };

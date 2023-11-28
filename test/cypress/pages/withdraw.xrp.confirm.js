@@ -8,11 +8,11 @@ const checkWithdrawConfirm = () => {
   cy.location('pathname').should('be.equal', routes.withdrawXrpConfirm);
 };
 
-const setVaultKey = (key) => {
+const setVaultKey = key => {
   cy.typeAndCheck(vaultKeyId, key);
 };
 
-const setBackupKey = (key) => {
+const setBackupKey = key => {
   cy.typeAndCheck(backupKeyId, key);
 };
 
@@ -44,5 +44,5 @@ export default {
   checkVaultKeyRequired,
   checkWithdrawConfirm,
   setBackupKey,
-  setVaultKey,
+  setVaultKey
 };

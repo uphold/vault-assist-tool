@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 const VaultAssistApp = () => (
   <ThemeProvider>
     <GlobalStyle />
+
     <AppWithTranslation />
   </ThemeProvider>
 );

@@ -20,6 +20,8 @@ rules:
     - error
   new-cap:
     - error
+  react/jsx-newline:
+    - off
   react/jsx-uses-react:
     - off
   react/react-in-jsx-scope:
@@ -27,6 +29,8 @@ rules:
   valid-jsdoc:
     - off
   newline-after-var: 0
+  no-console:
+    - off
   one-var: 0
 
 root: true

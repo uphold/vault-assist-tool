@@ -27,20 +27,20 @@ export const ThemeProvider = ({ theme: providedTheme, themeName, ...props }) => 
 
 DSThemeProvider.defaultProps = {
   theme: {},
-  themeName: ThemePreference.Dark,
+  themeName: ThemePreference.Dark
 };
 
 DSThemeProvider.propTypes = {
   theme: PropTypes.object,
-  themeName: PropTypes.oneOf(Object.values(ThemePreference)),
+  themeName: PropTypes.oneOf(Object.values(ThemePreference))
 };
 
 ThemeProvider.defaultProps = {
   theme: {},
-  themeName: ThemePreference.Dark,
+  themeName: ThemePreference.Dark
 };
 
 ThemeProvider.propTypes = {
   theme: PropTypes.object,
-  themeName: PropTypes.oneOf(Object.values(ThemePreference)),
+  themeName: PropTypes.oneOf(Object.values(ThemePreference))
 };

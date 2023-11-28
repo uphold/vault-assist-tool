@@ -7,5 +7,5 @@ export default {
   sp06: 32,
   sp07: 40,
   sp08: 48,
-  sp09: 56,
+  sp09: 56
 };

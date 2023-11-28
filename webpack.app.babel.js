@@ -16,33 +16,33 @@ const publicPath = '/';
 const plugins = [
   new CleanWebpackPlugin({
     cleanOnceBeforeBuildPatterns: ['**/*'],
-    cleanStaleWebpackAssets: false,
+    cleanStaleWebpackAssets: false
   }),
   new CopyPlugin({
     patterns: [
       {
         context: path.resolve('src/assets'),
         from: 'favicon',
-        to: path.resolve('public/favicon'),
-      },
-    ],
+        to: path.resolve('public/favicon')
+      }
+    ]
   }),
   new DuplicatePackageCheckerPlugin(),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     minify: !isDevelopment,
     publicPath,
-    template: path.resolve('src/views/index.html'),
+    template: path.resolve('src/views/index.html')
   }),
   // Add support for Reanimated
   new DefinePlugin({
     __DEV__: isDevelopment,
-    process: { env: {} },
+    process: { env: {} }
   }),
   new ProvidePlugin({
     Buffer: ['buffer', 'Buffer'],
-    process: 'process/browser',
-  }),
+    process: 'process/browser'
+  })
 ];
 
 /** @type {import("webpack").Configuration}  */
@@ -51,16 +51,16 @@ const webpackConfig = {
     allowedHosts: 'auto',
     client: {
       overlay: { warnings: false },
-      progress: true,
+      progress: true
     },
     compress: true,
     devMiddleware: {
       stats: {
         chunks: false,
         colors: true,
-        modules: false,
+        modules: false
       },
-      writeToDisk: true,
+      writeToDisk: true
     },
     historyApiFallback: true,
     hot: false,
@@ -68,8 +68,8 @@ const webpackConfig = {
     setupExitSignals: false,
     static: {
       directory: path.resolve('public'),
-      watch: { ignored: /node_modules/ },
-    },
+      watch: { ignored: /node_modules/ }
+    }
   },
   devtool: isDevelopment ? 'eval-source-map' : false,
   entry: { vaultassist: './src/index.js' },
@@ -78,16 +78,16 @@ const webpackConfig = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       },
       {
         exclude: /node_modules\/(?!events-logger).+/,
         test: /\.js?$/,
-        use: 'babel-loader',
+        use: 'babel-loader'
       },
       {
         test: /\.png$/,
-        use: 'url-loader',
+        use: 'url-loader'
       },
       {
         loader: '@svgr/webpack',
@@ -97,16 +97,16 @@ const webpackConfig = {
             plugins: [
               {
                 name: 'preset-default',
-                params: { overrides: { removeTitle: false, removeUnknownsAndDefaults: { keepRoleAttr: true } } },
+                params: { overrides: { removeTitle: false, removeUnknownsAndDefaults: { keepRoleAttr: true } } }
               },
-              'prefixIds',
-            ],
+              'prefixIds'
+            ]
           },
-          titleProp: true,
+          titleProp: true
         },
-        test: /\.svg$/,
-      },
-    ],
+        test: /\.svg$/
+      }
+    ]
   },
   optimization: {
     minimize: !isDevelopment,
@@ -118,15 +118,15 @@ const webpackConfig = {
           name: 'vaultassist.vendor',
           priority: -15,
           reuseExistingChunk: true,
-          test: /node_modules/,
-        },
-      },
-    },
+          test: /node_modules/
+        }
+      }
+    }
   },
   output: {
     filename: '[name].[contenthash].js',
     path: outputPath,
-    publicPath,
+    publicPath
   },
   plugins,
   resolve: {
@@ -142,16 +142,16 @@ const webpackConfig = {
       'react-native-reanimated': path.resolve('node_modules/react-native-reanimated'),
       'react-native-web': path.resolve('node_modules/react-native-web'),
       src: path.resolve('src'),
-      'styled-components': path.resolve('node_modules/styled-components'),
+      'styled-components': path.resolve('node_modules/styled-components')
     },
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
       stream: require.resolve('stream-browserify'),
-      url: require.resolve('url'),
-    },
-  },
+      url: require.resolve('url')
+    }
+  }
 };
 
 export default webpackConfig;

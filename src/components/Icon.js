@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import icons from '../assets/icons';
 
 export const Icon = memo(({ color, name, size, ...props }) => {
-  const capitalize = (input) => input?.replace?.(/^(.)/, (char) => char.toUpperCase()) || input;
+  const capitalize = input => input?.replace?.(/^(.)/, char => char.toUpperCase()) || input;
 
   const { coreIcon, iconSize, nameRef, source, viewBox } = useMemo(() => {
     const { size: imageSize, source } = icons[name] || {};
@@ -21,7 +21,7 @@ export const Icon = memo(({ color, name, size, ...props }) => {
       iconSize: size || iconSize,
       nameRef,
       source,
-      viewBox,
+      viewBox
     };
   }, [name, size]);
 
@@ -29,7 +29,7 @@ export const Icon = memo(({ color, name, size, ...props }) => {
     () => ({
       fill: colors[color] || color || 'currentColor',
       height: iconSize,
-      width: iconSize,
+      width: iconSize
     }),
     [color, iconSize]
   );
@@ -56,11 +56,11 @@ Icon.displayName = 'Memo(Icon)';
 
 Icon.defaultProps = {
   color: 'n05',
-  size: 0,
+  size: 0
 };
 
 Icon.propTypes = {
   color: PropTypes.string,
   name: PropTypes.string.isRequired,
-  size: PropTypes.number,
+  size: PropTypes.number
 };

@@ -18,10 +18,10 @@ export const Body = ({ isdisabled, value, ...props }) => {
 
 Body.defaultProps = {
   isdisabled: false,
-  value: '',
+  value: ''
 };
 
 Body.propTypes = {
   isdisabled: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.string
 };

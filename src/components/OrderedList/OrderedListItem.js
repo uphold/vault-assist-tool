@@ -28,10 +28,10 @@ export const OrderedListItem = ({ children, number, ...props }) => (
 );
 
 OrderedListItem.defaultProps = {
-  number: null,
+  number: null
 };
 
 OrderedListItem.propTypes = {
   children: PropTypes.node.isRequired,
-  number: PropTypes.number,
+  number: PropTypes.number
 };

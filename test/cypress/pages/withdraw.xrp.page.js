@@ -13,12 +13,12 @@ const containsDetails = (balance, reserve, ownerReserve, currency) => {
   cy.contains(`${formatNumber(reserve)} ${currency}`);
   cy.contains(
     I18n.t('withdraw.xrp.conditions.network.costs.text', {
-      ownerReserve: formatNumber(ownerReserve, 0, 0),
+      ownerReserve: formatNumber(ownerReserve, 0, 0)
     })
   );
 };
 
 export default {
   checkWithdraw,
-  containsDetails,
+  containsDetails
 };

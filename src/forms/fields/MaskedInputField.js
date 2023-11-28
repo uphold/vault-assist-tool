@@ -31,11 +31,11 @@ MaskedInputField.displayName = 'MaskedInputField';
 MaskedInputField.defaultProps = {
   mask: { mask: String },
   onChange: () => {},
-  options: {},
+  options: {}
 };
 
 MaskedInputField.propTypes = {
   mask: PropTypes.object,
   onChange: PropTypes.func,
-  options: PropTypes.object,
+  options: PropTypes.object
 };

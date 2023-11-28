@@ -81,7 +81,7 @@ const defaultColors = {
   'yellow-80': colors.yellow80,
   'yellow-90': colors.yellow90,
   'yellow-95': colors.yellow95,
-  'yellow-100': colors.yellow100,
+  'yellow-100': colors.yellow100
 };
 
 export const themes = {
@@ -114,7 +114,7 @@ export const themes = {
     'neutral-80': colors.neutral80,
     'neutral-90': colors.neutral90,
     'neutral-95': colors.neutral95,
-    'neutral-100': colors.neutral100,
+    'neutral-100': colors.neutral100
   },
   light: {
     ...defaultColors,
@@ -141,7 +141,7 @@ export const themes = {
     'neutral-80': colors.neutral80,
     'neutral-90': colors.neutral90,
     'neutral-95': colors.neutral95,
-    'neutral-100': colors.neutral100,
+    'neutral-100': colors.neutral100
   },
   manager: {
     ...defaultColors,
@@ -158,6 +158,6 @@ export const themes = {
     n06: colors.n06,
     n07: colors.n07,
     n025: colors.n025,
-    n045: colors.n045,
-  },
+    n045: colors.n045
+  }
 };

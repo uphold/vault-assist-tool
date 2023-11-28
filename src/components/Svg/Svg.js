@@ -35,7 +35,7 @@ Svg.defaultProps = {
   name: undefined,
   size: 20,
   testID: undefined,
-  width: undefined,
+  width: undefined
 };
 
 Svg.displayName = 'Memo(Svg)';
@@ -47,5 +47,5 @@ Svg.propTypes = {
   name: PropTypes.string,
   size: PropTypes.number,
   testID: PropTypes.string,
-  width: PropTypes.number,
+  width: PropTypes.number
 };

@@ -5,5 +5,5 @@ export const BoxWidget = styled(Box)``;
 
 BoxWidget.defaultProps = {
   layoutHeight: 'unset',
-  paddingBottom: 'sp05',
+  paddingBottom: 'sp05'
 };

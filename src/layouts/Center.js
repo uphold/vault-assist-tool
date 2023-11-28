@@ -18,5 +18,5 @@ export const Center = styled(Mixed.div)`
 Center.defaultProps = {
   layoutMinHeight: '0',
   layoutMinWidth: '0',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };

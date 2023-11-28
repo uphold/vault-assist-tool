@@ -4,7 +4,7 @@ import {
   TransactionService,
   ValidationUtils,
   Blockchain as VaultBlockchain,
-  WalletService,
+  WalletService
 } from 'vault-wallet-toolkit';
 import { Wallet } from 'vault-wallet-toolkit/lib/core/Wallet';
 import {
@@ -14,14 +14,14 @@ import {
   getBalance as getXrpBalance,
   getAccountSigners as getXrpSigners,
   sendTransaction as sendXrplTransaction,
-  multisigner as xrplMultiSigner,
+  multisigner as xrplMultiSigner
 } from './xrpl-provider';
 
 export const Blockchain = VaultBlockchain;
 export const { validateAddress, validateMnemonic } = ValidationUtils;
 export const { signTransaction } = WalletService;
 
-export const getCurrency = (blockchain) => {
+export const getCurrency = blockchain => {
   switch (blockchain) {
     case Blockchain.XRPL:
       return 'XRP';

@@ -8,7 +8,7 @@ export const Transaction = ({ submitTransaction }) => {
   useEffect(() => {
     window.requestAnimationFrame(async () => {
       // Make sure animation plays before we submit
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       await submitTransaction();
     });
   }, []);
@@ -27,5 +27,5 @@ export const Transaction = ({ submitTransaction }) => {
 
 Transaction.propTypes = {
   isGuarded: PropTypes.bool.isRequired,
-  submitTransaction: PropTypes.func.isRequired,
+  submitTransaction: PropTypes.func.isRequired
 };

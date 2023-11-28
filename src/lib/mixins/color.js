@@ -4,19 +4,19 @@ import { transformColor } from './transformers';
 export const colorDefinition = {
   background: {
     properties: ['background'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   backgroundColor: {
     properties: ['background-color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   color: {
     properties: ['color'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   opacity: {
-    properties: ['opacity'],
-  },
+    properties: ['opacity']
+  }
 };
 
 export const color = createMixin(colorDefinition);

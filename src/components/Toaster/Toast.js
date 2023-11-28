@@ -7,7 +7,7 @@ const ToastTypes = Object.freeze({
   alert: 'actionAlert',
   error: 'actionError',
   info: 'actionInfo',
-  success: 'actionSuccess',
+  success: 'actionSuccess'
 });
 
 export const Toast = ({ message, type }) => (
@@ -23,10 +23,10 @@ export const Toast = ({ message, type }) => (
 );
 
 Toast.defaultProps = {
-  type: 'info',
+  type: 'info'
 };
 
 Toast.propTypes = {
   message: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  type: PropTypes.oneOf(Object.keys(ToastTypes)),
+  type: PropTypes.oneOf(Object.keys(ToastTypes))
 };

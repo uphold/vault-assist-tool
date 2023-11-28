@@ -14,11 +14,11 @@ export const Label = styled.label`
   transition: color 0.3s ease-in-out;
 
   &::before {
-    content: '';
     border-top: 2px solid ${styles.colors.nd30};
+    content: '';
     left: 0;
-    right: 0;
     position: absolute;
+    right: 0;
     top: 8px;
     z-index: -1;
   }
@@ -30,5 +30,5 @@ Label.defaultProps = {
   layoutTop: 0,
   margin: 0,
   padding: '0 sp02',
-  zIndex: 1,
+  zIndex: 1
 };

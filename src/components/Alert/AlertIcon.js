@@ -28,11 +28,11 @@ export const AlertIcon = forwardRef(({ variant }, ref) => {
 });
 
 AlertIcon.defaultProps = {
-  variant: 'info',
+  variant: 'info'
 };
 
 AlertIcon.displayName = 'forwardRef(AlertIcon)';
 
 AlertIcon.propTypes = {
-  variant: PropTypes.oneOf(Object.values(variants)),
+  variant: PropTypes.oneOf(Object.values(variants))
 };

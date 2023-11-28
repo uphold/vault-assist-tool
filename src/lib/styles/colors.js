@@ -131,5 +131,5 @@ export default {
   yellow80: '#593D03',
   yellow90: '#462E01',
   yellow95: '#2D1D00',
-  yellow100: '#1F1200',
+  yellow100: '#1F1200'
 };

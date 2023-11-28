@@ -40,10 +40,10 @@ export const BoxFade = ({ children, isVisible, ...props }) => (
 );
 
 BoxFade.defaultProps = {
-  isVisible: false,
+  isVisible: false
 };
 
 BoxFade.propTypes = {
   children: PropTypes.node.isRequired,
-  isVisible: PropTypes.bool,
+  isVisible: PropTypes.bool
 };

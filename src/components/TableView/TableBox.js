@@ -1,7 +1,7 @@
 import { Mixed } from '../Mixed';
 import { styles } from '../../lib/styles';
 
-export const TableBox = (props) => (
+export const TableBox = props => (
   <Mixed.div {...props}>
     <Mixed.div {...props} border="0" padding="sp02 0" />
   </Mixed.div>
@@ -10,5 +10,5 @@ export const TableBox = (props) => (
 TableBox.defaultProps = {
   border: `1px solid ${styles.colors.nd50}`,
   borderRadius: 'rd04',
-  padding: 'sp03',
+  padding: 'sp03'
 };

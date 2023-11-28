@@ -5,12 +5,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import dayjs from './dayjs';
 
 const languageDetector = new LanguageDetector(null, {
-  order: ['navigator', 'querystring', 'cookie', 'sessionStorage', 'localStorage'],
+  order: ['navigator', 'querystring', 'cookie', 'sessionStorage', 'localStorage']
 });
 
 languageDetector.addDetector({
-  cacheUserLanguage: (language) => dayjs.locale(language),
-  name: 'dayjs',
+  cacheUserLanguage: language => dayjs.locale(language),
+  name: 'dayjs'
 });
 languageDetector.options.caches.push('dayjs');
 

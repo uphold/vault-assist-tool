@@ -13,9 +13,9 @@ const PlaceholderLabel = styled.p`
 export const Placeholder = ({ placeholder }) => <PlaceholderLabel>{placeholder}</PlaceholderLabel>;
 
 Placeholder.defaultProps = {
-  placeholder: '',
+  placeholder: ''
 };
 
 Placeholder.propTypes = {
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string
 };

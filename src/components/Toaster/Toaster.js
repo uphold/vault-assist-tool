@@ -8,12 +8,18 @@ import styled from 'styled-components';
 export const ToasterContainer = styled(BaseToastContainer).attrs({
   autoClose: 3000,
   hideProgressBar: true,
-  newestOnTop: true,
+  newestOnTop: true
 })`
   width: 408px;
 
   @media (max-width: 480px) {
     width: 100vw;
+  }
+
+  .Toastify__close-button {
+    color: ${styles.colors.n045};
+    display: none;
+    opacity: 1;
   }
 
   &:not(:hover) {
@@ -23,23 +29,14 @@ export const ToasterContainer = styled(BaseToastContainer).attrs({
   }
 
   .Toastify__toast {
+    background: none;
     border-radius: 8px;
     min-height: initial;
     padding: 0;
   }
 
-  .Toastify__toast {
-    background: none;
-  }
-
   .Toastify__toast-body {
     padding: 0;
-  }
-
-  .Toastify__close-button {
-    display: none;
-    color: ${styles.colors.n045};
-    opacity: 1;
   }
 `;
 
@@ -54,7 +51,7 @@ export class Toaster {
       closeButton: false,
       closeOnClick: false,
       position: 'bottom-right',
-      toastId: props.id,
+      toastId: props.id
     });
   }
 

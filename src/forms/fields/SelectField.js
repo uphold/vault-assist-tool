@@ -51,7 +51,7 @@ BaseSelectField.defaultProps = {
   message: undefined,
   onClick: () => {},
   type: 'button',
-  value: {},
+  value: {}
 };
 
 BaseSelectField.displayName = 'forwardRef(BaseSelectField)';
@@ -68,7 +68,7 @@ BaseSelectField.propTypes = {
   message: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,
-  value: PropTypes.object,
+  value: PropTypes.object
 };
 
 export const SelectField = ({ control, defaultValue, name, shouldUnregister, ...props }) => (
@@ -84,12 +84,12 @@ export const SelectField = ({ control, defaultValue, name, shouldUnregister, ...
 SelectField.defaultProps = {
   control: {},
   defaultValue: {},
-  shouldUnregister: true,
+  shouldUnregister: true
 };
 
 SelectField.propTypes = {
   control: PropTypes.object,
   defaultValue: PropTypes.object,
   name: PropTypes.string.isRequired,
-  shouldUnregister: PropTypes.bool,
+  shouldUnregister: PropTypes.bool
 };

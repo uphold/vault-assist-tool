@@ -18,7 +18,7 @@ const Container = styled(Mixed.div)`
         `}
 `;
 
-const getBorderColor = (props) => {
+const getBorderColor = props => {
   const status = getFormStatus(props);
   const variant = getFormVariant(props);
 
@@ -33,7 +33,7 @@ const getBorderColor = (props) => {
   return 'n04';
 };
 
-const getBorderWidth = (props) => {
+const getBorderWidth = props => {
   const variant = getFormVariant(props);
 
   if (variant === 'secondary') {
@@ -43,7 +43,7 @@ const getBorderWidth = (props) => {
   return 2;
 };
 
-export const Input = (props) => (
+export const Input = props => (
   <Container
     borderColor={getBorderColor(props)}
     borderRadius="rd02"
@@ -57,5 +57,5 @@ Input.defaultProps = {
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'space-between',
-  layoutPosition: 'relative',
+  layoutPosition: 'relative'
 };

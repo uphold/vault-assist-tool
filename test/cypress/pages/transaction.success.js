@@ -11,5 +11,5 @@ const containsDetails = (address, destinationTag) => {
 
 export default {
   checkTransactionSuccess,
-  containsDetails,
+  containsDetails
 };

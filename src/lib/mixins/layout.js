@@ -4,123 +4,123 @@ import { transformColor, transformNumber, transformString } from './transformers
 export const layoutDefinition = {
   boxShadow: {
     properties: ['box-shadow'],
-    transform: transformColor(),
+    transform: transformColor()
   },
   boxSizing: {
-    properties: ['box-sizing'],
+    properties: ['box-sizing']
   },
   cursor: {
-    properties: ['cursor'],
+    properties: ['cursor']
   },
   display: {
-    properties: ['display'],
+    properties: ['display']
   },
   grid: {
-    properties: ['grid'],
+    properties: ['grid']
   },
   gridArea: {
-    properties: ['grid-area'],
+    properties: ['grid-area']
   },
   gridAutoColumns: {
-    properties: ['grid-auto-columns'],
+    properties: ['grid-auto-columns']
   },
   gridAutoFlow: {
-    properties: ['grid-auto-flow'],
+    properties: ['grid-auto-flow']
   },
   gridAutoRows: {
-    properties: ['grid-auto-rows'],
+    properties: ['grid-auto-rows']
   },
   gridColumn: {
-    properties: ['grid-column'],
+    properties: ['grid-column']
   },
   gridColumnEnd: {
-    properties: ['grid-column-end'],
+    properties: ['grid-column-end']
   },
   gridColumnStart: {
-    properties: ['grid-column-start'],
+    properties: ['grid-column-start']
   },
   gridRow: {
-    properties: ['grid-row'],
+    properties: ['grid-row']
   },
   gridRowEnd: {
-    properties: ['grid-row-end'],
+    properties: ['grid-row-end']
   },
   gridRowStart: {
-    properties: ['grid-row-start'],
+    properties: ['grid-row-start']
   },
   gridTemplate: {
-    properties: ['grid-template'],
+    properties: ['grid-template']
   },
   gridTemplateAreas: {
     properties: ['grid-template-areas'],
-    transform: transformString(),
+    transform: transformString()
   },
   gridTemplateColumns: {
-    properties: ['grid-template-columns'],
+    properties: ['grid-template-columns']
   },
   gridTemplateRows: {
-    properties: ['grid-template-rows'],
+    properties: ['grid-template-rows']
   },
   layoutHeight: {
     properties: ['height'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutMaxHeight: {
     properties: ['maxHeight'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutMaxWidth: {
     properties: ['maxWidth'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutMinHeight: {
     properties: ['minHeight'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutMinWidth: {
     properties: ['minWidth'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutSize: {
     properties: ['height', 'width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   layoutWidth: {
     properties: ['width'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   overflow: {
-    properties: ['overflow'],
+    properties: ['overflow']
   },
   overflowX: {
-    properties: ['overflowX'],
+    properties: ['overflowX']
   },
   overflowY: {
-    properties: ['overflowY'],
+    properties: ['overflowY']
   },
   scrollPadding: {
     properties: ['scroll-padding'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   scrollPaddingBottom: {
     properties: ['scroll-padding-bottom'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   scrollPaddingLeft: {
     properties: ['scroll-padding-left'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   scrollPaddingRight: {
     properties: ['scroll-padding-right'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   scrollPaddingTop: {
     properties: ['scroll-padding-top'],
-    transform: transformNumber(),
+    transform: transformNumber()
   },
   verticalAlign: {
-    properties: ['verticalAlign'],
-  },
+    properties: ['verticalAlign']
+  }
 };
 
 export const layout = createMixin(layoutDefinition);

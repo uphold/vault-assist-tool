@@ -35,9 +35,9 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
             isDisabled,
             label,
             subtitle,
-            value,
-          },
-        },
+            value
+          }
+        }
       }),
       { items: [], optionsMap: {} }
     );
@@ -76,9 +76,9 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
           >
             {items.length ? (
               <ListBox
-                isDisabled={(value) => optionsMap[value]?.isDisabled}
+                isDisabled={value => optionsMap[value]?.isDisabled}
                 items={items}
-                onSelect={(item) => {
+                onSelect={item => {
                   setSelectedItem(item);
                   if (hideConfirm) {
                     onConfirm();
@@ -86,8 +86,8 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
                 }}
                 ref={ref}
                 selectedItem={selectedItem}
-                subtitle={(value) => optionsMap[value]?.subtitle}
-                title={(value) => optionsMap[value]?.label}
+                subtitle={value => optionsMap[value]?.subtitle}
+                title={value => optionsMap[value]?.label}
               />
             ) : null}
 
@@ -107,7 +107,7 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
 
 BaseDynamicSelectField.defaultProps = {
   hideConfirm: false,
-  portalId: 'dynamicFormPortal',
+  portalId: 'dynamicFormPortal'
 };
 
 BaseDynamicSelectField.displayName = 'forwardRef(BaseDynamicSelectField)';
@@ -116,7 +116,7 @@ BaseDynamicSelectField.propTypes = {
   ...BaseSelectField.propTypes,
   hideConfirm: PropTypes.bool,
   options: PropTypes.array.isRequired,
-  portalId: PropTypes.string,
+  portalId: PropTypes.string
 };
 
 export const DynamicSelectField = ({ control, defaultValue, name, shouldUnregister, ...props }) => (
@@ -132,12 +132,12 @@ export const DynamicSelectField = ({ control, defaultValue, name, shouldUnregist
 DynamicSelectField.defaultProps = {
   control: {},
   defaultValue: undefined,
-  shouldUnregister: true,
+  shouldUnregister: true
 };
 
 DynamicSelectField.propTypes = {
   control: PropTypes.object,
   defaultValue: PropTypes.object,
   name: PropTypes.string.isRequired,
-  shouldUnregister: PropTypes.bool,
+  shouldUnregister: PropTypes.bool
 };

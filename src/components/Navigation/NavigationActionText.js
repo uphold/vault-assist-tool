@@ -17,5 +17,5 @@ export const NavigationActionText = ({ children, ...props }) => {
 
 NavigationActionText.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

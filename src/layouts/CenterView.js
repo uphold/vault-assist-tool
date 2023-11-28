@@ -15,5 +15,5 @@ export const CenterView = styled(Mixed.div)`
 CenterView.defaultProps = {
   layoutMinHeight: '0',
   layoutMinWidth: '0',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };

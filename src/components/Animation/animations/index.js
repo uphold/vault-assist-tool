@@ -9,5 +9,5 @@ export default {
   failedOperation,
   loadingSpinner,
   pendingOperation,
-  successOperation,
+  successOperation
 };

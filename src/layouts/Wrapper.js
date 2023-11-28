@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const BaseWrapper = styled(Mixed.div)`
   @media (min-height: 600px) {
     @media (min-width: 884px) {
+      align-items: center;
       background-color: transparent;
       display: flex;
       justify-content: center;
-      align-items: center;
     }
   }
 `;
@@ -17,8 +17,8 @@ const CenterWrapper = styled(Mixed.div)`
   padding: 0px 0px;
   @media (min-height: 600px) {
     @media (min-width: 884px) {
-      height: 624px;
       border-radius: 25px;
+      height: 624px;
       width: 432px;
     }
   }
@@ -46,9 +46,9 @@ Wrapper.defaultProps = {
   display: 'grid',
   layoutHeight: '100%',
   layoutPosition: 'relative',
-  overflow: 'hidden',
+  overflow: 'hidden'
 };
 
 Wrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };

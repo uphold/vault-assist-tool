@@ -7,46 +7,46 @@ const backgroundStyle = Object.freeze({
   bottom: { alignItems: 'flex-end' },
   center: { alignItems: 'center' },
   centerWindowed: { alignItems: 'center', justifyContent: 'center' },
-  fullscreen: { alignItems: 'center', justifyContent: 'center', layoutPosition: 'fixed' },
+  fullscreen: { alignItems: 'center', justifyContent: 'center', layoutPosition: 'fixed' }
 });
 
 const backgroundTransition = Object.freeze({
   bottom: { duration: 0.3 },
   center: { duration: 0.15 },
   centerWindowed: { duration: 0.15 },
-  fullscreen: { duration: 0.15 },
+  fullscreen: { duration: 0.15 }
 });
 
 const backgroundVariants = {
   exit: { opacity: 0 },
   initial: { opacity: 0 },
-  visible: { opacity: 1 },
+  visible: { opacity: 1 }
 };
 
 const boxStyle = Object.freeze({
   bottom: { borderRadius: 'rd05', flex: 1, marginBottom: '-16px', paddingBottom: 'sp07' },
   center: { borderRadius: 'rd03', flex: 1 },
   centerWindowed: { borderRadius: 'rd03', layoutHeight: '90%', layoutWidth: 'clamp(350px, 70%, 1000px)' },
-  fullscreen: { borderRadius: 'rd03', flex: 1, layoutMaxWidth: '368px', marginLeft: 'var(--navigation-left-width)' },
+  fullscreen: { borderRadius: 'rd03', flex: 1, layoutMaxWidth: '368px', marginLeft: 'var(--navigation-left-width)' }
 });
 
 const boxTransition = Object.freeze({
   bottom: { mass: 0.5, stiffness: 80, type: 'spring' },
   center: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
   centerWindowed: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
-  fullscreen: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
+  fullscreen: { duration: 0.28, ease: [0.25, 1, 0.5, 1] }
 });
 
 const boxVariants = {
-  exit: (variant) => (variant === 'bottom' ? { y: '200%' } : {}),
-  initial: (variant) => (variant === 'bottom' ? { y: '200%' } : { scale: 1.1 }),
-  visible: (variant) => (variant === 'bottom' ? { y: '0%' } : { scale: 1 }),
+  exit: variant => (variant === 'bottom' ? { y: '200%' } : {}),
+  initial: variant => (variant === 'bottom' ? { y: '200%' } : { scale: 1.1 }),
+  visible: variant => (variant === 'bottom' ? { y: '0%' } : { scale: 1 })
 };
 
 const layoutTransition = Object.freeze({ bounce: 0.2, duration: 0.2, type: 'spring' });
 
 export const FloatingBox = memo(({ children, isVisible, onRequestClose, variant, ...props }) => {
-  const onClick = (event) => {
+  const onClick = event => {
     if (event.currentTarget === event.target) {
       event.stopPropagation();
       onRequestClose();
@@ -112,12 +112,12 @@ export const FloatingBox = memo(({ children, isVisible, onRequestClose, variant,
 FloatingBox.displayName = 'Memo(FloatingBox)';
 
 FloatingBox.defaultProps = {
-  onRequestClose: () => {},
+  onRequestClose: () => {}
 };
 
 FloatingBox.propTypes = {
   children: PropTypes.node.isRequired,
   isVisible: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func,
-  variant: PropTypes.oneOf(Object.keys(backgroundStyle)).isRequired,
+  variant: PropTypes.oneOf(Object.keys(backgroundStyle)).isRequired
 };

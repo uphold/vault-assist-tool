@@ -6,9 +6,9 @@ export const DropdownIcon = ({ disabled, ...props }) => (
 );
 
 DropdownIcon.defaultProps = {
-  disabled: false,
+  disabled: false
 };
 
 DropdownIcon.propTypes = {
-  disabled: PropTypes.bool,
+  disabled: PropTypes.bool
 };

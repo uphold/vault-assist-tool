@@ -10,7 +10,7 @@ const extensions = {
     s: 'just now',
     w: '%dw',
     ww: '%dw',
-    yy: '%dy',
+    yy: '%dy'
   },
   es: {
     d: 'ayer',
@@ -23,8 +23,8 @@ const extensions = {
     s: 'ahora mismo',
     w: '%ds',
     ww: '%ds',
-    yy: '%da',
-  },
+    yy: '%da'
+  }
 };
 
 const baseThresholds = [
@@ -36,7 +36,7 @@ const baseThresholds = [
   { ignorePastAndFuture: true, l: 'd', r: 1 },
   { d: 'day', l: 'dd', r: 6 },
   { l: 'w', r: 1 },
-  { d: 'week', l: 'ww', r: 3 },
+  { d: 'week', l: 'ww', r: 3 }
 ];
 
 // This is based from dayjs's base relativeTime plugin implementation

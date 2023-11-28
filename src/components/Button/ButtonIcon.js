@@ -23,7 +23,7 @@ export const ButtonIcon = forwardRef(({ icon, size, type, ...props }, ref) => {
 });
 
 ButtonIcon.defaultProps = {
-  type: undefined,
+  type: undefined
 };
 
 ButtonIcon.displayName = 'ButtonIcon';
@@ -31,5 +31,5 @@ ButtonIcon.displayName = 'ButtonIcon';
 ButtonIcon.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   size: PropTypes.oneOf(Object.values(ButtonSize)).isRequired,
-  type: PropTypes.oneOf(Object.values(ButtonType)),
+  type: PropTypes.oneOf(Object.values(ButtonType))
 };
