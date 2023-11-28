@@ -1,5 +1,8 @@
 import { get, omit } from 'lodash';
+import { mergeDeep } from './utils/mergeDeep';
 import { styles } from '../styles';
+import { themes } from './themes';
+import allTokens from './tokens/tokens.json';
 
 export const getElementStyle = (theme, name, variant = 'default', status) => {
   if (!status) {
@@ -191,3 +194,14 @@ export const getTypographyMixins = (...args) => {
 };
 
 export const typography = name => props => getTypography(props.theme, name, props.variant, props.status);
+
+export const getThemeSettings = name => ({
+  colors: themes[name],
+  name,
+  // Keep backwards compatibility
+  themeScheme: {
+    colors: themes[name],
+    name
+  },
+  tokens: mergeDeep(allTokens.global, allTokens[name])
+});

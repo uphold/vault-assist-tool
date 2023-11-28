@@ -1,19 +1,20 @@
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
-import { ThemePreference, getTheme } from './lib';
+import { ThemePreference } from './config';
 import { createContext, useMemo } from 'react';
+import { getThemeSettings } from './helpers';
 import PropTypes from 'prop-types';
 
 export const ThemeContext = createContext();
 
 export const DSThemeProvider = ({ themeName, ...props }) => {
-  const theme = useMemo(() => getTheme(themeName), [themeName]);
+  const theme = useMemo(() => getThemeSettings(themeName), [themeName]);
 
   return <ThemeContext.Provider value={theme} {...props} />;
 };
 
 export const ThemeProvider = ({ theme: providedTheme, themeName, ...props }) => {
   const theme = useMemo(() => {
-    const themeProvided = getTheme(themeName);
+    const themeProvided = getThemeSettings(themeName);
 
     return { ...providedTheme, ...themeProvided };
   }, [providedTheme, themeName]);

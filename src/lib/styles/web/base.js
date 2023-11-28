@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import colors from '../colors';
 
 export const base = css`
   * {
@@ -51,5 +52,13 @@ export const base = css`
 
   .grecaptcha-badge {
     z-index: 2;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: ${colors.nd140} !important;
   }
 `;
