@@ -1,6 +1,9 @@
 import * as webLocales from '../../src/assets/locales';
-import { I18n } from '../../src/lib/i18n/provider';
+import { setLocales } from '../../src/lib/i18n';
+import i18next from 'i18next';
 
-I18n.setLocales(webLocales);
+const I18n = i18next;
+
+setLocales(webLocales);
 
 export default I18n;

@@ -1,5 +1,4 @@
 import './constants';
-import { I18n } from '../i18n/provider';
 import {
   TransactionService,
   ValidationUtils,
@@ -16,6 +15,7 @@ import {
   sendTransaction as sendXrplTransaction,
   multisigner as xrplMultiSigner
 } from './xrpl-provider';
+import { translate } from '../../lib/i18n';
 
 export const Blockchain = VaultBlockchain;
 export const { validateAddress, validateMnemonic } = ValidationUtils;
@@ -72,7 +72,7 @@ export const multiSignTransaction = (blockchain, transaction, keys) => {
       return xrplMultiSigner(transaction, keys);
 
     default:
-      throw new Error(I18n.t('messages.error.unsupported.blockchain'));
+      throw new Error(translate('messages.error.unsupported.blockchain'));
   }
 };
 
@@ -82,7 +82,7 @@ export const getSigners = async (blockchain, address) => {
       return await getXrpSigners(address);
 
     default:
-      throw new Error(I18n.t('messages.error.unsupported.blockchain'));
+      throw new Error(translate('messages.error.unsupported.blockchain'));
   }
 };
 
@@ -101,6 +101,6 @@ export const getBalance = async (blockchain, address) => {
       return await getXrpBalance(address);
 
     default:
-      throw new Error(I18n.t('messages.error.unsupported.blockchain'));
+      throw new Error(translate('messages.error.unsupported.blockchain'));
   }
 };

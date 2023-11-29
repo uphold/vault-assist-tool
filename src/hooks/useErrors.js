@@ -1,5 +1,5 @@
-import { I18n } from '../lib/i18n/provider';
 import { Toaster } from '../components/Toaster';
+import { translate } from '../lib/i18n';
 import { useEffect, useRef } from 'react';
 import { useWatch } from 'react-hook-form';
 import get from 'lodash/get';
@@ -57,7 +57,7 @@ export const useErrors = (
       }
 
       if (!Object.keys(errorsRef.current).some(field => field in previousRef.current) && showGenericError) {
-        Toaster.showError(I18n.t('messages.error.default'));
+        Toaster.showError(translate('messages.error.default'));
 
         return;
       }
