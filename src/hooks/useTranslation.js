@@ -1,8 +1,6 @@
-import { I18n } from '../lib/i18n/provider';
+import { translate } from '../lib/i18n';
+import i18next from 'react-i18next';
 
 export const useTranslation = () => {
-  const exists = I18n.exists.bind(I18n);
-  const translate = I18n.t.bind(I18n);
-
-  return { exists, t: translate };
+  return { I18n: i18next, t: translate };
 };

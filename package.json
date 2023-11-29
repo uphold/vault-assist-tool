@@ -36,8 +36,6 @@
     "copy-webpack-plugin": "11.0.0",
     "create-file-plugin-webpack": "1.0.1",
     "cypress-real-events": "1.10.3",
-    "dayjs": "1.10.7",
-    "dayjs-business-days": "1.0.4",
     "history": "4.10.1",
     "html-webpack-plugin": "5.5.0",
     "lodash": "4.17.21",
