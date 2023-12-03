@@ -65,3 +65,14 @@ To build the package (output to `public` directory):
 ```sh
 yarn build
 ```
+## Running Vault Assist Tool Locally
+
+To run a local instance of the Assist Tool, targeting mainnet, first build the site, then start a python web server
+
+```sh
+yarn build
+cd public
+python3 -m http.server --bind 127.0.0.1
+```
+
+The open a browser window at `http://127.0.0.1:8000/`
