@@ -7,20 +7,20 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "predeploy": "NODE_CONFIG_DIR=./config bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
+    "predeploy": "bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
     "deploy": "gh-pages -d public",
-    "build": "NODE_CONFIG_DIR=./config bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
-    "dev": "NODE_CONFIG_DIR=./config webpack serve --config webpack.app.babel.js",
+    "build": "bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
+    "dev": "webpack serve --config webpack.app.babel.js --mode development --node-env ${NODE_ENV:=development}",
     "eslint": "eslint .",
     "cy:open": "cypress open",
     "cy:run": "cypress run --config excludeSpecPattern=test/cypress/integration/optional.spec.js",
     "cy:run-optional": "cypress run --config specPattern=test/cypress/integration/optional.spec.js",
-    "e2e": "start-server-and-test start http://localhost:3000 cy:run",
-    "e2e:optional": "start-server-and-test start http://localhost:3000 cy:run-optional",
+    "e2e": "start-server-and-test dev http://localhost:3000 cy:run",
+    "e2e:optional": "start-server-and-test dev http://localhost:3000 cy:run-optional",
     "lint": "yarn eslint && yarn stylelint src",
     "patch-package": "patch-package",
     "pre-commit": "lint-staged --relative",
-    "start": "NODE_CONFIG_DIR=./config webpack serve --config webpack.app.babel.js --mode development"
+    "start": "webpack serve --config webpack.app.babel.js --node-env ${NODE_ENV:=production}"
   },
   "pre-commit": "pre-commit",
   "lint-staged": {
