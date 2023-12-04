@@ -18,29 +18,40 @@ This tool is available on the web at [https://uphold.github.io/vault-assist-tool
 4. Specify the destination address you wish to move funds.
 5. Confirm and view transaction on chain
 
----
 
-## Development
+## Running Vault Assist Tool Locally
 
-The Uphold Vault Assist Tool is provided under the [MIT License](/LICENSE).
+### Installing Dependencies
 
-### Install dependencies
-
-To install the dependencies run:
+You must install these before you are able to run this locally:
 
 ```sh
 yarn install
 ```
 
-### Local Web Server
+### Start local web server
 
-To run this package locally:
+After the dependencies are installed, you should be able to run the server:
 
 ```sh
 yarn start
 ```
 
-**NOTE**: By default the local server uses [testnet](https://xrpl.org/parallel-networks.html) for development purposes.
+Then open a browser window at `http://127.0.0.1:3000/`
+
+## Development and testing
+
+The Uphold Vault Assist Tool is provided under the [MIT License](/LICENSE).
+
+### Start development server
+
+**Note**: You must install the dependencies as mentioned above before running this.
+
+To run the local web server using [testnet](https://xrpl.org/parallel-networks.html):
+
+```sh
+yarn dev
+```
 
 ### Testing
 
@@ -58,7 +69,7 @@ yarn e2e:optional
 
 ### Build
 
-**Note:** There is Github workflow is used to deploy this to the web.
+**Note:** There is a Github workflow which is used to deploy this to the web.
 
 To build the package (output to `public` directory):
 

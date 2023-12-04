@@ -17,6 +17,9 @@ import {
 } from './xrpl-provider';
 import { translate } from '../../lib/i18n';
 
+// eslint-disable-next-line no-process-env
+const { NODE_ENV } = process.env;
+
 export const Blockchain = VaultBlockchain;
 export const { validateAddress, validateMnemonic } = ValidationUtils;
 export const { signTransaction } = WalletService;
@@ -36,7 +39,9 @@ export const getCurrency = blockchain => {
 export const getTransactionLink = (blockchain, hash) => {
   switch (blockchain) {
     case Blockchain.XRPL:
-      return __DEV__ ? `https://testnet.xrpl.org/transactions/${hash}` : `https://xrpscan.com/tx/${hash}`;
+      return NODE_ENV === 'production'
+        ? `https://livenet.xrpl.org/transactions/${hash}`
+        : `https://testnet.xrpl.org/transactions/${hash}`;
     default:
       break;
   }
