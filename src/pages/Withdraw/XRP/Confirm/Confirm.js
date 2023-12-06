@@ -102,7 +102,7 @@ export const Confirm = ({ onConfirmWithdraw, accountData }) => {
             data-test="backupKey"
             label={t('withdraw.xrp.confirm.fields.backup.key.label')}
             name="backupKey"
-            placeholder={t('withdraw.xrp.confirm.fields.vault.key.placeholder')}
+            placeholder={t('withdraw.xrp.confirm.fields.backup.key.placeholder')}
           />
         </Content>
 
