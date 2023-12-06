@@ -4,6 +4,6 @@ import i18next from 'i18next';
 
 const I18n = i18next;
 
-setLocales(webLocales);
+setLocales(webLocales.en);
 
 export default I18n;
