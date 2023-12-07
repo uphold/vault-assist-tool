@@ -11,7 +11,7 @@ import path from 'path';
 const environment = process.env.NODE_ENV || 'development';
 const isDevelopment = environment === 'development' || process.env.LOCAL_DEVELOPMENT === 'true';
 const outputPath = path.resolve('public');
-const publicPath = '/';
+const publicPath = isDevelopment ? '/' : '/vault-assist-tool/';
 
 const plugins = [
   new CleanWebpackPlugin({
