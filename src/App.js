@@ -1,3 +1,4 @@
+/* eslint-disable no-process-env */
 import { Access, Landing } from './pages';
 import { Failure, Success, Transaction } from './pages/Transaction';
 import { Fragment, useEffect, useState } from 'react';
@@ -11,7 +12,9 @@ import { createBrowserHistory } from 'history';
 import { sendTransaction } from './lib/vault';
 import smoothscroll from 'smoothscroll-polyfill';
 
-const history = createBrowserHistory();
+const environment = process.env.NODE_ENV || 'development';
+const isDevelopment = environment === 'development' || process.env.LOCAL_DEVELOPMENT === 'true';
+const history = createBrowserHistory({ basename: isDevelopment ? '/' : '/vault-assist-tool/' });
 
 smoothscroll.polyfill();
 
