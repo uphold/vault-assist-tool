@@ -10453,9 +10453,9 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vault-wallet-toolkit@uphold/vault-wallet-toolkit:
+"vault-wallet-toolkit@https://github.com/uphold/vault-wallet-toolkit.git#1.1.1":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/uphold/vault-wallet-toolkit.git#3224b969c6438d212a93f55058356f4645f1f8d4"
+  resolved "https://github.com/uphold/vault-wallet-toolkit.git#3224b969c6438d212a93f55058356f4645f1f8d4"
   dependencies:
     bip32 "4.0.0"
     bitcoinjs-lib "6.1.3"

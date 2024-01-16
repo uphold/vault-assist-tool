@@ -43,7 +43,7 @@
     "react-native": "0.72.3",
     "react-native-reanimated": "3.3.0",
     "react-native-web": "0.19.1",
-    "vault-wallet-toolkit": "uphold/vault-wallet-toolkit",
+    "vault-wallet-toolkit": "https://github.com/uphold/vault-wallet-toolkit.git#1.1.1",
     "webpack": "5.76.3",
     "xrpl": "2.9.0",
     "yup": "0.28.5"
