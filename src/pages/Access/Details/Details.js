@@ -51,7 +51,9 @@ export const Details = ({ accountData, onConfirm }) => {
             <TableViewTitle>{t('access.details.address.label', { currency: getCurrency(network) })}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewNote lineHeight="28px">{address}</TableViewNote>
+              <TableViewNote lineHeight="28px" style={{ wordBreak: 'break-all' }}>
+                {address}
+              </TableViewNote>
             </TableViewBody>
 
             <HorizontalSeparator />

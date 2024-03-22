@@ -23,6 +23,7 @@ module.exports = api => {
         useBuiltIns: 'entry'
       }
     ],
+    ['@babel/typescript'],
     ['@babel/preset-react', { runtime: 'automatic', useBuiltIns: true }]
   ];
 

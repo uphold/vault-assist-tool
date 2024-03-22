@@ -1,9 +1,12 @@
 import { Blockchain, WalletService } from 'vault-wallet-toolkit';
+import { Network, NetworkUtil } from '../../../../src/lib/vault/network';
 import { getAccountReserve, getBalance, getLedgerReserve } from '../../../../src/lib/vault/xrpl-provider';
 import { getAddress } from '../../../../src/lib/vault';
 import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
 
 const defaultBlockchain = Blockchain.XRPL;
+
+NetworkUtil.setNetwork(Network.DEVELOPMENT);
 
 const createWallets = numberOfWallets => {
   return [...Array(numberOfWallets)].map(() => {

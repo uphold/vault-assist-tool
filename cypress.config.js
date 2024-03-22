@@ -26,13 +26,54 @@ module.exports = defineConfig({
         })
       ];
 
+      options.webpackOptions.module.rules = [
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          exclude: /node_modules\/(?!events-logger).+/,
+          test: /\.js?$/,
+          use: 'babel-loader'
+        },
+        {
+          exclude: /node_modules/,
+          test: /\.(ts|tsx)$/,
+          use: ['ts-loader']
+        },
+        {
+          test: /\.png$/,
+          use: 'url-loader'
+        },
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgProps: { role: 'img' },
+            svgoConfig: {
+              plugins: [
+                {
+                  name: 'preset-default',
+                  params: { overrides: { removeTitle: false, removeUnknownsAndDefaults: { keepRoleAttr: true } } }
+                },
+                'prefixIds'
+              ]
+            },
+            titleProp: true
+          },
+          test: /\.svg$/
+        }
+      ];
+
       options.webpackOptions.resolve = {
+        extensions: ['.ts', '.js', '.json'],
         fallback: {
           buffer: require.resolve('buffer/'),
           crypto: require.resolve('crypto-browserify'),
           http: require.resolve('stream-http'),
           https: require.resolve('https-browserify'),
+          net: false,
           stream: require.resolve('stream-browserify'),
+          tls: false,
           url: require.resolve('url')
         }
       };

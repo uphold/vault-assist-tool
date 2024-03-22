@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+      "baseUrl": ".",
+      "target": "es6",
+      "module": "commonjs",
+      "lib": ["es5", "es6", "es7"],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "noFallthroughCasesInSwitch": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "noImplicitAny": false,
+      "useUnknownInCatchVariables": false,
+      "strictNullChecks": false,
+      "isolatedModules": true,
+      "noEmit": false,
+      "jsx": "react-jsx"
+  },
+  "include": [
+      "src/lib/vault/clients"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

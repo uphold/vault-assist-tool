@@ -19,6 +19,7 @@ export const es = {
       "access.navigation.title": "Vault Assist",
       "actions.accessVault": "Accede a tu Vault",
       "actions.close": "Cerrar",
+      "actions.confirm": "Confirmar",
       "actions.confirm.withdraw": "Confirmar y retirar",
       "actions.continue": "Continuar",
       "actions.end.session": "Finalizar sesión",
@@ -75,4 +76,3 @@ export const es = {
       "withdraw.xrp.navigation.title": "Retirar XRP",
     }
   };
-  
