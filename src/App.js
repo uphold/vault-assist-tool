@@ -1,15 +1,15 @@
 /* eslint-disable no-process-env */
 import { Access, Landing } from './pages';
-import { Failure, Success, Transaction } from './pages/Transaction';
+import { BTC, XRP } from './pages/Withdraw';
+import { Blockchain, sendTransaction } from './lib/vault';
+import { Failure, Pending, Success, Transaction } from './pages/Transaction';
 import { Fragment, useEffect, useState } from 'react';
 import { IconDefs } from './components/IconDefs';
 import { Route } from './components/Route';
 import { Router, Switch } from 'react-router-dom';
 import { ToasterContainer } from './components/Toaster';
 import { Wrapper } from './layouts/Wrapper';
-import { XRP } from './pages/Withdraw';
 import { createBrowserHistory } from 'history';
-import { sendTransaction } from './lib/vault';
 import smoothscroll from 'smoothscroll-polyfill';
 
 const environment = process.env.NODE_ENV || 'development';
@@ -70,8 +70,19 @@ export const App = () => {
   };
 
   const onConfirmAccount = accountData => {
+    const { network } = accountData;
+
     setAccountData(accountData);
-    history.push({ ...history.location, pathname: `/withdraw/xrp` });
+    switch (network) {
+      case Blockchain.XRPL:
+        history.push({ ...history.location, pathname: `/withdraw/xrp` });
+        break;
+      case Blockchain.BTC:
+        history.push({ ...history.location, pathname: `/withdraw/btc` });
+        break;
+      default:
+        break;
+    }
   };
 
   const onConfirmTransaction = preparedTransaction => {
@@ -82,8 +93,8 @@ export const App = () => {
 
   const submitTransaction = async preparedTransaction => {
     try {
-      const { network, transaction } = preparedTransaction;
-      const transactionData = await sendTransaction(network, transaction);
+      const { network, transaction, destinationData } = preparedTransaction;
+      const transactionData = await sendTransaction(network, transaction, destinationData);
 
       setTransactionData(transactionData);
       setTransactionStatus(TransactionStatus.success);
@@ -119,6 +130,16 @@ export const App = () => {
                 setIsGuarded={setIsGuarded}
               />
 
+              <Route
+                accountData={accountData}
+                component={BTC}
+                key="btc"
+                onConfirmTransaction={onConfirmTransaction}
+                path="/withdraw/btc"
+                pendingTransaction={transactionStatus !== TransactionStatus.unknown}
+                setIsGuarded={setIsGuarded}
+              />
+
               {!transactionData ? (
                 <Route
                   component={Transaction}
@@ -143,7 +164,15 @@ export const App = () => {
                 />
               ) : null}
 
-              <Route component={Failure} key="failure" onFinish={cleanSession} path="/transaction/failure" />
+              <Route
+                component={Failure}
+                key="failure"
+                onFinish={cleanSession}
+                path="/transaction/failure"
+                preparedTransaction={preparedTransaction}
+              />
+
+              <Route component={Pending} key="pending" onFinish={cleanSession} path="/pending" />
             </Fragment>
           ) : null}
 

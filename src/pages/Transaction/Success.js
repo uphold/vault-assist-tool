@@ -1,4 +1,5 @@
 import { Animation } from '../../components/Animation';
+import { Blockchain, getCurrency, getTransactionLink } from '../../lib/vault';
 import { Button } from '../../components/Button';
 import { CenterView, Content, Header, Navigation } from '../../layouts';
 import { Fragment, useState } from 'react';
@@ -13,7 +14,6 @@ import { TableViewNote } from '../../components/TableView/TableViewNote';
 import { TableViewTitle } from '../../components/TableView/TableViewTitle';
 import { colors } from '../../lib/styles';
 import { formatNumber } from '../../utils/formatNumber';
-import { getCurrency, getTransactionLink } from '../../lib/vault';
 import { useTranslation } from '../../hooks/useTranslation';
 import CustomPropTypes from '../../lib/propTypes';
 import PropTypes from 'prop-types';
@@ -47,7 +47,9 @@ export const Success = ({ transactionData, onFinish }) => {
         <Content paddingTop="12px">
           <Header alignItems="center">
             <H3 marginBottom="sp03" textAlign="center">
-              {t('transaction.success.header', { currency: getCurrency(network) })}
+              {network === Blockchain.XRPL
+                ? t('transaction.success.header', { currency: getCurrency(network) })
+                : t('transaction.success.pending.header', { currency: getCurrency(network) })}
             </H3>
           </Header>
 

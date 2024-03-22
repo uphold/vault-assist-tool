@@ -7,10 +7,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "predeploy": "bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
+    "predeploy": "bash -c 'NET=${NET:=production} webpack --env NET=${NET:=production} --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
     "deploy": "gh-pages -d public",
-    "build": "LOCAL_DEVELOPMENT=true bash -c 'webpack --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
-    "dev": "webpack serve --config webpack.app.babel.js --mode development --node-env ${NODE_ENV:=development}",
+    "build": "LOCAL_DEVELOPMENT=true NET=${NET:=production} bash -c 'webpack --env NET=${NET:=production} --config webpack.app.babel.js --node-env ${NODE_ENV:=production} --progress'",
+    "dev": "NET=${NET:=development} webpack serve --env NET=${NET:=development} --config webpack.app.babel.js --mode development --node-env ${NODE_ENV:=development}",
     "eslint": "eslint .",
     "cy:open": "cypress open",
     "cy:run": "cypress run --config excludeSpecPattern=test/cypress/integration/optional.spec.js",
@@ -20,7 +20,7 @@
     "lint": "yarn eslint && yarn stylelint src",
     "patch-package": "patch-package",
     "pre-commit": "lint-staged --relative",
-    "start": "LOCAL_DEVELOPMENT=true webpack serve --config webpack.app.babel.js --node-env ${NODE_ENV:=production}"
+    "start": "LOCAL_DEVELOPMENT=true NET=${NET:=production} webpack serve --env NET=${NET:=production} --config webpack.app.babel.js --node-env ${NODE_ENV:=production}"
   },
   "pre-commit": "pre-commit",
   "lint-staged": {
@@ -30,9 +30,12 @@
     ]
   },
   "dependencies": {
+    "@codewarriorr/electrum-client-js": "0.1.1",
     "@typehaus/metropolis": "12.0.0-next.7",
     "babel-plugin-react-native-web": "0.19.1",
+    "buffer-reverse": "1.0.1",
     "clean-webpack-plugin": "4.0.0",
+    "config": "3.1.0",
     "copy-webpack-plugin": "11.0.0",
     "create-file-plugin-webpack": "1.0.1",
     "cypress-real-events": "1.10.3",
@@ -53,6 +56,7 @@
     "@babel/plugin-proposal-export-default-from": "7.18.10",
     "@babel/preset-env": "7.19.4",
     "@babel/preset-react": "7.18.6",
+    "@babel/preset-typescript": "7.23.3",
     "@babel/register": "7.18.9",
     "@cypress/grep": "4.0.0",
     "@cypress/webpack-preprocessor": "6.0.0",
@@ -64,7 +68,6 @@
     "babel-plugin-styled-components": "2.0.7",
     "buffer": "6.0.3",
     "cleave.js": "1.6.0",
-    "config": "3.1.0",
     "crypto-browserify": "3.12.0",
     "css-loader": "6.7.1",
     "cypress": "12.17.1",
@@ -111,6 +114,8 @@
     "stylelint-order": "5.0.0",
     "terser-webpack-plugin": "5.3.6",
     "tippy.js": "6.2.3",
+    "ts-loader": "9.5.1",
+    "typescript": "5.4.2",
     "url": "0.11.3",
     "url-loader": "4.1.1",
     "uuid": "8.3.2",

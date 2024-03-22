@@ -21,7 +21,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CustomPropTypes from '../../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
-export const Destination = ({ accountData, onConfirmDestination }) => {
+export const Root = ({ accountData, onConfirmDestination }) => {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -29,11 +29,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
     history.goBack();
   };
 
-  const { balance, reserve, address: sourceAddress, network } = accountData;
-  const { ownerReserve = 0, totalReserve = 0 } = reserve;
-
-  const remainingBalance = Number(balance) - Number(totalReserve);
-  const destinationAmount = remainingBalance + totalReserve;
+  const { balance, address: sourceAddress, fee, network } = accountData;
 
   const form = useForm({
     mode: 'onChange',
@@ -43,11 +39,11 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   const { control, handleSubmit } = form;
 
   const onSubmit = handleSubmit(data => {
-    const { address, destinationTag } = data;
+    const { address } = data;
 
     onConfirmDestination({
-      destinationTag: destinationTag.length ? destinationTag : undefined,
-      fee: ownerReserve,
+      amount: balance,
+      fee,
       to: address
     });
   }, toastErrors);
@@ -56,44 +52,36 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
     <Fragment>
       <Navigation
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
-        title={t('withdraw.xrp.navigation.title')}
+        title={t('withdraw.btc.navigation.title')}
       />
 
       <ScrollableSection>
         <Content paddingBottom="0" paddingTop="0">
           <Alert marginBottom="18px" variant="warning">
-            {t('withdraw.xrp.destination.warning')}
+            {t('withdraw.btc.destination.warning')}
           </Alert>
 
           <TextField
             control={control}
             data-test="address"
-            label={t('withdraw.xrp.destination.fields.address.label')}
+            label={t('withdraw.btc.destination.fields.address.label')}
             name="address"
-            placeholder={t('withdraw.xrp.destination.fields.address.placeholder')}
-          />
-
-          <TextField
-            control={control}
-            data-test="destinationTag"
-            label={t('withdraw.xrp.destination.fields.destination.tag.label')}
-            name="destinationTag"
-            placeholder={t('withdraw.xrp.destination.fields.destination.tag.placeholder')}
+            placeholder={t('withdraw.btc.destination.fields.address.placeholder')}
           />
 
           <TableBox padding="sp01 sp03">
-            <TableViewTitle>{t('withdraw.xrp.destination.label.withdraw.amount')}</TableViewTitle>
+            <TableViewTitle>{t('withdraw.btc.destination.label.withdraw.amount')}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewNote>{`${formatNumber(destinationAmount)} XRP`}</TableViewNote>
+              <TableViewNote>{`${formatNumber(balance)} BTC`}</TableViewNote>
             </TableViewBody>
 
             <HorizontalSeparator margin="sp02 0" />
 
-            <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
+            <TableViewTitle>{t('withdraw.btc.destination.label.network.costs')}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewNote>{`${formatNumber(ownerReserve)} XRP`}</TableViewNote>
+              <TableViewNote>{`${formatNumber(fee)} BTC`}</TableViewNote>
             </TableViewBody>
           </TableBox>
         </Content>
@@ -106,17 +94,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   );
 };
 
-Destination.defaultProps = {
-  accountData: {
-    reserve: {
-      baseReserve: 0,
-      ownerReserve: 0,
-      totalReserve: 0
-    }
-  }
-};
-
-Destination.propTypes = {
+Root.propTypes = {
   accountData: CustomPropTypes.Account.isRequired,
   onConfirmDestination: PropTypes.func.isRequired
 };
