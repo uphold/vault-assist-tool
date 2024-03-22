@@ -9,6 +9,7 @@ import info from './info.svg';
 import infoCircle from './infoCircle.svg';
 import infoRounded from './infoRounded.svg';
 import next from './next.svg';
+import pending from './pending.svg';
 import success from './success.svg';
 import ticker from './ticker.svg';
 import up from './up.svg';
@@ -26,6 +27,7 @@ export default {
   infoCircle,
   infoRounded,
   next,
+  pending,
   success,
   ticker,
   up,

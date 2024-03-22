@@ -2,7 +2,7 @@ import { Details } from './Details';
 import { Root } from './Root';
 import { Route } from '../../components/Route';
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { getBalance, getCurrency, getReserves, getSigners } from '../../lib/vault';
+import { getBalance, getCurrency, getFee, getReserves, getSigners } from '../../lib/vault';
 import { useEffect, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import PropTypes from 'prop-types';
@@ -19,16 +19,17 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
     }
   }, [accountData]);
 
-  const onConfirmAccess = async ({ address, network }) => {
+  const onConfirmAccess = async ({ address, descriptor, network }) => {
     const balance = await getBalance(network, address);
-    const signers = await getSigners(network, address);
+    const signers = await getSigners(network, address, descriptor);
     const reserve = await getReserves(network, address);
+    const fee = await getFee(network, address);
 
     if (!signers) {
       throw new Error(t('access.fields.address.errors.invalid', { currency: getCurrency(network) }));
     }
 
-    setAccountData({ address, balance, network, reserve, signers });
+    setAccountData({ address, balance, descriptor, fee, network, reserve, signers });
     history.push({ ...history.location, pathname: `${path}/details` });
   };
 

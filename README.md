@@ -14,9 +14,10 @@ This tool is available on the web at [https://uphold.github.io/vault-assist-tool
 
 1. Select the Vault you wish to access (XRP, BTC...)
 2. Enter your Vault address. This was emailed to you when you created the Vault. It is also available within the Uphold app.
-3. Enter your Vault and Backup Key
-4. Specify the destination address you wish to move funds.
-5. Confirm and view transaction on chain
+3. If you selected BTC, you will also need to enter your BTC Output descriptor. It was emailed to you when you created the Vault.
+4. Enter your Vault and Backup Key
+5. Specify the destination address you wish to move funds.
+6. Confirm and view transaction on chain
 
 
 ## Running Vault Assist Tool Locally
@@ -51,6 +52,12 @@ To run the local web server using [testnet](https://xrpl.org/parallel-networks.h
 
 ```sh
 yarn dev
+```
+
+You can run the local web server for Bitcoin [regtest mode](https://developer.bitcoin.org/examples/testing.html). This requires a local ElectrumX server with websockets enabled on port 50003 (ws://127.0.0.1:50003):
+
+```sh
+NET=local yarn dev
 ```
 
 ### Testing
