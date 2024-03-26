@@ -45,7 +45,7 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
       {...props}
     >
       <Mixed.div alignItems="center" display="flex" justifyContent="space-between">
-        <Small color="currentColor" fontWeight="600">
+        <Small color="n05" fontWeight="600">
           {title(item)}
         </Small>
 

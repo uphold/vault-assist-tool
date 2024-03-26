@@ -37,7 +37,7 @@ const plugins = [
   // Add support for Reanimated
   new DefinePlugin({
     __DEV__: isDevelopment,
-    process: { env: {} }
+    process: { env: { NET: JSON.stringify(process.env.NET) } }
   }),
   new ProvidePlugin({
     Buffer: ['buffer', 'Buffer'],
@@ -84,6 +84,11 @@ const webpackConfig = {
         exclude: /node_modules\/(?!events-logger).+/,
         test: /\.js?$/,
         use: 'babel-loader'
+      },
+      {
+        exclude: /node_modules/,
+        test: /\.(ts|tsx)$/,
+        use: ['ts-loader']
       },
       {
         test: /\.png$/,
@@ -144,11 +149,14 @@ const webpackConfig = {
       src: path.resolve('src'),
       'styled-components': path.resolve('node_modules/styled-components')
     },
+    extensions: ['.ts', '.js', '.json'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
+      net: false,
       stream: require.resolve('stream-browserify'),
+      tls: false,
       url: require.resolve('url')
     }
   }

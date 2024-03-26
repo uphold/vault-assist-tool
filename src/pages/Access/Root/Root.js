@@ -23,19 +23,19 @@ import PropTypes from 'prop-types';
 export const Root = ({ onConfirm, onGoBack }) => {
   const { t } = useTranslation();
   const history = useHistory();
+  const [selectedNetwork, setSelectedNetwork] = useState(Blockchain.XRPL);
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressInfoSheetVisible, setIsAddressInfoSheetVisible] = useState(false);
-
-  const selectedNetwork = Blockchain.XRPL;
+  const [isDescriptorInfoSheetVisible, setIsDescriptorInfoSheetVisible] = useState(false);
 
   const networkNames = Object.freeze({
     [Blockchain.XRPL]: 'XRP',
-    [Blockchain.BTC]: 'BTC (coming soon)'
+    [Blockchain.BTC]: 'BTC'
   });
 
   const networkOptions = [
     { isDisabled: false, label: networkNames[Blockchain.XRPL], value: `${Blockchain.XRPL}` },
-    { isDisabled: true, label: networkNames[Blockchain.BTC], value: `${Blockchain.BTC}` }
+    { isDisabled: false, label: networkNames[Blockchain.BTC], value: `${Blockchain.BTC}` }
   ];
 
   const onClickBack = () => {
@@ -54,14 +54,30 @@ export const Root = ({ onConfirm, onGoBack }) => {
   const { control, handleSubmit, setError } = form;
 
   const onSubmit = handleSubmit(async data => {
-    const { address } = data;
+    const { address, descriptor, network } = data;
+    const blockchain = parseInt(network.value, 10);
 
     setIsLoading(true);
     try {
-      await onConfirm({ address, network: selectedNetwork });
+      await onConfirm({ address, descriptor, network: blockchain });
     } catch (error) {
       setIsLoading(false);
       if (error?.message) {
+        if (blockchain === Blockchain.BTC) {
+          if (error.message === 'InsufficientFunds') {
+            setError('address', error.message);
+            toastErrors([
+              { message: t('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }) }
+            ]);
+
+            return;
+          }
+          if (error.message === 'TransactionPending') {
+            history.push({ ...history.location, pathname: `/pending` });
+
+            return;
+          }
+        }
         toastErrors([error]);
         setError('address', error.message);
       }
@@ -70,6 +86,7 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
   const dismissBottomsheet = () => {
     setIsAddressInfoSheetVisible(false);
+    setIsDescriptorInfoSheetVisible(false);
   };
 
   return (
@@ -91,8 +108,9 @@ export const Root = ({ onConfirm, onGoBack }) => {
             hideConfirm
             label={t('access.fields.network.label')}
             name="network"
+            onChange={item => setSelectedNetwork(parseInt(item.value, 10))}
             options={networkOptions}
-            placeholder={t('access.fields.network.placeholder')}
+            placeholder={networkNames[selectedNetwork]}
           />
 
           <TextField
@@ -106,6 +124,20 @@ export const Root = ({ onConfirm, onGoBack }) => {
             name="address"
             placeholder={t('access.fields.address.placeholder')}
           />
+
+          {selectedNetwork === Blockchain.BTC && (
+            <TextField
+              action={{
+                icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
+                onClick: () => setIsDescriptorInfoSheetVisible(true)
+              }}
+              control={control}
+              data-test="descriptor"
+              label={t('access.fields.descriptor.label')}
+              name="descriptor"
+              placeholder={t('access.fields.descriptor.placeholder')}
+            />
+          )}
         </Content>
 
         <SectionStickyFooter>
@@ -129,6 +161,21 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
             <Small>{t('access.fields.address.details.bullet2')}</Small>
           </UnorderedList>
+
+          <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
+        </ScrollableSection>
+      </BottomSheet>
+
+      <BottomSheet isVisible={isDescriptorInfoSheetVisible} onRequestClose={dismissBottomsheet}>
+        <NavigationBar
+          leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
+          title={t('access.fields.descriptor.details.header', { currency: getCurrency(selectedNetwork) })}
+        />
+
+        <ScrollableSection padding="sp02 sp05">
+          <Small marginBottom="sp03">{t('access.fields.descriptor.details.description1')}</Small>
+
+          <Small marginBottom="sp06">{t('access.fields.descriptor.details.description2')}</Small>
 
           <Button onPress={dismissBottomsheet}>{t('actions.okay')}</Button>
         </ScrollableSection>

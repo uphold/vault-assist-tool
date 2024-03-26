@@ -54,8 +54,12 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
   const onClose = () => setVisibility(false);
   const onOpen = () => setVisibility(true);
 
-  const onConfirm = () => {
-    props.onChange(optionsMap[selectedItem]);
+  const onConfirm = item => {
+    if (hideConfirm) {
+      props.onChange(optionsMap[item]);
+    } else {
+      props.onChange(optionsMap[selectedItem]);
+    }
 
     onClose();
   };
@@ -81,7 +85,7 @@ const BaseDynamicSelectField = forwardRef(({ options, portalId, hideConfirm, ...
                 onSelect={item => {
                   setSelectedItem(item);
                   if (hideConfirm) {
-                    onConfirm();
+                    onConfirm(item);
                   }
                 }}
                 ref={ref}
