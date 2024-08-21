@@ -45,9 +45,10 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
       {...props}
     >
       <Mixed.div alignItems="center" display="flex" justifyContent="space-between">
-        <Small color="n05" fontWeight="600">
-          {title(item)}
-        </Small>
+        <Mixed.div display="flex" gap="sp02" justifyContent="space-between">
+          <Small fontWeight="600">{title(item)}</Small>
+          {!!subtitle && <Small color="n05" dangerouslySetInnerHTML={{ __html: subtitle(item) }} textAlign="left" />}
+        </Mixed.div>
 
         {item === selectedItem && (
           <Mixed.div
@@ -61,16 +62,6 @@ export const ListBox = forwardRef(({ items, isDisabled, onSelect, selectedItem, 
           </Mixed.div>
         )}
       </Mixed.div>
-
-      {!!subtitle && (
-        <Small
-          color="n05"
-          dangerouslySetInnerHTML={{ __html: subtitle(item) }}
-          marginTop="sp01"
-          onClick={event => event.target.tagName.toLowerCase() === 'a' && event.stopPropagation()}
-          textAlign="left"
-        />
-      )}
     </Motion.button>
   ))
 );
@@ -86,9 +77,9 @@ ListBox.displayName = 'forwardRef(ListBox)';
 
 ListBox.propTypes = {
   isDisabled: PropTypes.func,
-  items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
+  items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])),
   onSelect: PropTypes.func.isRequired,
-  selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   subtitle: PropTypes.func,
   title: PropTypes.func.isRequired
 };

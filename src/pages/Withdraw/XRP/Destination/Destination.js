@@ -13,11 +13,13 @@ import { TableViewTitle } from '../../../../components/TableView/TableViewTitle'
 import { TextField } from '../../../../forms/fields/TextField';
 import { destinationSchema } from '../../../../forms/schemas';
 import { formatNumber } from '../../../../utils/formatNumber';
+import { getCurrency, signersRequired } from '../../../../lib/vault';
 import { toastErrors } from '../../../../utils/toastErrors';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../../../hooks/useTranslation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import BigNumber from 'bignumber.js';
 import CustomPropTypes from '../../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
@@ -29,46 +31,76 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
     history.goBack();
   };
 
-  const { balance, reserve, address: sourceAddress, network } = accountData;
-  const { ownerReserve = 0, totalReserve = 0 } = reserve;
+  const { balance, fee: baseFee, reserve, token, trustlines, address: sourceAddress, network } = accountData;
+  const { ownerReserve = '0', totalReserve = '0' } = reserve;
 
-  const remainingBalance = Number(balance) - Number(totalReserve);
-  const destinationAmount = remainingBalance + totalReserve;
+  const totalReserveAmount = new BigNumber(totalReserve);
+  const remainingBalance = new BigNumber(balance).minus(totalReserveAmount);
+  const destinationAmount = new BigNumber(remainingBalance).plus(totalReserveAmount);
+
+  // Fee calculations
+  const signerMultiplier = new BigNumber(signersRequired).plus(1);
+  const transactionFee = new BigNumber(baseFee).times(signerMultiplier);
+  const fee = trustlines.length > 0 ? transactionFee.toString() : ownerReserve;
+  const transactionsRequired = token ? 2 : 1;
+  const totalFees = transactionFee.times(transactionsRequired).toString();
+
+  // Send max tokens when not closing vault
+  const tokenAmount = token
+    ? {
+        currency: token.currency,
+        issuer: token.account,
+        value: token.balance
+      }
+    : remainingBalance.minus(totalFees).toString();
 
   const form = useForm({
     mode: 'onChange',
     resolver: yupResolver(destinationSchema(sourceAddress, network))
   });
 
-  const { control, handleSubmit } = form;
+  const { control, handleSubmit, setError } = form;
 
-  const onSubmit = handleSubmit(data => {
+  const onSubmit = handleSubmit(async data => {
     const { address, destinationTag } = data;
 
-    onConfirmDestination({
-      destinationTag: destinationTag.length ? destinationTag : undefined,
-      fee: ownerReserve,
-      to: address
-    });
+    try {
+      await onConfirmDestination({
+        destinationTag: destinationTag.length ? destinationTag : undefined,
+        fee,
+        from: sourceAddress,
+        to: address,
+        tokenAmount
+      });
+    } catch (error) {
+      setError('address', [error]);
+      toastErrors([error]);
+    }
   }, toastErrors);
 
   return (
     <Fragment>
       <Navigation
         leftAction={<NavigationAction name="back" onClick={onClickBack} />}
-        title={t('withdraw.xrp.navigation.title')}
+        title={t('withdraw.xrp.navigation.title', {
+          currency: getCurrency(token?.currency ? token.currency : network)
+        })}
       />
 
       <ScrollableSection>
         <Content paddingBottom="0" paddingTop="0">
           <Alert marginBottom="18px" variant="warning">
-            {t('withdraw.xrp.destination.warning')}
+            {t('withdraw.xrp.destination.warning', {
+              currency: token?.currency ? getCurrency(token.currency) : 'XRPL'
+            })}
           </Alert>
 
           <TextField
             control={control}
             data-test="address"
-            label={t('withdraw.xrp.destination.fields.address.label')}
+            label={t('withdraw.xrp.destination.fields.address.label', {
+              currency: getCurrency(token?.currency ? token.currency : network)
+            })}
             name="address"
             placeholder={t('withdraw.xrp.destination.fields.address.placeholder')}
           />
@@ -81,21 +113,49 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
             placeholder={t('withdraw.xrp.destination.fields.destination.tag.placeholder')}
           />
 
-          <TableBox padding="sp01 sp03">
-            <TableViewTitle>{t('withdraw.xrp.destination.label.withdraw.amount')}</TableViewTitle>
+          {token?.currency && token?.balance ? (
+            <TableBox padding="sp01 sp03">
+              <TableViewTitle>{t('withdraw.xrp.destination.label.withdraw.amount')}</TableViewTitle>
 
-            <TableViewBody>
-              <TableViewNote>{`${formatNumber(destinationAmount)} XRP`}</TableViewNote>
-            </TableViewBody>
+              <TableViewBody>
+                <TableViewNote>{`${formatNumber(token.balance)} ${getCurrency(token.currency)}`}</TableViewNote>
+              </TableViewBody>
 
-            <HorizontalSeparator margin="sp02 0" />
+              <HorizontalSeparator margin="sp02 0" />
 
-            <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
+              <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
 
-            <TableViewBody>
-              <TableViewNote>{`${formatNumber(ownerReserve)} XRP`}</TableViewNote>
-            </TableViewBody>
-          </TableBox>
+              <TableViewBody>
+                <TableViewNote>{`${formatNumber(totalFees)} XRP`}</TableViewNote>
+              </TableViewBody>
+
+              <HorizontalSeparator margin="sp02 0" />
+
+              <TableViewTitle>{t('withdraw.xrp.destination.label.reserve.credit')}</TableViewTitle>
+
+              <TableViewBody>
+                <TableViewNote>{`${formatNumber(ownerReserve)} XRP`}</TableViewNote>
+              </TableViewBody>
+            </TableBox>
+          ) : (
+            <TableBox padding="sp01 sp03">
+              <TableViewTitle>{t('withdraw.xrp.destination.label.withdraw.amount')}</TableViewTitle>
+
+              <TableViewBody>
+                <TableViewNote>{`${formatNumber(
+                  trustlines.length > 0 ? remainingBalance.toString() : destinationAmount.toString()
+                )} XRP`}</TableViewNote>
+              </TableViewBody>
+
+              <HorizontalSeparator margin="sp02 0" />
+
+              <TableViewTitle>{t('withdraw.xrp.destination.label.network.costs')}</TableViewTitle>
+
+              <TableViewBody>
+                <TableViewNote>{`${formatNumber(trustlines.length > 0 ? totalFees : ownerReserve)} XRP`}</TableViewNote>
+              </TableViewBody>
+            </TableBox>
+          )}
         </Content>
 
         <SectionStickyFooter>

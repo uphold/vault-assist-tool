@@ -1,4 +1,4 @@
-import { Blockchain, getCurrency } from '../../../lib/vault';
+import { Blockchain, getCurrency, getTokenList } from '../../../lib/vault';
 import { BottomSheet } from '../../../components/BottomSheet';
 import { Button } from '../../../components/Button';
 import { Content, Navigation } from '../../../layouts';
@@ -23,7 +23,7 @@ import PropTypes from 'prop-types';
 export const Root = ({ onConfirm, onGoBack }) => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [selectedNetwork, setSelectedNetwork] = useState(Blockchain.XRPL);
+  const [selectedAsset, setSelectedAsset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressInfoSheetVisible, setIsAddressInfoSheetVisible] = useState(false);
   const [isDescriptorInfoSheetVisible, setIsDescriptorInfoSheetVisible] = useState(false);
@@ -33,10 +33,37 @@ export const Root = ({ onConfirm, onGoBack }) => {
     [Blockchain.BTC]: 'BTC'
   });
 
-  const networkOptions = [
-    { isDisabled: false, label: networkNames[Blockchain.XRPL], value: `${Blockchain.XRPL}` },
-    { isDisabled: false, label: networkNames[Blockchain.BTC], value: `${Blockchain.BTC}` }
-  ];
+  const assetType = Object.freeze({
+    [Blockchain.XRPL]: 'XRPL Token'
+  });
+
+  // Build selection options from supported networks
+  const supportedNetworkList = [Blockchain.XRPL, Blockchain.BTC];
+
+  const assetOptions = [];
+
+  supportedNetworkList.forEach(blockchain => {
+    const tokens = getTokenList(blockchain);
+
+    assetOptions.push({
+      data: { blockchain },
+      isDisabled: false,
+      label: networkNames[blockchain],
+      value: assetOptions.length
+    });
+
+    if (tokens.length > 0) {
+      tokens.forEach(token => {
+        assetOptions.push({
+          data: { blockchain, token },
+          isDisabled: false,
+          label: token.name,
+          subtitle: assetType[blockchain],
+          value: assetOptions.length
+        });
+      });
+    }
+  });
 
   const onClickBack = () => {
     onGoBack();
@@ -45,21 +72,21 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
   const form = useForm({
     defaultValues: {
-      network: networkOptions[0]
+      asset: assetOptions[0]
     },
     mode: 'onChange',
-    resolver: yupResolver(addressSchema(selectedNetwork))
+    resolver: yupResolver(addressSchema(assetOptions[selectedAsset].data))
   });
 
   const { control, handleSubmit, setError } = form;
 
   const onSubmit = handleSubmit(async data => {
-    const { address, descriptor, network } = data;
-    const blockchain = parseInt(network.value, 10);
+    const { address, descriptor, asset } = data;
+    const { blockchain, token } = assetOptions[asset.value].data;
 
     setIsLoading(true);
     try {
-      await onConfirm({ address, descriptor, network: blockchain });
+      await onConfirm({ address, descriptor, network: blockchain, token });
     } catch (error) {
       setIsLoading(false);
       if (error?.message) {
@@ -67,7 +94,7 @@ export const Root = ({ onConfirm, onGoBack }) => {
           if (error.message === 'InsufficientFunds') {
             setError('address', error.message);
             toastErrors([
-              { message: t('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }) }
+              { message: t('access.fields.address.errors.invalid', { currency: getCurrency(blockchain) }) }
             ]);
 
             return;
@@ -104,13 +131,13 @@ export const Root = ({ onConfirm, onGoBack }) => {
 
           <DynamicSelectField
             control={control}
-            data-test="network"
+            data-test="asset"
             hideConfirm
-            label={t('access.fields.network.label')}
-            name="network"
-            onChange={item => setSelectedNetwork(parseInt(item.value, 10))}
-            options={networkOptions}
-            placeholder={networkNames[selectedNetwork]}
+            label={t('access.fields.asset.label')}
+            name="asset"
+            onChange={item => setSelectedAsset(item.value)}
+            options={assetOptions}
+            placeholder={assetOptions[selectedAsset].label}
           />
 
           <TextField
@@ -120,12 +147,14 @@ export const Root = ({ onConfirm, onGoBack }) => {
             }}
             control={control}
             data-test="address"
-            label={t('access.fields.address.label', { currency: getCurrency(selectedNetwork) })}
+            label={t('access.fields.address.label', {
+              currency: getCurrency(assetOptions[selectedAsset].data.blockchain)
+            })}
             name="address"
             placeholder={t('access.fields.address.placeholder')}
           />
 
-          {selectedNetwork === Blockchain.BTC && (
+          {assetOptions[selectedAsset].data.blockchain === Blockchain.BTC && (
             <TextField
               action={{
                 icon: <Icon marginRight="14px" name="infoCircle" size={24} />,
@@ -150,7 +179,9 @@ export const Root = ({ onConfirm, onGoBack }) => {
       <BottomSheet isVisible={isAddressInfoSheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
-          title={t('access.fields.address.details.header', { currency: getCurrency(selectedNetwork) })}
+          title={t('access.fields.address.details.header', {
+            currency: getCurrency(assetOptions[selectedAsset].data.blockchain)
+          })}
         />
 
         <ScrollableSection padding="sp02 sp05">
@@ -169,7 +200,9 @@ export const Root = ({ onConfirm, onGoBack }) => {
       <BottomSheet isVisible={isDescriptorInfoSheetVisible} onRequestClose={dismissBottomsheet}>
         <NavigationBar
           leftAction={<NavigationAction name="expand" onClick={dismissBottomsheet} />}
-          title={t('access.fields.descriptor.details.header', { currency: getCurrency(selectedNetwork) })}
+          title={t('access.fields.descriptor.details.header', {
+            currency: getCurrency(assetOptions[selectedAsset].data.blockchain)
+          })}
         />
 
         <ScrollableSection padding="sp02 sp05">
