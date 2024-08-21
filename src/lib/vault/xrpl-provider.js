@@ -2,13 +2,22 @@ import './constants';
 import { Blockchain, WalletService } from 'vault-wallet-toolkit';
 import { dropsToXrp, encode, multisign, xrpToDrops } from 'xrpl';
 import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
+import { multisigRequirements } from './network';
+export { convertHexToString } from 'xrpl';
+import BigNumber from 'bignumber.js';
 
 const blockchain = Blockchain.XRPL;
 
+export const transactionTypes = Object.freeze({
+  AccountDelete: 'AccountDelete',
+  Payment: 'Payment',
+  TrustSet: 'TrustSet'
+});
+
 // signer requirements for multisig vault
 const requirements = {
-  signerEntries: 3,
-  signerQuorum: 2
+  signerEntries: multisigRequirements.entries,
+  signerQuorum: multisigRequirements.signers
 };
 
 export const { signTransaction } = WalletService;
@@ -35,6 +44,12 @@ const getAccountInfo = async address => {
   return await instance.request({ account: address, command: 'account_info', signer_lists: true });
 };
 
+const getTrustlines = async address => {
+  const { instance } = await getXrplProvider();
+
+  return await instance.request({ account: address, command: 'account_lines' });
+};
+
 export const getLedgerReserve = async () => {
   // current ledger reserve values
   const {
@@ -45,7 +60,7 @@ export const getLedgerReserve = async () => {
     }
   } = await getServerInfo();
 
-  return { baseReserve, ownerReserve };
+  return { baseReserve: new BigNumber(baseReserve).toString(), ownerReserve: new BigNumber(ownerReserve).toString() };
 };
 
 export const getAccountReserve = async address => {
@@ -59,7 +74,7 @@ export const getAccountReserve = async address => {
   } = await getAccountInfo(address);
 
   // total reserve xrp on this account
-  return baseReserve + ownerCount * ownerReserve;
+  return new BigNumber(ownerCount).times(ownerReserve).plus(baseReserve).toString();
 };
 
 export const getAccountSigners = async address => {
@@ -86,28 +101,81 @@ export const getAccountSigners = async address => {
   }
 };
 
+export const getAccountTrustlines = async address => {
+  // get account trustline list
+  const {
+    result: { lines }
+  } = await getTrustlines(address);
+
+  return lines;
+};
+
+export const getTransactionFee = async () => {
+  const { instance } = await getXrplProvider();
+  // current ledger reserve values
+  const {
+    result: {
+      info: {
+        load_factor,
+        validated_ledger: { base_fee_xrp }
+      }
+    }
+  } = await getServerInfo();
+
+  return new BigNumber(base_fee_xrp).times(load_factor).times(instance.feeCushion).toString();
+};
+
 export const buildTransaction = async ({
   to,
   from,
   fee,
   destinationTag,
   transactionType,
+  limitAmount,
+  amount,
+  queued = 0,
   signerCounts = requirements.signerQuorum
 }) => {
   const { instance } = await getXrplProvider();
 
-  return encode(
-    await instance.autofill(
-      {
-        Account: from,
-        Destination: to,
-        DestinationTag: destinationTag,
-        Fee: xrpToDrops(fee),
-        TransactionType: transactionType
-      },
-      signerCounts
-    )
-  );
+  // Closing account or sending payments require "to"
+  // Trust lines require "limitAmount" of { currency, issuer, value }
+  const baseParams = {
+    Account: from,
+    Destination: to,
+    DestinationTag: destinationTag,
+    Fee: fee ? xrpToDrops(fee) : undefined,
+    LimitAmount: limitAmount,
+    TransactionType: transactionType
+  };
+
+  // Amount is either XRP, or specific token
+  const paymentParams = amt => {
+    if (!amt) {
+      return {};
+    }
+
+    switch (typeof amt) {
+      case 'string':
+        return { Amount: xrpToDrops(amt) };
+
+      default:
+        return {
+          Amount: {
+            currency: amt.currency,
+            issuer: amt.issuer,
+            value: amt.value
+          },
+          // tfPartialPayment flag --> https://xrpl.org/docs/references/protocol/transactions/types/payment#payment-flags
+          Flags: 131072
+        };
+    }
+  };
+
+  const autofilled = await instance.autofill({ ...baseParams, ...paymentParams(amount) }, signerCounts);
+  const { Sequence: sequence } = autofilled;
+
+  return encode({ ...autofilled, Sequence: sequence + queued });
 };
 
 export const sendTransaction = async transaction => {
@@ -119,9 +187,18 @@ export const sendTransaction = async transaction => {
       Destination: to,
       DestinationTag: destinationTag,
       hash,
-      meta: { DeliveredAmount: amount }
+      TransactionType: transactionType,
+      meta: { delivered_amount: amount }
     }
   } = await instance.submitAndWait(transaction);
 
-  return { amount: dropsToXrp(amount), destinationTag, from, hash, network: blockchain, to };
+  return {
+    amount: typeof amount === 'string' ? dropsToXrp(amount) : amount,
+    destinationTag,
+    from,
+    hash,
+    network: blockchain,
+    to,
+    transactionType
+  };
 };

@@ -1,22 +1,33 @@
 import './constants';
-import { Network, getNetworkEnv } from './network';
+import { Network, getNetworkEnv, multisigRequirements } from './network';
 import { ValidationUtils, Blockchain as VaultBlockchain, WalletService } from 'vault-wallet-toolkit';
 import { Wallet } from 'vault-wallet-toolkit/lib/core/Wallet';
 import { bitcoinProvider } from './btc-provider';
 import {
+  convertHexToString,
   buildTransaction as createXrplTransaction,
   getAccountReserve,
+  getAccountTrustlines,
   getLedgerReserve,
   getBalance as getXrpBalance,
   getAccountSigners as getXrpSigners,
+  getTransactionFee as getXrpTransactionFee,
   sendTransaction as sendXrplTransaction,
-  multisigner as xrplMultiSigner
+  multisigner as xrplMultiSigner,
+  transactionTypes as xrplTransactionTypes
 } from './xrpl-provider';
 import { translate } from '../../lib/i18n';
+import { tokens as xrplMainnetTokens } from './xrpl-tokenlist-mainnet.json';
+import { tokens as xrplTestnetTokens } from './xrpl-tokenlist-testnet.json';
 
 export const Blockchain = VaultBlockchain;
 export const { validateMnemonic } = ValidationUtils;
 export const { signTransaction } = WalletService;
+export const { signers: signersRequired } = multisigRequirements;
+export const transactionTypes = Object.freeze({
+  [Blockchain.XRPL]: xrplTransactionTypes,
+  [Blockchain.BTC]: {}
+});
 
 export const validateAddress = (network, address) => {
   return ValidationUtils.validateAddress(network, address, getNetworkEnv());
@@ -30,14 +41,15 @@ export const validateDescriptor = descriptor => {
   }
 };
 
-export const getCurrency = blockchain => {
-  switch (blockchain) {
+export const getCurrency = currency => {
+  switch (currency) {
     case Blockchain.XRPL:
       return 'XRP';
     case Blockchain.BTC:
       return 'BTC';
     default:
-      break;
+      // use for XRPL tokens to convert from hex
+      return /^[A-F0-9]+$/i.test(currency) ? convertHexToString(currency).replace(/[^\x20-\x7E]/g, '') : currency;
   }
 };
 
@@ -68,11 +80,14 @@ export const getAddress = (blockchain, key) => {
 };
 
 export const getFee = async (blockchain, from) => {
-  if (blockchain === Blockchain.BTC) {
-    return await bitcoinProvider.calculateTransactionFee(from);
+  switch (blockchain) {
+    case Blockchain.XRPL:
+      return await getXrpTransactionFee();
+    case Blockchain.BTC:
+      return await bitcoinProvider.calculateTransactionFee(from);
+    default:
+      return '0';
   }
-
-  return 0;
 };
 
 export const isKeySigner = (blockchain, key, signers) => {
@@ -110,6 +125,16 @@ export const createTransaction = async (blockchain, data) => {
   } catch (error) {
     console.error(error?.message);
     throw new Error(translate('messages.error.default'));
+  }
+};
+
+export const processTransactionResponses = (blockchain, responses, destinationData) => {
+  if (blockchain === Blockchain.XRPL) {
+    return {
+      ...destinationData,
+      hash: responses[0].hash,
+      network: blockchain
+    };
   }
 };
 
@@ -154,10 +179,34 @@ export const getReserves = async (blockchain, address) => {
 export const getBalance = async (blockchain, address) => {
   switch (blockchain) {
     case Blockchain.XRPL:
-      return await getXrpBalance(address);
+      try {
+        return await getXrpBalance(address);
+      } catch {
+        return '0';
+      }
     case Blockchain.BTC:
       return await bitcoinProvider.getAddressBalance(address);
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
+  }
+};
+
+export const getTokenFromTrustline = (trustlines, token) =>
+  token && trustlines.find(({ account, currency }) => account === token?.issuer && currency === token?.currency);
+
+export const getTrustlines = async (blockchain, address) => {
+  if (blockchain === Blockchain.XRPL) {
+    return await getAccountTrustlines(address);
+  }
+
+  return [];
+};
+
+export const getTokenList = blockchain => {
+  switch (blockchain) {
+    case Blockchain.XRPL:
+      return getNetworkEnv() === Network.PRODUCTION ? xrplMainnetTokens : xrplTestnetTokens;
+    default:
+      return [];
   }
 };

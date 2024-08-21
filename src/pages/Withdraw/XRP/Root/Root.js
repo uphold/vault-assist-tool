@@ -11,6 +11,7 @@ import { Semibold } from '../../../../components/Typography/Semibold';
 import { formatNumber } from '../../../../utils/formatNumber';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../../../hooks/useTranslation';
+import BigNumber from 'bignumber.js';
 import CustomPropTypes from '../../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
@@ -23,9 +24,9 @@ export const Root = ({ accountData, onContinueWithdraw }) => {
   };
 
   const { balance, reserve } = accountData;
-  const { ownerReserve = 0, totalReserve = 0 } = reserve;
+  const { ownerReserve = '0', totalReserve = '0' } = reserve;
 
-  const remainingBalance = Number(balance) - Number(totalReserve);
+  const remainingBalance = new BigNumber(balance).minus(totalReserve);
 
   return (
     <Fragment>

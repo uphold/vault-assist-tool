@@ -4,29 +4,45 @@ import { svgs } from '../../lib/svgs';
 import { useTheme } from '../../hooks/useTheme';
 import PropTypes from 'prop-types';
 
-export const Svg = forwardRef(({ color, customComponent, height, name, size, testID, width, ...props }, ref) => {
-  const { name: themeName } = useTheme();
-  const { icons, images } = svgs;
+export const Svg = forwardRef(
+  ({ color, customComponent, height, tokenSymbol, name, size, testID, width, ...props }, ref) => {
+    const { name: themeName } = useTheme();
+    const { icons, images, tokens } = svgs;
 
-  const svg = customComponent || images[name] || icons[name];
+    const svg = customComponent || images[name] || icons[name];
 
-  const Component = svg?.[themeName] || svg;
+    const Component = svg?.[themeName] || svg;
 
-  if (!Component) {
-    return null;
+    if (tokenSymbol) {
+      const TokenIcon = tokens[tokenSymbol] || tokens.Default;
+
+      return (
+        <TokenIcon
+          height={height || size}
+          ref={ref}
+          width={width || size}
+          {...(testID && { 'data-testid': testID })}
+          {...props}
+        />
+      );
+    }
+
+    if (!Component) {
+      return null;
+    }
+
+    return (
+      <Component
+        fill={color ? styles.colors?.[color] || color : undefined}
+        height={height || size}
+        ref={ref}
+        width={width || size}
+        {...(testID && { 'data-testid': testID })}
+        {...props}
+      />
+    );
   }
-
-  return (
-    <Component
-      fill={color ? styles.colors?.[color] || color : undefined}
-      height={height || size}
-      ref={ref}
-      width={width || size}
-      {...(testID && { 'data-testid': testID })}
-      {...props}
-    />
-  );
-});
+);
 
 Svg.defaultProps = {
   color: undefined,
@@ -35,6 +51,7 @@ Svg.defaultProps = {
   name: undefined,
   size: 20,
   testID: undefined,
+  tokenSymbol: undefined,
   width: undefined
 };
 
@@ -47,5 +64,6 @@ Svg.propTypes = {
   name: PropTypes.string,
   size: PropTypes.number,
   testID: PropTypes.string,
+  tokenSymbol: PropTypes.string,
   width: PropTypes.number
 };

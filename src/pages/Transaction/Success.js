@@ -1,13 +1,14 @@
 import { Animation } from '../../components/Animation';
-import { Blockchain, getCurrency, getTransactionLink } from '../../lib/vault';
+import { Blockchain, getCurrency, getTransactionLink, transactionTypes } from '../../lib/vault';
 import { Button } from '../../components/Button';
 import { CenterView, Content, Header, Navigation } from '../../layouts';
-import { Fragment, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { H3 } from '../../components/Typography/H3';
 import { HorizontalSeparator } from '../../components/HorizontalSeparator';
 import { NavigationAction } from '../../components/Navigation';
 import { ScrollableSection } from '../../components/ScrollableSection';
 import { SectionStickyFooter } from '../../components/SectionStickyFooter';
+import { Small } from '../../components/Typography/Small';
 import { TableBox } from '../../components/TableView/TableBox';
 import { TableViewBody } from '../../components/TableView/TableViewBody';
 import { TableViewNote } from '../../components/TableView/TableViewNote';
@@ -22,7 +23,56 @@ export const Success = ({ transactionData, onFinish }) => {
   const { t } = useTranslation();
   const [animating, setAnimating] = useState(true);
 
-  const { to, destinationTag, amount, network, hash } = transactionData;
+  const { to, destinationTag, amount, transactionType, tokenAmount: token, network, hash } = transactionData;
+
+  const { header, description, transferAmount, transferLabel } = useMemo(() => {
+    switch (network) {
+      case Blockchain.XRPL:
+        if (transactionType === transactionTypes[Blockchain.XRPL].Payment) {
+          // token sent, trust line closed
+          if (token) {
+            return {
+              description: t('transaction.success.token.description', { currency: getCurrency(token?.currency) }),
+              header: t('transaction.success.token.header', { currency: getCurrency(token?.currency) }),
+              transferAmount: `${formatNumber(token?.value)} ${getCurrency(token?.currency)}`,
+              transferLabel: t('transaction.success.details.label.amount.transferred')
+            };
+          }
+
+          // xrp transfer only
+          return {
+            description: t('transaction.success.transfer.description'),
+            header: t('transaction.success.transfer.header', { currency: getCurrency(network) }),
+            transferAmount: `${formatNumber(amount)} ${getCurrency(network)}`,
+            transferLabel: t('transaction.success.details.label.amount.transferred')
+          };
+        }
+
+        if (transactionType === transactionTypes[Blockchain.XRPL].TrustSet) {
+          // only trust line closed
+          return {
+            description: t('transaction.success.token.description', { currency: getCurrency(token?.currency) }),
+            header: t('transaction.success.trustline.header', { currency: getCurrency(token?.currency) }),
+            transferAmount: `${formatNumber(amount)} ${getCurrency(network)}`,
+            transferLabel: t('transaction.success.details.label.amount.transferred')
+          };
+        }
+
+        // fully close account
+        return {
+          header: t('transaction.success.header', { currency: getCurrency(network) }),
+          transferAmount: `${formatNumber(amount)} ${getCurrency(network)}`,
+          transferLabel: t('transaction.success.details.label.reserve.credited')
+        };
+
+      default:
+        return {
+          header: t('transaction.success.pending.header', { currency: getCurrency(network) }),
+          transferAmount: `${formatNumber(amount)} ${getCurrency(network)}`,
+          transferLabel: t('transaction.success.details.label.amount.transferred')
+        };
+    }
+  }, [amount, network, token, transactionType]);
 
   return animating ? (
     <CenterView>
@@ -46,20 +96,21 @@ export const Success = ({ transactionData, onFinish }) => {
       <ScrollableSection>
         <Content paddingTop="12px">
           <Header alignItems="center">
-            <H3 marginBottom="sp03" textAlign="center">
-              {network === Blockchain.XRPL
-                ? t('transaction.success.header', { currency: getCurrency(network) })
-                : t('transaction.success.pending.header', { currency: getCurrency(network) })}
+            <H3 marginBottom={description ? '0' : 'sp03'} textAlign="center">
+              {header}
             </H3>
           </Header>
+          {description && (
+            <Small marginBottom="sp05" textAlign="center">
+              {description}
+            </Small>
+          )}
 
           <TableBox padding="sp01 sp03">
-            <TableViewTitle>{t('transaction.success.details.label.amount.transferred')}</TableViewTitle>
+            <TableViewTitle>{transferLabel}</TableViewTitle>
 
             <TableViewBody>
-              <TableViewNote>
-                {formatNumber(amount)} {getCurrency(network)}
-              </TableViewNote>
+              <TableViewNote>{transferAmount}</TableViewNote>
             </TableViewBody>
 
             <HorizontalSeparator margin="sp02 0" />

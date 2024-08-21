@@ -1,7 +1,7 @@
 /* eslint-disable no-process-env */
 import { Access, Landing } from './pages';
 import { BTC, XRP } from './pages/Withdraw';
-import { Blockchain, sendTransaction } from './lib/vault';
+import { Blockchain, processTransactionResponses, sendTransaction } from './lib/vault';
 import { Failure, Pending, Success, Transaction } from './pages/Transaction';
 import { Fragment, useEffect, useState } from 'react';
 import { IconDefs } from './components/IconDefs';
@@ -29,6 +29,7 @@ export const App = () => {
   const [isGuarded, setIsGuarded] = useState(true);
   const [accountData, setAccountData] = useState();
   const [preparedTransaction, setPreparedTransaction] = useState();
+  const [preparedTransactions, setPreparedTransactions] = useState();
   const [transactionStatus, setTransactionStatus] = useState(TransactionStatus.unknown);
   const [transactionData, setTransactionData] = useState();
 
@@ -59,6 +60,7 @@ export const App = () => {
     setIsGuarded(true);
     setAccountData();
     setPreparedTransaction();
+    setPreparedTransactions();
     setTransactionData();
     setTransactionStatus(TransactionStatus.unknown);
   };
@@ -70,12 +72,18 @@ export const App = () => {
   };
 
   const onConfirmAccount = accountData => {
-    const { network } = accountData;
+    const { network, token, trustlines } = accountData;
 
     setAccountData(accountData);
     switch (network) {
       case Blockchain.XRPL:
-        history.push({ ...history.location, pathname: `/withdraw/xrp` });
+        if (token) {
+          history.push({ ...history.location, pathname: `/withdraw/xrp/destination` });
+        } else if (trustlines.length > 0) {
+          history.push({ ...history.location, pathname: `/withdraw/xrp/notice` });
+        } else {
+          history.push({ ...history.location, pathname: `/withdraw/xrp` });
+        }
         break;
       case Blockchain.BTC:
         history.push({ ...history.location, pathname: `/withdraw/btc` });
@@ -85,10 +93,34 @@ export const App = () => {
     }
   };
 
+  const onConfirmBatchTransaction = preparedTransactions => {
+    setPreparedTransactions(preparedTransactions);
+    setTransactionStatus(TransactionStatus.pending);
+    history.replace('/transaction');
+  };
+
   const onConfirmTransaction = preparedTransaction => {
     setPreparedTransaction(preparedTransaction);
     setTransactionStatus(TransactionStatus.pending);
     history.replace('/transaction');
+  };
+
+  const submitBatchTransactions = async preparedTransactions => {
+    try {
+      const { network, transactions, destinationData } = preparedTransactions;
+
+      const queue = transactions.map(transaction => sendTransaction(network, transaction));
+
+      const responses = await Promise.all(queue);
+
+      const transactionData = processTransactionResponses(network, responses, destinationData);
+
+      setTransactionData(transactionData);
+      setTransactionStatus(TransactionStatus.success);
+    } catch (error) {
+      console.error(error);
+      setTransactionStatus(TransactionStatus.failure);
+    }
   };
 
   const submitTransaction = async preparedTransaction => {
@@ -124,6 +156,7 @@ export const App = () => {
                 accountData={accountData}
                 component={XRP}
                 key="xrp"
+                onConfirmBatchTransaction={onConfirmBatchTransaction}
                 onConfirmTransaction={onConfirmTransaction}
                 path="/withdraw/xrp"
                 pendingTransaction={transactionStatus !== TransactionStatus.unknown}
@@ -148,7 +181,11 @@ export const App = () => {
                   path="/transaction"
                   submitTransaction={async () => {
                     if (!isGuarded) {
-                      await submitTransaction(preparedTransaction);
+                      if (preparedTransactions) {
+                        await submitBatchTransactions(preparedTransactions);
+                      } else {
+                        await submitTransaction(preparedTransaction);
+                      }
                     }
                   }}
                 />
@@ -170,6 +207,7 @@ export const App = () => {
                 onFinish={cleanSession}
                 path="/transaction/failure"
                 preparedTransaction={preparedTransaction}
+                preparedTransactions={preparedTransactions}
               />
 
               <Route component={Pending} key="pending" onFinish={cleanSession} path="/pending" />

@@ -16,6 +16,7 @@ import { TableViewTitle } from '../../../components/TableView/TableViewTitle';
 import { formatNumber } from '../../../utils/formatNumber';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from '../../../hooks/useTranslation';
+import BigNumber from 'bignumber.js';
 import CustomPropTypes from '../../../lib/propTypes';
 import PropTypes from 'prop-types';
 
@@ -27,10 +28,12 @@ export const Details = ({ accountData, onConfirm }) => {
     history.goBack();
   };
 
-  const { address, balance, reserve, network } = accountData;
+  const { address, balance: totalBalance, reserve, network, token, trustlines } = accountData;
   const { totalReserve = 0 } = reserve;
 
-  const remainingBalance = Number(balance) - Number(totalReserve);
+  const balance = new BigNumber(totalBalance).minus(totalReserve);
+  // Hide negative balance
+  const remainingBalance = balance.gt(0) ? balance : '0';
 
   return (
     <Fragment>
@@ -64,6 +67,23 @@ export const Details = ({ accountData, onConfirm }) => {
               <TableViewText>{`${formatNumber(remainingBalance)} ${getCurrency(network)}`}</TableViewText>
             </TableViewBody>
 
+            {network === Blockchain.XRPL &&
+              trustlines.map(({ currency, balance }, index) => (
+                <Fragment key={index}>
+                  <HorizontalSeparator />
+
+                  <TableViewTitle>
+                    {t('access.details.balance.label', {
+                      currency: getCurrency(currency)
+                    })}
+                  </TableViewTitle>
+
+                  <TableViewBody>
+                    <TableViewText>{`${formatNumber(balance)} ${getCurrency(currency)}`}</TableViewText>
+                  </TableViewBody>
+                </Fragment>
+              ))}
+
             {network === Blockchain.XRPL ? (
               <Fragment>
                 <HorizontalSeparator />
@@ -79,7 +99,9 @@ export const Details = ({ accountData, onConfirm }) => {
         </Content>
 
         <SectionStickyFooter>
-          <Button onPress={onConfirm}>{t('actions.withdraw', { currency: getCurrency(network) })}</Button>
+          <Button onPress={onConfirm}>
+            {t('actions.withdraw', { currency: token ? getCurrency(token.currency) : getCurrency(network) })}
+          </Button>
         </SectionStickyFooter>
       </ScrollableSection>
     </Fragment>
@@ -89,7 +111,7 @@ export const Details = ({ accountData, onConfirm }) => {
 Details.defaultProps = {
   accountData: {
     reserve: {
-      totalReserve: 0
+      totalReserve: '0'
     }
   }
 };

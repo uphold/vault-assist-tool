@@ -2,9 +2,9 @@ import { Blockchain } from '../vault';
 import PropTypes from 'prop-types';
 
 const ReserveAmounts = PropTypes.shape({
-  baseReserve: PropTypes.number,
-  ownerReserve: PropTypes.number,
-  totalReserve: PropTypes.number
+  baseReserve: PropTypes.string,
+  ownerReserve: PropTypes.string,
+  totalReserve: PropTypes.string
 });
 
 const Account = PropTypes.shape({
@@ -22,12 +22,13 @@ const Destination = PropTypes.shape({
 });
 
 const Transaction = PropTypes.shape({
-  amount: PropTypes.string.isRequired,
+  amount: PropTypes.string,
   destinationTag: PropTypes.number,
   from: PropTypes.string.isRequired,
   hash: PropTypes.string.isRequired,
   network: PropTypes.oneOf(Object.values(Blockchain)).isRequired,
-  to: PropTypes.string.isRequired
+  to: PropTypes.string.isRequired,
+  token: PropTypes.object
 });
 
 const CustomPropTypes = {

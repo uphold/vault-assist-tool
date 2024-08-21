@@ -4,28 +4,28 @@ import { isValidDescriptor } from '../validations/isValidDescriptor';
 import { translate } from '../../lib/i18n';
 import { yup } from '../index';
 
-export const addressSchema = selectedNetwork => {
-  switch (selectedNetwork) {
+export const addressSchema = ({ blockchain }) => {
+  switch (blockchain) {
     case Blockchain.XRPL:
       return yup.object().shape({
         address: yup
           .string()
-          .required(translate('access.fields.address.errors.required', { currency: getCurrency(selectedNetwork) }))
+          .required(translate('access.fields.address.errors.required', { currency: getCurrency(blockchain) }))
           .test(
             'validation',
-            translate('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }),
-            val => isValidAddress(selectedNetwork, val, 0)
+            translate('access.fields.address.errors.invalid', { currency: getCurrency(blockchain) }),
+            val => isValidAddress(blockchain, val, 0)
           )
       });
     case Blockchain.BTC:
       return yup.object().shape({
         address: yup
           .string()
-          .required(translate('access.fields.address.errors.required', { currency: getCurrency(selectedNetwork) }))
+          .required(translate('access.fields.address.errors.required', { currency: getCurrency(blockchain) }))
           .test(
             'validation',
-            translate('access.fields.address.errors.invalid', { currency: getCurrency(selectedNetwork) }),
-            val => isValidAddress(selectedNetwork, val, 0)
+            translate('access.fields.address.errors.invalid', { currency: getCurrency(blockchain) }),
+            val => isValidAddress(blockchain, val, 0)
           ),
         descriptor: yup
           .string()
