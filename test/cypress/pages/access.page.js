@@ -2,7 +2,7 @@ import I18n from '../translations';
 import routes from '../fixtures/routes.json';
 
 const addressId = 'address';
-const networkId = 'network';
+const assetId = 'asset';
 const dynamicFormPortalId = '#dynamicFormPortal';
 
 const checkAccess = () => {
@@ -14,7 +14,7 @@ const setAddress = from => {
 };
 
 const selectNetwork = value => {
-  cy.findAndClick(networkId);
+  cy.findAndClick(assetId);
   cy.get(dynamicFormPortalId).within(() => {
     cy.findAllByText(value).eq(0).click();
   });
