@@ -32,6 +32,11 @@ const createVaultTestWallets = async () => {
   const vaultWallet = faucet.wallet;
   const vaultAddress = vaultWallet.address;
 
+  //Fund a destination wallet for testing
+  const destinationFaucet = await instance.fundWallet();
+  const destinationWallet = destinationFaucet.wallet;
+  const destination = destinationWallet.address;
+
   const signerWallets = createWallets(3).map(wallet => parseWallet(wallet));
   const signerListEntries = buildSignerListEntries(signerWallets);
 
@@ -45,9 +50,6 @@ const createVaultTestWallets = async () => {
   await instance.submitAndWait(transaction, { autofill: true, wallet: vaultWallet });
 
   const { ownerReserve } = await getLedgerReserve();
-
-  //Use blackhole destination: https://xrpl.org/addresses.html#special-addresses
-  const destination = 'rrrrrrrrrrrrrrrrrNAMEtxvNvQ';
 
   return {
     destination,
