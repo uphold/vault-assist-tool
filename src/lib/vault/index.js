@@ -203,10 +203,22 @@ export const getTrustlines = async (blockchain, address) => {
 };
 
 export const getTokenList = blockchain => {
-  switch (blockchain) {
-    case Blockchain.XRPL:
-      return getNetworkEnv() === Network.PRODUCTION ? xrplMainnetTokens : xrplTestnetTokens;
-    default:
-      return [];
+  if (blockchain === Blockchain.XRPL) {
+    switch (getNetworkEnv()) {
+      case Network.PRODUCTION:
+        return xrplMainnetTokens;
+      case Network.DEVELOPMENT:
+        // eslint-disable-next-line no-case-declarations
+        const testTokenList = JSON.parse(localStorage.getItem('testTokenList'));
+
+        // Use generated list when running e2e tests
+        if (testTokenList) {
+          return testTokenList;
+        }
+
+        return xrplTestnetTokens;
+      default:
+        return [];
+    }
   }
 };
