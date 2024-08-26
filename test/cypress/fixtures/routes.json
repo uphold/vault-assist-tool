@@ -7,5 +7,6 @@
   "transactionSuccess": "/transaction/success",
   "withdrawXrp": "/withdraw/xrp",
   "withdrawXrpConfirm": "/withdraw/xrp/confirm",
-  "withdrawXrpDestination": "/withdraw/xrp/destination"
+  "withdrawXrpDestination": "/withdraw/xrp/destination",
+  "withdrawXrpNotice": "/withdraw/xrp/notice"
 }

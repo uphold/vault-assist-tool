@@ -39,7 +39,7 @@ describe(`Creating test account (WARNING: this takes 15 minutes)`, { scrollBehav
     beforeEach(() => {
       cy.clickAccess();
       accessPage.checkAccess();
-      accessPage.selectNetwork(defaultCrypto);
+      accessPage.selectAsset(defaultCrypto);
 
       accessPage.setAddress(wallets.vaultAddress);
       cy.clickSubmit();

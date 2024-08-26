@@ -13,7 +13,7 @@ const setAddress = from => {
   cy.typeAndCheck(addressId, from);
 };
 
-const selectNetwork = value => {
+const selectAsset = value => {
   cy.findAndClick(assetId);
   cy.get(dynamicFormPortalId).within(() => {
     cy.findAllByText(value).eq(0).click();
@@ -32,6 +32,6 @@ export default {
   checkAccess,
   checkInvalid,
   checkRequired,
-  selectNetwork,
+  selectAsset,
   setAddress
 };

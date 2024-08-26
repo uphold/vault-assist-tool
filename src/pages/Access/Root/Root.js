@@ -52,7 +52,7 @@ export const Root = ({ onConfirm, onGoBack }) => {
       value: assetOptions.length
     });
 
-    if (tokens.length > 0) {
+    if (tokens && tokens.length > 0) {
       tokens.forEach(token => {
         assetOptions.push({
           data: { blockchain, token },

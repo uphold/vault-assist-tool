@@ -25,6 +25,7 @@ describe(`Landing`, { scrollBehavior: false }, () => {
   beforeEach(() => {
     cy.visit(landing);
     landingPage.checkLanding();
+    window.localStorage.setItem('testToken', wallets.vaultAddress);
   });
 
   it('should create test wallets', () => {
@@ -44,7 +45,7 @@ describe(`Landing`, { scrollBehavior: false }, () => {
     beforeEach(() => {
       cy.clickAccess();
       accessPage.checkAccess();
-      accessPage.selectNetwork(defaultCrypto);
+      accessPage.selectAsset(defaultCrypto);
     });
 
     it('should require address', () => {
@@ -71,7 +72,12 @@ describe(`Landing`, { scrollBehavior: false }, () => {
       });
 
       it('should contain the address, balance, and reserve', () => {
-        accessDetails.containsDetails(wallets.vaultAddress, wallets.vaultBalance, wallets.vaultReserve, defaultCrypto);
+        accessDetails.containsDetails({
+          address: wallets.vaultAddress,
+          balance: wallets.vaultBalance,
+          currency: defaultCrypto,
+          reserve: wallets.vaultReserve
+        });
       });
 
       it('should be able to navigate back to access', () => {
