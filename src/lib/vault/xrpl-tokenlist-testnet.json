@@ -1,9 +1,9 @@
 {
   "tokens": [
     {
-      "name": "TEST",
-      "currency": "ABC",
-      "issuer": "rrrrrrrrrrrrrrrrrNAMEtxvNvQ"
+      "name": "SOLOCOIN",
+      "currency": "534F4C4F434F494E000000000000000000000000",
+      "issuer": "r3FpiFeWDBtkMBHr8PShNAYwXNoUkpa2ti"
     }
   ]
 }
