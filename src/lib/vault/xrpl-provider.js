@@ -172,7 +172,10 @@ export const buildTransaction = async ({
     }
   };
 
-  const autofilled = await instance.autofill({ ...baseParams, ...paymentParams(amount) }, signerCounts);
+  // tfClearFreeze & tfSetNoRipple flag --> https://xrpl.org/docs/references/protocol/transactions/types/trustset#trustset-flags
+  const trustFlags = transactionType === transactionTypes.TrustSet ? { Flags: 2228224 } : {};
+
+  const autofilled = await instance.autofill({ ...baseParams, ...paymentParams(amount), ...trustFlags }, signerCounts);
   const { Sequence: sequence } = autofilled;
 
   return encode({ ...autofilled, Sequence: sequence + queued });
