@@ -5,10 +5,8 @@ export { Blockchain, Network, NetworkUtil };
 const { NET } = process.env;
 
 // signer requirements for multisig vault
-export const multisigRequirements = {
-  entries: 3,
-  signers: 2
-};
+export const DEFAULT_MULTISIG_ENTRIES = 3;
+export const DEFAULT_MULTISIG_SIGNERS_REQUIRED = 2;
 
 export const getNetworkEnv = () => {
   switch (NET) {

@@ -118,7 +118,7 @@ export const App = () => {
       setTransactionData(transactionData);
       setTransactionStatus(TransactionStatus.success);
     } catch (error) {
-      console.error(error);
+      console.error(error?.message);
       setTransactionStatus(TransactionStatus.failure);
     }
   };
@@ -131,7 +131,7 @@ export const App = () => {
       setTransactionData(transactionData);
       setTransactionStatus(TransactionStatus.success);
     } catch (error) {
-      console.error(error);
+      console.error(error?.message);
       setTransactionStatus(TransactionStatus.failure);
     }
   };
