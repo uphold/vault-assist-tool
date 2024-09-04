@@ -1,6 +1,7 @@
 import { Alert } from '../../../../components/Alert';
 import { Button } from '../../../../components/Button';
 import { Content, Navigation } from '../../../../layouts';
+import { DEFAULT_MULTISIG_SIGNERS_REQUIRED, getCurrency } from '../../../../lib/vault';
 import { Fragment } from 'react';
 import { HorizontalSeparator } from '../../../../components/HorizontalSeparator';
 import { NavigationAction } from '../../../../components/Navigation';
@@ -13,7 +14,6 @@ import { TableViewTitle } from '../../../../components/TableView/TableViewTitle'
 import { TextField } from '../../../../forms/fields/TextField';
 import { destinationSchema } from '../../../../forms/schemas';
 import { formatNumber } from '../../../../utils/formatNumber';
-import { getCurrency, signersRequired } from '../../../../lib/vault';
 import { toastErrors } from '../../../../utils/toastErrors';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -39,7 +39,7 @@ export const Destination = ({ accountData, onConfirmDestination }) => {
   const destinationAmount = new BigNumber(remainingBalance).plus(totalReserveAmount);
 
   // Fee calculations
-  const signerMultiplier = new BigNumber(signersRequired).plus(1);
+  const signerMultiplier = new BigNumber(DEFAULT_MULTISIG_SIGNERS_REQUIRED).plus(1);
   const transactionFee = new BigNumber(baseFee).times(signerMultiplier);
   const fee = trustlines.length > 0 ? transactionFee.toString() : ownerReserve;
   const transactionsRequired = token ? 2 : 1;

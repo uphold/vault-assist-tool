@@ -1,8 +1,8 @@
 import './constants';
 import { Blockchain, WalletService } from 'vault-wallet-toolkit';
+import { DEFAULT_MULTISIG_ENTRIES, DEFAULT_MULTISIG_SIGNERS_REQUIRED } from './network';
 import { dropsToXrp, encode, multisign, xrpToDrops } from 'xrpl';
 import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
-import { multisigRequirements } from './network';
 export { convertHexToString } from 'xrpl';
 import BigNumber from 'bignumber.js';
 
@@ -13,12 +13,6 @@ export const transactionTypes = Object.freeze({
   Payment: 'Payment',
   TrustSet: 'TrustSet'
 });
-
-// signer requirements for multisig vault
-const requirements = {
-  signerEntries: multisigRequirements.entries,
-  signerQuorum: multisigRequirements.signers
-};
 
 export const { signTransaction } = WalletService;
 
@@ -88,7 +82,7 @@ export const getAccountSigners = async address => {
   if (signerLists.length > 0) {
     const [{ SignerEntries: signerEntries, SignerQuorum: signerQuorum }] = signerLists;
 
-    if (signerQuorum === requirements.signerQuorum && signerEntries.length === requirements.signerEntries) {
+    if (signerQuorum === DEFAULT_MULTISIG_SIGNERS_REQUIRED && signerEntries.length === DEFAULT_MULTISIG_ENTRIES) {
       // convert into array of addresses
       return signerEntries.map(signerEntry => {
         const {
@@ -134,7 +128,7 @@ export const buildTransaction = async ({
   limitAmount,
   amount,
   queued = 0,
-  signerCounts = requirements.signerQuorum
+  signerCounts = DEFAULT_MULTISIG_SIGNERS_REQUIRED
 }) => {
   const { instance } = await getXrplProvider();
 
