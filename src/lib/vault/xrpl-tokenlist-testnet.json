@@ -1,9 +1,14 @@
 {
-  "tokens": [
-    {
-      "name": "SOLOCOIN",
-      "currency": "534F4C4F434F494E000000000000000000000000",
-      "issuer": "r3FpiFeWDBtkMBHr8PShNAYwXNoUkpa2ti"
-    }
-  ]
+    "tokens": [
+        {
+            "name": "SOLOCOIN",
+            "currency": "534F4C4F434F494E000000000000000000000000",
+            "issuer": "r3FpiFeWDBtkMBHr8PShNAYwXNoUkpa2ti"
+        },
+        {
+            "name": "CORECOIN",
+            "currency": "434F5245434F494E000000000000000000000000",
+            "issuer": "rKQWycyRBTEZKC1sW67YjgGKBnDWwTbLga"
+        }
+    ]
 }
