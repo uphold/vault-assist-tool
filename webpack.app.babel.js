@@ -136,6 +136,7 @@ const webpackConfig = {
   plugins,
   resolve: {
     alias: {
+      '@hashgraph/sdk': path.resolve('node_modules/@hashgraph/sdk/src/browser.js'),
       lodash: path.resolve('node_modules/lodash-es'),
       'lodash-es': path.resolve('node_modules/lodash-es'),
       node_modules: path.resolve('node_modules'),
