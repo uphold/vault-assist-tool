@@ -1,6 +1,6 @@
 import './constants';
 import { Network, getNetworkEnv } from './network';
-import { ValidationUtils, Blockchain as VaultBlockchain, WalletService } from 'vault-wallet-toolkit';
+import { Blockchain as VaultBlockchain, validateAddress as validateVaultAddress } from 'vault-wallet-toolkit';
 import { Wallet } from 'vault-wallet-toolkit/lib/core/Wallet';
 import { bitcoinProvider } from './btc-provider';
 import {
@@ -19,18 +19,17 @@ import {
 import { translate } from '../../lib/i18n';
 import { tokens as xrplMainnetTokens } from './xrpl-tokenlist-mainnet.json';
 import { tokens as xrplTestnetTokens } from './xrpl-tokenlist-testnet.json';
+export { validateMnemonic, signTransaction } from 'vault-wallet-toolkit';
 export { DEFAULT_MULTISIG_SIGNERS_REQUIRED } from './network';
 
 export const Blockchain = VaultBlockchain;
-export const { validateMnemonic } = ValidationUtils;
-export const { signTransaction } = WalletService;
 export const transactionTypes = Object.freeze({
   [Blockchain.XRPL]: xrplTransactionTypes,
   [Blockchain.BTC]: {}
 });
 
 export const validateAddress = (network, address) => {
-  return ValidationUtils.validateAddress(network, address, getNetworkEnv());
+  return validateVaultAddress(network, address, getNetworkEnv());
 };
 
 export const validateDescriptor = descriptor => {

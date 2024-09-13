@@ -1,8 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import './constants';
-import { Blockchain, WalletService } from 'vault-wallet-toolkit';
+import { Blockchain, signTransaction } from 'vault-wallet-toolkit';
 import { DEFAULT_MULTISIG_ENTRIES, DEFAULT_MULTISIG_SIGNERS_REQUIRED } from './network';
 import { dropsToXrp, encode, multisign, xrpToDrops } from 'xrpl';
-import { getXrplProvider } from 'vault-wallet-toolkit/lib/core/Xrpledger/XrplProvider';
+import { getXrplProvider } from './clients/xrpl/xrpl-client';
 export { convertHexToString } from 'xrpl';
 import BigNumber from 'bignumber.js';
 
@@ -13,8 +14,6 @@ export const transactionTypes = Object.freeze({
   Payment: 'Payment',
   TrustSet: 'TrustSet'
 });
-
-export const { signTransaction } = WalletService;
 
 const signer = (key, tx) => signTransaction(blockchain, key, tx, { multisig: true });
 

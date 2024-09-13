@@ -1,5 +1,5 @@
-import { Blockchain, Network, NetworkUtil } from 'vault-wallet-toolkit';
-export { Blockchain, Network, NetworkUtil };
+import { Blockchain, Network, getNetwork, setNetwork } from 'vault-wallet-toolkit';
+export { Blockchain, Network, getNetwork, setNetwork };
 
 // eslint-disable-next-line no-process-env
 const { NET } = process.env;

@@ -1,3 +1,3 @@
-import { NetworkUtil, getNetworkEnv } from './network';
+import { getNetworkEnv, setNetwork } from './network';
 
-NetworkUtil.setNetwork(getNetworkEnv());
+setNetwork(getNetworkEnv());

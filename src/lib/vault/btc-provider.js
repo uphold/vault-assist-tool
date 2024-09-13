@@ -1,10 +1,10 @@
 /* eslint-disable import/no-unresolved */
 import './constants';
 import * as bitcoin from 'bitcoinjs-lib';
-import { Blockchain, WalletService } from 'vault-wallet-toolkit';
+import { Blockchain, signTransaction } from 'vault-wallet-toolkit';
 import { Electrum } from './clients/electrum/electrum-client';
-import { NetworkUtil } from './network';
 import { coinSelection } from './clients/coin-selection/coin-selection';
+import { getNetwork } from './network';
 import { getRedeemScript, satsToBtc, signatureValidator } from './clients/utils/bitcoin-utils';
 import { txhexToElectrumTransaction } from './clients/utils/electrum-utils';
 
@@ -18,11 +18,9 @@ const SEQUENCE_RBF_ENABLED = 0xffffffff - 2;
 // Network fee always set to fast
 const BTC_FEE_RATE = 1;
 
-export const { signTransaction } = WalletService;
-
 class BitcoinProvider {
   constructor() {
-    this.network = NetworkUtil.getNetwork(blockchain);
+    this.network = getNetwork(blockchain);
     this.instance = new Electrum(this.network);
   }
 

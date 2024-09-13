@@ -1,10 +1,10 @@
 /* eslint-disable id-length */
-import { Blockchain, NetworkUtil } from '../../network';
+import { Blockchain, getNetwork } from '../../network';
 import * as bitcoin from 'bitcoinjs-lib';
 import BigNumber from 'bignumber.js';
 import reverse from 'buffer-reverse';
 
-const network = NetworkUtil.getNetwork(Blockchain.BTC) as bitcoin.Network;
+const network = getNetwork(Blockchain.BTC) as bitcoin.Network;
 
 export interface TransactionOutput {
   address: string;
