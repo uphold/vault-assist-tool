@@ -18,7 +18,7 @@ const CenterWrapper = styled(Mixed.div)`
   @media (min-height: 600px) {
     @media (min-width: 884px) {
       border-radius: 25px;
-      height: 624px;
+      height: 662px;
       width: 432px;
     }
   }
@@ -30,6 +30,7 @@ const Layout = styled(Mixed.div)`
     'navigation'
     'content';
   grid-template-rows: min-content 1fr;
+  overflow-y: auto;
 `;
 
 export const Wrapper = ({ children, ...props }) => (

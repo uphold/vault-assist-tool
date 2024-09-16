@@ -13,6 +13,7 @@ const actionsViewTransaction = I18n.t('actions.view.transaction');
 const actionsWithdraw = I18n.t('actions.withdraw', { currency: defaultCrypto });
 const actionsWithdrawAvailableXrp = I18n.t('actions.withdraw.xrp');
 const actionsWithdrawTokens = I18n.t('actions.withdraw.tokens');
+const actionsWithdrawCrypto = I18n.t('actions.withdraw.crypto');
 const button = 'button-primary';
 const closeButton = 'close';
 
@@ -55,6 +56,7 @@ Cypress.Commands.addAll({
   clickViewTransaction: clickActionByText(actionsViewTransaction),
   clickWithdraw: clickActionByText(actionsWithdraw),
   clickWithdrawAvailableXrp: clickActionByText(actionsWithdrawAvailableXrp),
+  clickWithdrawCrypto: clickActionByText(actionsWithdrawCrypto),
   clickWithdrawTokens: clickActionByText(actionsWithdrawTokens),
   visitPage
 });

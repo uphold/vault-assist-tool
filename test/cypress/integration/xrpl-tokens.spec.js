@@ -68,7 +68,7 @@ describe(`Landing`, { scrollBehavior: false }, () => {
       cy.clickSubmit();
       accessDetails.checkAccessDetails();
 
-      cy.clickWithdraw();
+      cy.clickWithdrawCrypto();
       withdrawXrpNotice.checkWithdrawNotice();
 
       cy.clickWithdrawAvailableXrp();
@@ -98,7 +98,7 @@ describe(`Landing`, { scrollBehavior: false }, () => {
       cy.clickSubmit();
       accessDetails.checkAccessDetails();
 
-      cy.clickWithdraw();
+      cy.clickWithdrawCrypto();
       withdrawXrpNotice.checkWithdrawNotice();
 
       cy.clickWithdrawTokens();
