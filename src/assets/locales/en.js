@@ -34,6 +34,7 @@ export const en = {
     "actions.submit": "Submit",
     "actions.view.transaction": "View transaction",
     "actions.withdraw": "Withdraw {{currency}} from Vault",
+    "actions.withdraw.crypto": "Withdraw crypto from Vault",
     "actions.withdraw.tokens": "Withdraw tokens first",
     "actions.withdraw.xrp": "Withdraw available XRP",
     "landing.description": "Using your two keys, you can safely move all your Vault assets in the unlikely event the Uphold app and/or platform are not available to you.",

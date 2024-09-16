@@ -23,7 +23,7 @@ const Destination = PropTypes.shape({
 
 const Transaction = PropTypes.shape({
   amount: PropTypes.string,
-  destinationTag: PropTypes.string,
+  destinationTag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   from: PropTypes.string.isRequired,
   hash: PropTypes.string.isRequired,
   network: PropTypes.oneOf(Object.values(Blockchain)).isRequired,

@@ -100,7 +100,9 @@ export const Details = ({ accountData, onConfirm }) => {
 
         <SectionStickyFooter>
           <Button onPress={onConfirm}>
-            {t('actions.withdraw', { currency: token ? getCurrency(token.currency) : getCurrency(network) })}
+            {!token && trustlines.length > 0
+              ? t('actions.withdraw.crypto')
+              : t('actions.withdraw', { currency: token ? getCurrency(token.currency) : getCurrency(network) })}
           </Button>
         </SectionStickyFooter>
       </ScrollableSection>
