@@ -34,6 +34,24 @@ export const destinationSchema = (sourceAddress, blockchain) => {
             val => isValidAddress(Blockchain.BTC, val) && val !== sourceAddress
           )
       });
+    case Blockchain.HEDERA:
+      return yup.object().shape({
+        address: yup
+          .string()
+          .required(translate('withdraw.hbar.destination.fields.address.errors.required'))
+          .test(
+            'validation',
+            translate('withdraw.hbar.destination.fields.address.errors.invalid.hbar'),
+            val => isValidAddress(Blockchain.HEDERA, val) && val !== sourceAddress
+          ),
+        destinationMemo: yup
+          .string()
+          .test(
+            'validation',
+            translate('withdraw.hbar.destination.fields.destination.memo.errors.invalid'),
+            val => val.length < 100
+          )
+      });
     default:
       break;
   }

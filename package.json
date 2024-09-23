@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "@codewarriorr/electrum-client-js": "0.1.1",
+    "@hashgraph/sdk": "2.50.0",
+    "@lapo/asn1js": "2.0.4",
     "@typehaus/metropolis": "12.0.0-next.7",
     "babel-plugin-react-native-web": "0.19.1",
     "buffer-reverse": "1.0.1",

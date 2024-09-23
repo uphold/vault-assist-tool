@@ -1,6 +1,6 @@
 /* eslint-disable no-process-env */
 import { Access, Landing } from './pages';
-import { BTC, XRP } from './pages/Withdraw';
+import { BTC, HBAR, XRP } from './pages/Withdraw';
 import { Blockchain, processTransactionResponses, sendTransaction } from './lib/vault';
 import { Failure, Pending, Success, Transaction } from './pages/Transaction';
 import { Fragment, useEffect, useState } from 'react';
@@ -88,6 +88,9 @@ export const App = () => {
       case Blockchain.BTC:
         history.push({ ...history.location, pathname: `/withdraw/btc` });
         break;
+      case Blockchain.HEDERA:
+        history.push({ ...history.location, pathname: `/withdraw/hbar` });
+        break;
       default:
         break;
     }
@@ -169,6 +172,16 @@ export const App = () => {
                 key="btc"
                 onConfirmTransaction={onConfirmTransaction}
                 path="/withdraw/btc"
+                pendingTransaction={transactionStatus !== TransactionStatus.unknown}
+                setIsGuarded={setIsGuarded}
+              />
+
+              <Route
+                accountData={accountData}
+                component={HBAR}
+                key="hbar"
+                onConfirmTransaction={onConfirmTransaction}
+                path="/withdraw/hbar"
                 pendingTransaction={transactionStatus !== TransactionStatus.unknown}
                 setIsGuarded={setIsGuarded}
               />

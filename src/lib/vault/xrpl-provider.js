@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import './constants';
-import { Blockchain, signTransaction } from 'vault-wallet-toolkit';
+import { SupportedBlockchain as Blockchain, signTransaction } from 'vault-wallet-toolkit';
 import { DEFAULT_MULTISIG_ENTRIES, DEFAULT_MULTISIG_SIGNERS_REQUIRED } from './network';
 import { dropsToXrp, encode, multisign, xrpToDrops } from 'xrpl';
 import { getXrplProvider } from './clients/xrpl/xrpl-client';
