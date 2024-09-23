@@ -12,7 +12,7 @@ const Account = PropTypes.shape({
   balance: PropTypes.string.isRequired,
   network: PropTypes.oneOf(Object.values(Blockchain)).isRequired,
   reserve: ReserveAmounts,
-  signers: PropTypes.arrayOf(PropTypes.string)
+  signers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])
 });
 
 const Destination = PropTypes.shape({

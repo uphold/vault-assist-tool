@@ -1765,6 +1765,14 @@
     tweetnacl "^1.0.3"
     utf8 "^3.0.0"
 
+"@hashgraph/proto@2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@hashgraph/proto/-/proto-2.15.0.tgz#10c94825acea256373ba896c6229d22f6de9c19b"
+  integrity sha512-ULSNIwQZIroTssrEfNoUcIcWEJ9BIwKZiAsaRvJ2+Rr3XIr+np7UXv6sEkJU+jSyzk97LrTdiRAoc/hJO9Vx8Q==
+  dependencies:
+    long "^4.0.0"
+    protobufjs "^7.2.5"
+
 "@hashgraph/proto@2.15.0-beta.3":
   version "2.15.0-beta.3"
   resolved "https://registry.yarnpkg.com/@hashgraph/proto/-/proto-2.15.0-beta.3.tgz#22554a49998e290bc320660a3cf6559eea1ad491"
@@ -1946,6 +1954,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@lapo/asn1js@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@lapo/asn1js/-/asn1js-2.0.4.tgz#424b853880d3fe3d5f36fa74dd2c47845a88dc3e"
+  integrity sha512-KJD3wQAZxozcraJdWp3utDU6DEZgAVBGp9INCdptUpZaXCEYkpwNb7h7wyYh5y6DxtpvIud8k0suhWJ/z2rKvw==
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"

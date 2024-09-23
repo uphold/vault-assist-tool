@@ -29,8 +29,9 @@ export const Root = ({ onConfirm, onGoBack }) => {
   const [isDescriptorInfoSheetVisible, setIsDescriptorInfoSheetVisible] = useState(false);
 
   const networkNames = Object.freeze({
-    [Blockchain.XRPL]: 'XRP',
-    [Blockchain.BTC]: 'BTC'
+    [Blockchain.XRPL]: getCurrency(Blockchain.XRPL),
+    [Blockchain.BTC]: getCurrency(Blockchain.BTC),
+    [Blockchain.HEDERA]: getCurrency(Blockchain.HEDERA)
   });
 
   const assetType = Object.freeze({
@@ -38,7 +39,7 @@ export const Root = ({ onConfirm, onGoBack }) => {
   });
 
   // Build selection options from supported networks
-  const supportedNetworkList = [Blockchain.XRPL, Blockchain.BTC];
+  const supportedNetworkList = [Blockchain.XRPL, Blockchain.BTC, Blockchain.HEDERA];
 
   const assetOptions = [];
 
