@@ -1,6 +1,6 @@
 import './constants';
 import { Network, getNetworkEnv } from './network';
-import { Blockchain as VaultBlockchain, validateAddress as validateVaultAddress } from 'vault-wallet-toolkit';
+import { SupportedBlockchain as VaultBlockchain, validateAddress as validateVaultAddress } from 'vault-wallet-toolkit';
 import { Wallet } from 'vault-wallet-toolkit/lib/core/Wallet';
 import { bitcoinProvider } from './btc-provider';
 import {
@@ -16,6 +16,7 @@ import {
   multisigner as xrplMultiSigner,
   transactionTypes as xrplTransactionTypes
 } from './xrpl-provider';
+import { hederaProvider } from './hedera-provider';
 import { translate } from '../../lib/i18n';
 import { tokens as xrplMainnetTokens } from './xrpl-tokenlist-mainnet.json';
 import { tokens as xrplTestnetTokens } from './xrpl-tokenlist-testnet.json';
@@ -29,6 +30,10 @@ export const transactionTypes = Object.freeze({
 });
 
 export const validateAddress = (network, address) => {
+  if (network === Blockchain.HEDERA) {
+    return /^(0|[1-9]\\d*)\.(0|[1-9]\\d*)\.((?:[0-9a-fA-F][0-9a-fA-F])+)[0-9a-fA-F]$/.test(address);
+  }
+
   return validateVaultAddress(network, address, getNetworkEnv());
 };
 
@@ -46,6 +51,8 @@ export const getCurrency = currency => {
       return 'XRP';
     case Blockchain.BTC:
       return 'BTC';
+    case Blockchain.HEDERA:
+      return 'HBAR';
     default:
       // use for XRPL tokens to convert from hex
       return /^[A-F0-9]+$/i.test(currency) ? convertHexToString(currency).replace(/[^\x20-\x7E]/g, '') : currency;
@@ -62,6 +69,10 @@ export const getTransactionLink = (blockchain, hash) => {
       return getNetworkEnv() === Network.PRODUCTION
         ? `https://mempool.space/tx/${hash}`
         : `https://mempool.space/testnet/tx/${hash}`;
+    case Blockchain.HEDERA:
+      return getNetworkEnv() === Network.PRODUCTION
+        ? `https://hashscan.io/mainnet/transaction/${hash}`
+        : `https://hashscan.io/testnet/transaction/${hash}`;
     default:
       break;
   }
@@ -73,6 +84,8 @@ export const getAddress = (blockchain, key) => {
       return new Wallet(blockchain, key).address;
     case Blockchain.BTC:
       return new Wallet(blockchain, key, "m/84'/0'/0'/0/0").address;
+    case Blockchain.HEDERA:
+      return new Wallet(blockchain, key).publicKey;
     default:
       break;
   }
@@ -84,6 +97,8 @@ export const getFee = async (blockchain, from) => {
       return await getXrpTransactionFee();
     case Blockchain.BTC:
       return await bitcoinProvider.calculateTransactionFee(from);
+    case Blockchain.HEDERA:
+      return await hederaProvider.getFee();
     default:
       return '0';
   }
@@ -94,6 +109,8 @@ export const isKeySigner = (blockchain, key, signers) => {
     case Blockchain.XRPL:
       return signers.includes(getAddress(blockchain, key));
     case Blockchain.BTC:
+      return signers.includes(getAddress(blockchain, key));
+    case Blockchain.HEDERA:
       return signers.includes(getAddress(blockchain, key));
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
@@ -106,6 +123,8 @@ export const sendTransaction = async (blockchain, transaction, destinationData) 
       return await sendXrplTransaction(transaction);
     case Blockchain.BTC:
       return await bitcoinProvider.sendTransaction(transaction, destinationData);
+    case Blockchain.HEDERA:
+      return await hederaProvider.sendTransaction(transaction, destinationData);
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
   }
@@ -118,6 +137,8 @@ export const createTransaction = async (blockchain, data) => {
         return await createXrplTransaction(data);
       case Blockchain.BTC:
         return await bitcoinProvider.createTransaction(data);
+      case Blockchain.HEDERA:
+        return await hederaProvider.createTransaction(data);
       default:
         throw new Error(translate('messages.error.unsupported.blockchain'));
     }
@@ -143,6 +164,8 @@ export const multiSignTransaction = (blockchain, transaction, keys) => {
       return xrplMultiSigner(transaction, keys);
     case Blockchain.BTC:
       return bitcoinProvider.multiSignTransaction(transaction, keys);
+    case Blockchain.HEDERA:
+      return hederaProvider.multiSignTransaction(transaction, keys);
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
   }
@@ -158,6 +181,8 @@ export const getSigners = async (blockchain, address, descriptor) => {
       }
 
       return bitcoinProvider.getSignersFromDescriptor(descriptor);
+    case Blockchain.HEDERA:
+      return await hederaProvider.getAccountKeys(address);
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
   }
@@ -172,7 +197,7 @@ export const getReserves = async (blockchain, address) => {
   }
 
   // there are no reserves on other blockchains
-  return { baseReserve: 0, ownerReserve: 0, totalReserve: 0 };
+  return { baseReserve: '0', ownerReserve: '0', totalReserve: '0' };
 };
 
 export const getBalance = async (blockchain, address) => {
@@ -185,6 +210,8 @@ export const getBalance = async (blockchain, address) => {
       }
     case Blockchain.BTC:
       return await bitcoinProvider.getAddressBalance(address);
+    case Blockchain.HEDERA:
+      return await hederaProvider.getBalance(address);
     default:
       throw new Error(translate('messages.error.unsupported.blockchain'));
   }

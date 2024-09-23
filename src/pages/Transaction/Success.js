@@ -65,6 +65,13 @@ export const Success = ({ transactionData, onFinish }) => {
           transferLabel: t('transaction.success.details.label.reserve.credited')
         };
 
+      case Blockchain.HEDERA:
+        return {
+          header: t('transaction.success.header', { currency: getCurrency(network) }),
+          transferAmount: `${formatNumber(amount)} ${getCurrency(network)}`,
+          transferLabel: t('transaction.success.details.label.amount.transferred')
+        };
+
       default:
         return {
           header: t('transaction.success.pending.header', { currency: getCurrency(network) }),
