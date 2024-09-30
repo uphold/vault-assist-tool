@@ -4,6 +4,11 @@
       "name": "SOLO",
       "currency": "534F4C4F00000000000000000000000000000000",
       "issuer": "rsoLo2S1kiGeCcn6hCUXVrCpGMWLrRrLZz"
+    },
+    {
+      "name": "CORE",
+      "currency": "434F524500000000000000000000000000000000",
+      "issuer": "rcoreNywaoz2ZCQ8Lg2EbSLnGuRBmun6D"
     }
   ]
 }
