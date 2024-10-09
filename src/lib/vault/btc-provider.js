@@ -1,17 +1,14 @@
 /* eslint-disable import/no-unresolved */
 import './constants';
 import * as bitcoin from 'bitcoinjs-lib';
-import { Blockchain, signTransaction } from 'vault-wallet-toolkit';
+import { SupportedBlockchain as Blockchain, signTransaction } from 'vault-wallet-toolkit';
+import { DEFAULT_MULTISIG_SIGNERS_REQUIRED, getNetwork } from './network';
 import { Electrum } from './clients/electrum/electrum-client';
 import { coinSelection } from './clients/coin-selection/coin-selection';
-import { getNetwork } from './network';
 import { getRedeemScript, satsToBtc, signatureValidator } from './clients/utils/bitcoin-utils';
 import { txhexToElectrumTransaction } from './clients/utils/electrum-utils';
 
 const blockchain = Blockchain.BTC;
-
-// signer requirements for multisig vault
-const threshold = 2;
 
 const SEQUENCE_RBF_ENABLED = 0xffffffff - 2;
 
@@ -144,7 +141,7 @@ class BitcoinProvider {
   getRedeemScriptFromDescriptor(descriptor) {
     const participants = this.getParticipantsFromDescriptor(descriptor);
 
-    return getRedeemScript(this.network, participants, threshold);
+    return getRedeemScript(this.network, participants, DEFAULT_MULTISIG_SIGNERS_REQUIRED);
   }
 
   getSignersFromDescriptor(descriptor) {
