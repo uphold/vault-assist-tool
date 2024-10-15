@@ -9,6 +9,11 @@
       "name": "CORE",
       "currency": "434F524500000000000000000000000000000000",
       "issuer": "rcoreNywaoz2ZCQ8Lg2EbSLnGuRBmun6D"
+    },
+    {
+      "name": "RLUSD",
+      "currency": "524C555344000000000000000000000000000000",
+      "issuer": "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De"
     }
   ]
 }

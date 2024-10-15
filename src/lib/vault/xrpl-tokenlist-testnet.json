@@ -9,6 +9,11 @@
             "name": "CORECOIN",
             "currency": "434F5245434F494E000000000000000000000000",
             "issuer": "rKQWycyRBTEZKC1sW67YjgGKBnDWwTbLga"
+        },
+        {
+          "name": "RLUSD",
+          "currency": "524C555344000000000000000000000000000000",
+          "issuer": "rh6ZtWo1fvvpJb8sJC9nAkM7SLvRkQwEgr"
         }
     ]
 }
