@@ -32,6 +32,17 @@ export const addressSchema = ({ blockchain }) => {
           .required(translate('access.fields.descriptor.errors.required'))
           .test('validation', translate('access.fields.descriptor.errors.invalid'), val => isValidDescriptor(val))
       });
+    case Blockchain.HEDERA:
+      return yup.object().shape({
+        address: yup
+          .string()
+          .required(translate('access.fields.address.errors.required', { currency: getCurrency(blockchain) }))
+          .test(
+            'validation',
+            translate('access.fields.address.errors.invalid', { currency: getCurrency(blockchain) }),
+            val => isValidAddress(blockchain, val, 0)
+          )
+      });
     default:
       break;
   }
