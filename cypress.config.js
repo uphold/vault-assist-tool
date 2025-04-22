@@ -1,4 +1,5 @@
 /* eslint-disable no-process-env */
+import path from 'path';
 const { DefinePlugin, ProvidePlugin } = require('webpack');
 const { defineConfig } = require('cypress');
 const webpackPreprocessor = require('@cypress/webpack-preprocessor');
@@ -46,6 +47,12 @@ module.exports = defineConfig({
           use: 'url-loader'
         },
         {
+          resolve: {
+            fullySpecified: false
+          },
+          test: /\.m?js/
+        },
+        {
           loader: '@svgr/webpack',
           options: {
             svgProps: { role: 'img' },
@@ -65,6 +72,9 @@ module.exports = defineConfig({
       ];
 
       options.webpackOptions.resolve = {
+        alias: {
+          '@hashgraph/sdk': path.resolve('node_modules/@hashgraph/sdk/src/browser.js')
+        },
         extensions: ['.ts', '.js', '.json'],
         fallback: {
           buffer: require.resolve('buffer/'),
