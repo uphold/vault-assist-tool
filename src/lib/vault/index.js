@@ -31,7 +31,7 @@ export const transactionTypes = Object.freeze({
 
 export const validateAddress = (network, address) => {
   if (network === Blockchain.HEDERA) {
-    return /^(0|[1-9]\\d*)\.(0|[1-9]\\d*)\.((?:[0-9a-fA-F][0-9a-fA-F])+)[0-9a-fA-F]$/.test(address);
+    return /^\d{1,10}\.\d{1,20}\.\d{1,20}$/.test(address);
   }
 
   return validateVaultAddress(network, address, getNetworkEnv());

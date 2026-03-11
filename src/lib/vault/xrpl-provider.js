@@ -81,7 +81,7 @@ export const getAccountSigners = async address => {
   if (signerLists.length > 0) {
     const [{ SignerEntries: signerEntries, SignerQuorum: signerQuorum }] = signerLists;
 
-    if (signerQuorum === DEFAULT_MULTISIG_SIGNERS_REQUIRED && signerEntries.length === DEFAULT_MULTISIG_ENTRIES) {
+    if (signerQuorum === DEFAULT_MULTISIG_SIGNERS_REQUIRED && signerEntries.length >= DEFAULT_MULTISIG_ENTRIES) {
       // convert into array of addresses
       return signerEntries.map(signerEntry => {
         const {
