@@ -54,6 +54,13 @@ To run the local web server using [testnet](https://xrpl.org/parallel-networks.h
 yarn dev
 ```
 
+It is possible to use Bitcoin testnet, but this requires a websocket proxy tool for establishing a connection to an ElectrumX server. Example using [websocat](https://github.com/vi/websocat):
+
+```sh
+websocat -E ws-l:127.0.0.1:50003 tcp:blackie.c3-soft.com:57005
+yarn dev
+```
+
 You can run the local web server for Bitcoin [regtest mode](https://developer.bitcoin.org/examples/testing.html). This requires a local ElectrumX server with websockets enabled on port 50003 (ws://127.0.0.1:50003):
 
 ```sh
