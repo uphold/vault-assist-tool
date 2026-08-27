@@ -98,7 +98,7 @@ export const getFee = async (blockchain, from) => {
     case Blockchain.BTC:
       return await bitcoinProvider.calculateTransactionFee(from);
     case Blockchain.HEDERA:
-      return await hederaProvider.getFee();
+      return await hederaProvider.getFee(hederaProvider.signatureCount);
     default:
       return '0';
   }

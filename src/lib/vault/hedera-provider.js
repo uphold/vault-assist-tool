@@ -25,14 +25,16 @@ export class HederaProvider {
   constructor() {
     this.client = getNetworkEnv() === Network.DEVELOPMENT ? Client.forTestnet() : Client.forMainnet();
     this.client.setMirrorNetwork(mirrorUrl);
-    // this.fee = transfer fee in usd
+    // this.fee = transfer fee in usd, assuming a single signature
     this.fee = '0.0001705';
+    // withdrawals are always signed by both the vault key and the backup key
+    this.signatureCount = 2;
     console.info(`Hedera network connected to ${this.client.ledgerId.toString()}`);
   }
 
   async createTransaction({ to, from, destinationMemo }) {
     const balance = await this.getBalance(from);
-    const fee = await this.getFee();
+    const fee = await this.getFee(this.signatureCount);
     const available = new BigNumber(balance).minus(fee).dp(8);
     const amount = new Hbar(available);
     const transactionId = TransactionId.generate(from);
@@ -92,7 +94,7 @@ export class HederaProvider {
     return balance.hbars.toBigNumber().toString();
   }
 
-  async getFee() {
+  async getFee(signatureCount = 1) {
     const endpoint = `https://${mirrorUrl}/api/v1/network/exchangerate`;
 
     const result = await fetch(endpoint, {
@@ -109,7 +111,8 @@ export class HederaProvider {
     } = await result.json();
 
     const price = new BigNumber(cent_equivalent).dividedBy(100).dividedBy(hbar_equivalent);
-    const fee = new BigNumber(this.fee).dividedBy(price);
+    // add a fee for each additional signer on this transaction
+    const fee = new BigNumber(this.fee).multipliedBy(signatureCount).dividedBy(price);
 
     return fee.toString();
   }
