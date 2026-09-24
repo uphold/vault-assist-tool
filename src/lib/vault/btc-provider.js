@@ -52,9 +52,6 @@ const splitTopLevel = (str, separator) => {
   return parts;
 };
 
-// Find the vault & recovery fingerprints in the output descriptor
-const isFingerprint = ({ fingerprint }) => /^[0-9a-f]{8}$/i.test(fingerprint);
-
 // Parse the keys in a leaf
 const parseLeafKeys = leafExpression =>
   [...leafExpression.matchAll(/pk\(\[([^\]]*)\]([0-9a-fA-F]+)\)/g)].map(([, origin, publicKey]) => {
@@ -272,17 +269,30 @@ class BitcoinProvider {
     const { internalKey, tree } = parseTaprootDescriptor(descriptor);
     const leaves = collectTaprootLeaves(tree);
 
-    // Identify vault & recovery keys to use for spendable path
-    const occurrences = {};
+    // By convention the tree always nests as { normal(vault,platform), { recovery(recovery,platform), ... } },
+    // with any further leaves (e.g. an inheritance beneficiary leaf) nested to the right of that. Platform is
+    // therefore whichever key the first two leaves share; vault and recovery are each leaf's other key. Vault
+    // Assist Tool only ever holds the vault and recovery/backup keys, so it must spend through the leaf pairing
+    // exactly those two - counting how many leaves each key appears in is ambiguous as soon as a third leaf
+    // exists, since platform then appears in more leaves than vault or recovery do.
+    const [normalLeaf, recoveryLeaf] = leaves;
+    const platformKey =
+      normalLeaf &&
+      recoveryLeaf &&
+      normalLeaf.keys.find(key => recoveryLeaf.keys.some(other => other.publicKey === key.publicKey));
 
-    leaves.forEach(leaf =>
-      leaf.keys.forEach(key => {
-        occurrences[key.publicKey] = (occurrences[key.publicKey] ?? 0) + 1;
-      })
-    );
+    if (!platformKey) {
+      throw new Error('NoSignableTaprootLeaf');
+    }
 
-    const spendLeafNode = leaves.find(leaf =>
-      leaf.keys.every(key => isFingerprint(key) && occurrences[key.publicKey] > 1)
+    const vaultKey = normalLeaf.keys.find(key => key.publicKey !== platformKey.publicKey);
+    const recoveryKey = recoveryLeaf.keys.find(key => key.publicKey !== platformKey.publicKey);
+
+    const spendLeafNode = leaves.find(
+      leaf =>
+        leaf.keys.length === 2 &&
+        leaf.keys.some(key => key.publicKey === vaultKey.publicKey) &&
+        leaf.keys.some(key => key.publicKey === recoveryKey.publicKey)
     );
 
     if (!spendLeafNode) {
