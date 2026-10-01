@@ -57,7 +57,7 @@ yarn dev
 It is possible to use Bitcoin testnet, but this requires a websocket proxy tool for establishing a connection to an ElectrumX server. Example using [websocat](https://github.com/vi/websocat):
 
 ```sh
-websocat -E ws-l:127.0.0.1:50003 tcp:blackie.c3-soft.com:57005
+websocat -E ws-l:127.0.0.1:50003 cmd:'openssl s_client -quiet -connect mempool.space:40002'
 yarn dev
 ```
 
