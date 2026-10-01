@@ -68,7 +68,7 @@ export const getTransactionLink = (blockchain, hash) => {
     case Blockchain.BTC:
       return getNetworkEnv() === Network.PRODUCTION
         ? `https://mempool.space/tx/${hash}`
-        : `https://mempool.space/testnet/tx/${hash}`;
+        : `https://mempool.space/testnet4/tx/${hash}`;
     case Blockchain.HEDERA:
       return getNetworkEnv() === Network.PRODUCTION
         ? `https://hashscan.io/mainnet/transaction/${hash}`

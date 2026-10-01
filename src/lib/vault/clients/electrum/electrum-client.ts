@@ -20,6 +20,8 @@ const mainnetPeers = [
   { host: 'bitcoin.threshold.p2p.org', port: '50004' }
 ];
 
+const MIN_TESTNET_FEE_RATE = 1;
+
 export interface BitcoinBalance {
   confirmed: number;
   unconfirmed: number;
@@ -114,9 +116,19 @@ export class Electrum implements BitcoinClient {
     if (!this.connected) {
       await this.init();
     }
-    const fee = await this.client.blockchainEstimatefee(rate);
 
-    return String(fee * 1e8 / 1000);
+    try {
+      const fee = await this.client.blockchainEstimatefee(rate);
+
+      return String(fee * 1e8 / 1000);
+    } catch (error) {
+      // Testnet sometimes fails when estimating fees, so fall back to the min rate
+      if (!this.local) {
+        throw error;
+      }
+
+      return String(MIN_TESTNET_FEE_RATE);
+    }
   }
 
   async getAddressBalance(address: string): Promise<BitcoinBalance> {
