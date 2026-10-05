@@ -1,7 +1,12 @@
 /* eslint-disable import/no-unresolved */
 import './constants';
 import { SupportedBlockchain as Blockchain, signTransaction } from 'vault-wallet-toolkit';
-import { DEFAULT_MULTISIG_ENTRIES, DEFAULT_MULTISIG_SIGNERS_REQUIRED } from './network';
+import {
+  DEFAULT_MULTISIG_ENTRIES,
+  DEFAULT_MULTISIG_SIGNERS_REQUIRED,
+  INHERITANCE_MULTISIG_QUORUM,
+  INHERITANCE_MULTISIG_WEIGHTS
+} from './network';
 import { dropsToXrp, encode, multisign, xrpToDrops } from 'xrpl';
 import { getXrplProvider } from './clients/xrpl/xrpl-client';
 export { convertHexToString } from 'xrpl';
@@ -70,6 +75,16 @@ export const getAccountReserve = async address => {
   return new BigNumber(ownerCount).times(ownerReserve).plus(baseReserve).toString();
 };
 
+const isDefaultSignerList = (signerEntries, signerQuorum) =>
+  signerQuorum === DEFAULT_MULTISIG_SIGNERS_REQUIRED && signerEntries.length >= DEFAULT_MULTISIG_ENTRIES;
+
+const isInheritanceSignerList = (signerEntries, signerQuorum) =>
+  signerQuorum === INHERITANCE_MULTISIG_QUORUM &&
+  signerEntries
+    .map(({ SignerEntry: { SignerWeight: weight } }) => weight)
+    .sort((first, second) => first - second)
+    .join() === INHERITANCE_MULTISIG_WEIGHTS.join();
+
 export const getAccountSigners = async address => {
   // get account signer list
   const {
@@ -81,7 +96,7 @@ export const getAccountSigners = async address => {
   if (signerLists.length > 0) {
     const [{ SignerEntries: signerEntries, SignerQuorum: signerQuorum }] = signerLists;
 
-    if (signerQuorum === DEFAULT_MULTISIG_SIGNERS_REQUIRED && signerEntries.length >= DEFAULT_MULTISIG_ENTRIES) {
+    if (isDefaultSignerList(signerEntries, signerQuorum) || isInheritanceSignerList(signerEntries, signerQuorum)) {
       // convert into array of addresses
       return signerEntries.map(signerEntry => {
         const {
