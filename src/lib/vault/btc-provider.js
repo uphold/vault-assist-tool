@@ -323,7 +323,8 @@ class BitcoinProvider {
 
     // Supported descriptors have a script tree of nested branches (exactly two children each) whose leaves are all
     // plain 2-key `and_v(v:pk(..),pk(..))` leaves; anything else is rejected while parsing. The first two leaves
-    // identify the roles, by convention { normal(vault,platform), { recovery(recovery,platform), ... } }: platform is
+    // identify the roles, by convention { normal(vault,platform), { recovery(recovery,platform), ... } } where, with
+    // inheritance, the remaining leaves are { vault+recovery, platform+beneficiary }: platform is
     // whichever key those two leaves share, and vault and recovery are each leaf's other key. Vault Assist Tool only
     // ever holds the vault and recovery/backup keys, so it must spend through the leaf pairing exactly those two,
     // which must exist somewhere in the tree. Counting how many leaves each key appears in would be ambiguous as soon

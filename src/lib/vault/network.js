@@ -7,6 +7,8 @@ const { NET } = process.env;
 // signer requirements for multisig vault
 export const DEFAULT_MULTISIG_ENTRIES = 3;
 export const DEFAULT_MULTISIG_SIGNERS_REQUIRED = 2;
+export const INHERITANCE_MULTISIG_QUORUM = 6;
+export const INHERITANCE_MULTISIG_WEIGHTS = [2, 3, 3, 4];
 
 export const getNetworkEnv = () => {
   switch (NET) {
