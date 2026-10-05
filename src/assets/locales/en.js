@@ -45,6 +45,7 @@ export const en = {
     "messages.error.default": "Something went wrong. Please try again",
     "messages.error.invalid.descriptor": "Please enter the correct output descriptor.",
     "messages.error.unsupported.blockchain": "Unsupported blockchain",
+    "messages.error.unsupported.descriptor": "Unsupported output descriptor. Only taproot descriptors with 2-key leaves are supported.",
     "transaction.failure.description": "This could be caused by a temporary issue on the blockchain. Please try again later.",
     "transaction.failure.description.xrp": "If you recently created your XRP Vault, please wait a few minutes and try again",
     "transaction.failure.header": "Withdrawal not processed",

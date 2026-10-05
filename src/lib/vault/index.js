@@ -39,7 +39,12 @@ export const validateAddress = (network, address) => {
 
 export const validateDescriptor = descriptor => {
   try {
-    return bitcoinProvider.getSignersFromDescriptor(descriptor).length;
+    const signers = bitcoinProvider.getSignersFromDescriptor(descriptor).length;
+
+    // Ensures the descriptor can actually be spent from, e.g. taproot descriptors with an unsupported script tree fail here
+    bitcoinProvider.deriveMultisigAddress(descriptor);
+
+    return signers;
   } catch {
     return false;
   }
@@ -91,12 +96,12 @@ export const getAddress = (blockchain, key) => {
   }
 };
 
-export const getFee = async (blockchain, from) => {
+export const getFee = async (blockchain, from, descriptor) => {
   switch (blockchain) {
     case Blockchain.XRPL:
       return await getXrpTransactionFee();
     case Blockchain.BTC:
-      return await bitcoinProvider.calculateTransactionFee(from);
+      return await bitcoinProvider.calculateTransactionFee(from, descriptor);
     case Blockchain.HEDERA:
       return await hederaProvider.getFee();
     default:
@@ -171,12 +176,24 @@ export const multiSignTransaction = (blockchain, transaction, keys) => {
   }
 };
 
+const deriveBitcoinAddress = descriptor => {
+  try {
+    return bitcoinProvider.deriveMultisigAddress(descriptor);
+  } catch (error) {
+    if (['NoSignableTaprootLeaf', 'UnsupportedTaprootDescriptor'].includes(error.message)) {
+      throw new Error(translate('messages.error.unsupported.descriptor'));
+    }
+
+    throw error;
+  }
+};
+
 export const getSigners = async (blockchain, address, descriptor) => {
   switch (blockchain) {
     case Blockchain.XRPL:
       return await getXrpSigners(address);
     case Blockchain.BTC:
-      if (bitcoinProvider.deriveMultisigAddress(descriptor) !== address) {
+      if (deriveBitcoinAddress(descriptor) !== address) {
         throw new Error(translate('withdraw.btc.destination.fields.address.errors.invalid.btc'));
       }
 

@@ -10,7 +10,8 @@ import {
   getRedeemScript,
   getTaproot,
   satsToBtc,
-  signatureValidator
+  signatureValidator,
+  toXOnly
 } from './clients/utils/bitcoin-utils';
 import { coinSelection } from './clients/coin-selection/coin-selection';
 import { txhexToElectrumTransaction } from './clients/utils/electrum-utils';
@@ -23,6 +24,11 @@ const SEQUENCE_RBF_ENABLED = 0xffffffff - 2;
 const BTC_FEE_RATE = 1;
 
 const TAPROOT_DESCRIPTOR_PREFIX = 'tr(';
+
+// Control block: 1 byte leaf version and parity + 32 byte internal key, followed by a 32 byte hash per tree level
+const TAPROOT_CONTROL_BLOCK_BASE_SIZE = 33;
+
+const UNSUPPORTED_TAPROOT_DESCRIPTOR = 'UnsupportedTaprootDescriptor';
 
 const isTaprootDescriptor = descriptor => descriptor.trimStart().startsWith(TAPROOT_DESCRIPTOR_PREFIX);
 
@@ -52,22 +58,50 @@ const splitTopLevel = (str, separator) => {
   return parts;
 };
 
-// Parse the keys in a leaf
-const parseLeafKeys = leafExpression =>
-  [...leafExpression.matchAll(/pk\(\[([^\]]*)\]([0-9a-fA-F]+)\)/g)].map(([, origin, publicKey]) => {
+// Parse the keys in a leaf. Only plain 2-key leaves are supported, i.e. `and_v(v:pk([origin]key),pk([origin]key))`
+const LEAF_KEY = '\\[([^\\]]*)\\]([0-9a-fA-F]{64}|[0-9a-fA-F]{66})';
+const LEAF_FORMAT = new RegExp(`^and_v\\(v:pk\\(${LEAF_KEY}\\),pk\\(${LEAF_KEY}\\)\\)$`);
+
+const parseLeafKeys = leafExpression => {
+  const match = leafExpression.replace(/\s+/g, '').match(LEAF_FORMAT);
+
+  if (!match) {
+    throw new Error(UNSUPPORTED_TAPROOT_DESCRIPTOR);
+  }
+
+  return [
+    [match[1], match[2]],
+    [match[3], match[4]]
+  ].map(([origin, publicKey]) => {
     const [fingerprint, ...paths] = origin.split('/');
 
     return { fingerprint, path: `m/${paths.join('/')}`, publicKey };
   });
+};
+
+// Parse the internal key (x-only or compressed, optionally prefixed with its key origin) as an x-only buffer
+const parseInternalKey = internalKey => {
+  const hex = internalKey.trim().replace(/^\[[^\]]*\]/, '');
+
+  if (!/^([0-9a-fA-F]{64}|[0-9a-fA-F]{66})$/.test(hex)) {
+    throw new Error(UNSUPPORTED_TAPROOT_DESCRIPTOR);
+  }
+
+  return toXOnly(Buffer.from(hex, 'hex'));
+};
 
 // Parse branches and leaf keys
 const parseTaprootTree = treeString => {
   const trimmed = treeString.trim();
 
   if (trimmed.startsWith('{')) {
-    const [left, right] = splitTopLevel(trimmed.slice(1, -1), ',');
+    const children = splitTopLevel(trimmed.slice(1, -1), ',');
 
-    return [parseTaprootTree(left), parseTaprootTree(right)];
+    if (children.length !== 2) {
+      throw new Error(UNSUPPORTED_TAPROOT_DESCRIPTOR);
+    }
+
+    return children.map(parseTaprootTree);
   }
 
   return { keys: parseLeafKeys(trimmed) };
@@ -79,7 +113,11 @@ const parseTaprootDescriptor = descriptor => {
   const inner = trimmed.slice(TAPROOT_DESCRIPTOR_PREFIX.length, trimmed.lastIndexOf(')'));
   const [internalKey, ...treeParts] = splitTopLevel(inner, ',');
 
-  return { internalKey: internalKey.trim(), tree: parseTaprootTree(treeParts.join(',')) };
+  if (treeParts.length === 0) {
+    throw new Error(UNSUPPORTED_TAPROOT_DESCRIPTOR);
+  }
+
+  return { internalKey: parseInternalKey(internalKey), tree: parseTaprootTree(treeParts.join(',')) };
 };
 
 // Flattens the parsed tree into leaves
@@ -98,9 +136,9 @@ class BitcoinProvider {
     this.instance = new Electrum(this.network);
   }
 
-  async calculateTransactionFee(from) {
+  async calculateTransactionFee(from, descriptor) {
     const feeRate = await this.instance.estimateFee(BTC_FEE_RATE);
-    const utxos = await this.instance.getAddressUTXOs(from);
+    const utxos = await this.getSpendableUtxos(from, descriptor);
     const { fee } = coinSelection(utxos, [{ address: from }], Number(feeRate));
 
     return satsToBtc(fee);
@@ -155,7 +193,7 @@ class BitcoinProvider {
   }
 
   async createTransaction({ to, from, descriptor }) {
-    const utxos = await this.instance.getAddressUTXOs(from);
+    const utxos = await this.getSpendableUtxos(from, descriptor);
 
     if (utxos.length === 0) {
       throw new Error('InsufficientFunds');
@@ -264,17 +302,32 @@ class BitcoinProvider {
     return participants.map(participant => this.deriveAddress(participant.publicKey));
   }
 
+  // Taproot vault inputs are always script-path spends, whose witness grows with the depth of the spend leaf
+  async getSpendableUtxos(from, descriptor) {
+    const utxos = await this.instance.getAddressUTXOs(from);
+
+    if (!isTaprootDescriptor(descriptor)) {
+      return utxos;
+    }
+
+    const { controlBlock } = this.getTaprootData(descriptor);
+    const scriptPathDepth = (controlBlock.length - TAPROOT_CONTROL_BLOCK_BASE_SIZE) / 32;
+
+    return utxos.map(utxo => ({ ...utxo, scriptPathDepth }));
+  }
+
   // Get funding address, spendable path, and control block from descriptor
   getTaprootData(descriptor) {
     const { internalKey, tree } = parseTaprootDescriptor(descriptor);
     const leaves = collectTaprootLeaves(tree);
 
-    // By convention the tree always nests as { normal(vault,platform), { recovery(recovery,platform), ... } },
-    // with any further leaves (e.g. an inheritance beneficiary leaf) nested to the right of that. Platform is
-    // therefore whichever key the first two leaves share; vault and recovery are each leaf's other key. Vault
-    // Assist Tool only ever holds the vault and recovery/backup keys, so it must spend through the leaf pairing
-    // exactly those two - counting how many leaves each key appears in is ambiguous as soon as a third leaf
-    // exists, since platform then appears in more leaves than vault or recovery do.
+    // Supported descriptors have a script tree of nested branches (exactly two children each) whose leaves are all
+    // plain 2-key `and_v(v:pk(..),pk(..))` leaves; anything else is rejected while parsing. The first two leaves
+    // identify the roles, by convention { normal(vault,platform), { recovery(recovery,platform), ... } }: platform is
+    // whichever key those two leaves share, and vault and recovery are each leaf's other key. Vault Assist Tool only
+    // ever holds the vault and recovery/backup keys, so it must spend through the leaf pairing exactly those two,
+    // which must exist somewhere in the tree. Counting how many leaves each key appears in would be ambiguous as soon
+    // as a further leaf exists, since platform then appears in more leaves than vault or recovery do.
     const [normalLeaf, recoveryLeaf] = leaves;
     const platformKey =
       normalLeaf &&
@@ -302,7 +355,7 @@ class BitcoinProvider {
     const spendLeaf = buildTapLeaf(spendLeafNode.keys[0].publicKey, spendLeafNode.keys[1].publicKey);
     const { address, controlBlock, output } = getTaproot(
       this.network,
-      Buffer.from(internalKey, 'hex'),
+      internalKey,
       buildTaprootScriptTree(tree),
       spendLeaf
     );

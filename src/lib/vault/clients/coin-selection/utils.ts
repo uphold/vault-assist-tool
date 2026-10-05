@@ -34,6 +34,16 @@ const TX_INPUT_SCRIPTHASH = 256;
 const TX_INPUT_P2TR = 16.5;
 
 /**
+ * Taproot script-path input witness size (varies with the depth of the spent leaf in the script tree)
+ * - 1             : Witness item count
+ * - 65 + 65       : Two Schnorr signatures (push + 64 bytes)
+ * - 69            : Leaf script (push + <xonly> OP_CHECKSIGVERIFY <xonly> OP_CHECKSIG)
+ * - 1 + 33 + 32*d : Control block (push + leaf version & internal key + 32 bytes per level of depth)
+ */
+const TX_INPUT_P2TR_SCRIPT_PATH_WITNESS = 1 + 65 + 65 + 69 + 1 + 33;
+const TX_INPUT_P2TR_SCRIPT_PATH_PER_LEVEL = 32;
+
+/**
  * Output base
  * - 8 : nValue The amount of bitcoin value being paid
  * - 1 : scriptPubKey length (compactSize) The length of the scriptPubKey field. 1 vbyte for a script up to 252 vbytes. Maximum of 3 vbytes for a maximum-length script (10,000 vbytes).
@@ -62,7 +72,10 @@ const TX_OUTPUT_P2TR = 34;
 export const inputBytes = (input: Partial<Input>) => {
   let scriptLength = TX_INPUT_PUBKEYHASH;
 
-  if (input?.address?.startsWith('bc1p')) {
+  if (input?.scriptPathDepth !== undefined) {
+    scriptLength =
+      (TX_INPUT_P2TR_SCRIPT_PATH_WITNESS + TX_INPUT_P2TR_SCRIPT_PATH_PER_LEVEL * input.scriptPathDepth) / 4;
+  } else if (input?.address?.startsWith('bc1p')) {
     scriptLength = TX_INPUT_P2TR;
   } else if (
     input?.address?.startsWith('bc1') ||
