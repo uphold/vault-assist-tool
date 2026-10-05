@@ -4,6 +4,8 @@ export interface Input {
   hash?: Buffer | string;
   vout: number;
   hex?: string;
+  // Set for taproot script-path spends: depth of the spent leaf in the script tree
+  scriptPathDepth?: number;
   value: number;
 }
 

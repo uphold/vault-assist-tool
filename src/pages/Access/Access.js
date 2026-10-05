@@ -34,7 +34,7 @@ export const Access = ({ onConfirmAccount, onGoBack }) => {
     const signers = await getSigners(network, address, descriptor);
     const trustlines = await getTrustlines(network, address);
     const reserve = await getReserves(network, address);
-    const fee = await getFee(network, address);
+    const fee = await getFee(network, address, descriptor);
     const token = await getTokenFromTrustline(trustlines, selectedToken);
 
     if (!signers) {
