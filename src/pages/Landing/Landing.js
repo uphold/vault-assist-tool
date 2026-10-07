@@ -43,7 +43,7 @@ export const Landing = ({ onConfirm }) => {
                 {t('landing.description')}
               </Small>
 
-              <Small textAlign="center">{t('landing.description2')} .</Small>
+              <Small textAlign="center">{t('landing.description2')}</Small>
             </Center>
           </Content>
         </CenterView>
